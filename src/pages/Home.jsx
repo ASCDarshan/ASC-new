@@ -1,7 +1,6 @@
-// src/pages/Home.jsx
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
+import {
   Hero,
   Services,
   Features,

@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from '../common';
-import { FaQuoteLeft, FaStar } from 'react-icons/fa';
+import { FaQuoteLeft } from 'react-icons/fa';
+import profileImg from "../../assets/images/profile.jpg"
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -10,36 +11,34 @@ const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Dr. Rajesh Kumar",
-      role: "Medical Director",
-      organization: "City Hospital",
-      image: "/api/placeholder/80/80",
-      quote: "The hospital management system developed by Anant Soft Computing has revolutionized our operations. The system is intuitive, efficient, and has significantly improved our patient care workflow.",
-      rating: 5
+      name: "Pratik Das",
+      quote: "It was absolutely amazing to interact with Jeegar at Anant Soft Computing. They are extremely professional in their work ethics and process and upfront about costs and Timelines. Was a great experience. Thank you Anant Soft Computing Team.",
     },
     {
       id: 2,
-      name: "Amit Sharma",
-      role: "Managing Director",
-      organization: "Global Education Consultants",
-      image: "/api/placeholder/80/80",
-      quote: "Their overseas education CRM has been a game-changer for our consultancy. The attention to detail and custom features have helped us manage student applications more effectively.",
-      rating: 5
+      name: "Sandip Patel",
+      quote: "I have given my LMS work to Anant soft Computing . Anant Soft Computing team had given nice support to us . The founder & CEO , Mr. Jigar Desai is personally involved in every project and also giving nice suggestion in each and every architect of system.",
     },
     {
       id: 3,
-      name: "Priya Patel",
-      role: "Founder",
-      organization: "Learning Edge Academy",
-      image: "/api/placeholder/80/80",
-      quote: "The learning management system exceeded our expectations. It's user-friendly, feature-rich, and the support team has been exceptional throughout the implementation.",
-      rating: 5
+      name: "Jimish Sura",
+      quote: "Anant Soft assisted with analysis of requirements, technology feasibility, design and development of various IT projects implemented in Conart. And deliver multiple projects successfully on time.",
+    },
+    {
+      id: 3,
+      name: "Milind Dave",
+      quote: "Best web development company in Vadodara and the colleagues are open to sharing knowledge and real-time solutions with each other.",
+    },
+    {
+      id: 3,
+      name: "Pujan Shah",
+      quote: "I have engaged Anant soft Computing for revamping our existing website and to design a unique dashboard for our clients use. Also, I have felt overall service and communication to satisfactory level especially when I am dealing from Australia.",
     }
   ];
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
+      setCurrentIndex((prevIndex) =>
         prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
       );
     }, 5000);
@@ -91,7 +90,7 @@ const Testimonials = () => {
                 <div className="text-primary opacity-80 mb-6">
                   <FaQuoteLeft size={40} />
                 </div>
-                
+
                 <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-8">
                   {testimonials[currentIndex].quote}
                 </p>
@@ -99,7 +98,7 @@ const Testimonials = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <img
-                      src={testimonials[currentIndex].image}
+                      src={profileImg}
                       alt={testimonials[currentIndex].name}
                       className="w-12 h-12 rounded-full object-cover"
                     />
@@ -115,12 +114,6 @@ const Testimonials = () => {
                       </p>
                     </div>
                   </div>
-                  
-                  <div className="flex gap-1">
-                    {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                      <FaStar key={i} className="text-yellow-400" />
-                    ))}
-                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -131,11 +124,10 @@ const Testimonials = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    currentIndex === index 
-                      ? 'w-8 bg-primary' 
-                      : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${currentIndex === index
+                    ? 'w-8 bg-primary'
+                    : 'bg-gray-300 hover:bg-gray-400'
+                    }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
               ))}

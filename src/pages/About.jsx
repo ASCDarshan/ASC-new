@@ -1,8 +1,7 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Container, Badge, Card } from '../components/common';
 import { Stats, CTA } from '../components/sections';
-import { FaUsers, FaLightbulb, FaRocket, FaBullseye, FaChartLine, FaHandshake } from 'react-icons/fa';
+import { FaUsers, FaLightbulb, FaRocket, FaBullseye, FaHandshake } from 'react-icons/fa';
 
 const AboutPage = () => {
   const fadeIn = {
@@ -12,7 +11,7 @@ const AboutPage = () => {
   };
 
   const stats = [
-    { value: '10+', label: 'Years Experience' },
+    { value: '11+', label: 'Years Experience' },
     { value: '250+', label: 'Projects Delivered' },
     { value: '95%', label: 'Client Satisfaction' },
     { value: '50+', label: 'Team Members' }
@@ -43,22 +42,29 @@ const AboutPage = () => {
 
   const teamMembers = [
     {
-      name: 'John Doe',
+      name: 'Jigar Desai',
       role: 'CEO & Founder',
-      image: '/api/placeholder/400/400',
       bio: 'Visionary leader with 15+ years of software industry experience.'
     },
     {
-      name: 'Jane Smith',
-      role: 'Technical Director',
-      image: '/api/placeholder/400/400',
+      name: 'Vijendrasinh',
+      role: 'SEO Manager',
       bio: 'Expert in enterprise solutions and system architecture.'
     },
     {
-      name: 'Mike Johnson',
-      role: 'Lead Developer',
-      image: '/api/placeholder/400/400',
+      name: 'Mehul Machhi',
+      role: 'Back End Developer',
       bio: 'Full-stack developer specializing in scalable applications.'
+    },
+    {
+      name: 'Sagar Ramani',
+      role: 'Front End Developer',
+      bio: 'Experienced front-end developer with a passion for crafting responsive, user-friendly interfaces.'
+    },
+    {
+      name: 'Darshan Patel',
+      role: 'Front End Developer',
+      bio: 'Creative problem solver focused on building dynamic and efficient web applications.'
     }
   ];
 
@@ -84,7 +90,7 @@ const AboutPage = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <Badge 
+              <Badge
                 variant="primary"
                 className="mb-6 bg-primary-100 text-primary-600 px-4 py-2"
               >
@@ -100,9 +106,9 @@ const AboutPage = () => {
                 {...fadeIn}
                 className="text-lg text-gray-600 mb-8"
               >
-                We are a passionate team of innovators, developers, and digital craftsmen 
-                dedicated to transforming businesses through cutting-edge technology solutions. 
-                Our decade-long journey has been marked by continuous innovation and 
+                We are a passionate team of innovators, developers, and digital craftsmen
+                dedicated to transforming businesses through cutting-edge technology solutions.
+                Our decade-long journey has been marked by continuous innovation and
                 unwavering commitment to excellence.
               </motion.p>
 
@@ -189,11 +195,11 @@ const AboutPage = () => {
                   <h2 className="text-2xl font-bold text-gray-900">Our Vision</h2>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  To be the leading technology partner for businesses worldwide, 
-                  enabling their digital transformation through innovative and 
+                  To be the leading technology partner for businesses worldwide,
+                  enabling their digital transformation through innovative and
                   sustainable solutions that drive real value and lasting success.
                 </p>
-                <motion.div 
+                <motion.div
                   className="mt-6 h-1 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full"
                   initial={{ width: 0 }}
                   whileInView={{ width: '100%' }}
@@ -202,7 +208,7 @@ const AboutPage = () => {
                 />
               </Card>
             </motion.div>
-            
+
             <motion.div
               {...fadeIn}
               className="relative group"
@@ -216,12 +222,12 @@ const AboutPage = () => {
                   <h2 className="text-2xl font-bold text-gray-900">Our Mission</h2>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  To deliver exceptional software solutions that empower businesses to 
-                  thrive in the digital age, while maintaining the highest standards of 
-                  quality, innovation, and customer satisfaction through dedicated 
+                  To deliver exceptional software solutions that empower businesses to
+                  thrive in the digital age, while maintaining the highest standards of
+                  quality, innovation, and customer satisfaction through dedicated
                   partnership and continuous improvement.
                 </p>
-                <motion.div 
+                <motion.div
                   className="mt-6 h-1 bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-full"
                   initial={{ width: 0 }}
                   whileInView={{ width: '100%' }}
@@ -241,7 +247,7 @@ const AboutPage = () => {
             {...fadeIn}
             className="text-center mb-16"
           >
-            <Badge 
+            <Badge
               variant="primary"
               className="mb-4 bg-primary-100 text-primary-600 px-4 py-2"
             >
@@ -285,15 +291,12 @@ const AboutPage = () => {
             {...fadeIn}
             className="text-center mb-16"
           >
-            <Badge 
+            <Badge
               variant="primary"
               className="mb-4 bg-primary-100 text-primary-600 px-4 py-2"
             >
               Our Team
             </Badge>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Meet the Leaders
-            </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Driven by passion and expertise, our leadership team brings together
               decades of industry experience to guide our vision forward.
@@ -309,14 +312,7 @@ const AboutPage = () => {
                 className="group"
               >
                 <Card className="overflow-hidden hover:shadow-xl transition-shadow">
-                  <div className="relative">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
+
                   <div className="p-6">
                     <h3 className="text-xl font-semibold text-gray-900">
                       {member.name}

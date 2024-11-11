@@ -1,5 +1,3 @@
-// src/components/layout/Container.jsx
-import React from 'react';
 
 const Container = ({ children, className = '', fluid = false }) => {
   return (

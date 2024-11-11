@@ -2,15 +2,14 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Container, Input, Button } from '../common';
-import { 
-  FaMapMarkerAlt, 
-  FaPhone, 
-  FaEnvelope, 
+import {
+  FaMapMarkerAlt,
+  FaPhone,
+  FaEnvelope,
   FaClock,
-  FaLinkedin,
-  FaTwitter,
-  FaGithub,
-  FaInstagram
+  FaFacebook,
+  FaInstagram,
+  FaGoogle
 } from 'react-icons/fa';
 
 const Contact = () => {
@@ -45,25 +44,23 @@ const Contact = () => {
       icon: <FaMapMarkerAlt />,
       title: 'Visit Us',
       details: [
-        'Anant Soft Computing',
-        'Tech Park, Innovation Street',
-        'Ahmedabad, Gujarat 380015'
+        '1C, Satyam Apartment',
+        'Aradhana Society,Vishwas Colony,Alkapuri',
+        'Vadodara, Gujarat 390005'
       ]
     },
     {
       icon: <FaPhone />,
       title: 'Call Us',
       details: [
-        '+91 98765 43210',
-        '+91 98765 43211'
+        '+91 9638544455',
       ]
     },
     {
       icon: <FaEnvelope />,
       title: 'Email Us',
       details: [
-        'info@anantsoft.com',
-        'support@anantsoft.com'
+        'info@anantsoftcomputing.com',
       ]
     },
     {
@@ -71,16 +68,14 @@ const Contact = () => {
       title: 'Working Hours',
       details: [
         'Monday - Friday: 9:00 AM - 6:00 PM',
-        'Saturday: 9:00 AM - 2:00 PM'
       ]
     }
   ];
 
   const socialLinks = [
-    { icon: <FaLinkedin />, href: '#', label: 'LinkedIn' },
-    { icon: <FaTwitter />, href: '#', label: 'Twitter' },
-    { icon: <FaGithub />, href: '#', label: 'GitHub' },
-    { icon: <FaInstagram />, href: '#', label: 'Instagram' }
+    { icon: <FaFacebook />, href: 'https://www.facebook.com/anantsoftcomputing/', label: 'LinkedIn' },
+    { icon: <FaInstagram />, href: 'https://www.instagram.com/anantsoftcomputing/', label: 'Instagram' },
+    { icon: <FaGoogle />, href: 'https://www.google.com/maps/place/Anant+Soft+Computing/@22.3094348,73.1713566,17z/data=!3m1!4b1!4m6!3m5!1s0x395fc5873e594259:0xda3dc91c20f4beec!8m2!3d22.3094348!4d73.1713566!16s%2Fg%2F11bw1ylpm3?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D', label: 'Google' },
   ];
 
   return (
@@ -96,12 +91,12 @@ const Contact = () => {
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
             Get in Touch
             <span className="block text-primary text-lg font-normal mt-2">
-              We'd Love to Hear from You
+              We&apos;d Love to Hear from You
             </span>
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Have a project in mind? Looking to partner or work with us? 
-            We'd love to hear from you!
+            Have a project in mind? Looking to partner or work with us?
+            We&apos;d love to hear from you!
           </p>
         </motion.div>
 
@@ -215,6 +210,8 @@ const Contact = () => {
                     <option value="mobile">Mobile Development</option>
                     <option value="crm">CRM Development</option>
                     <option value="erp">ERP Solutions</option>
+                    <option value="host">Hosting</option>
+                    <option value="seo">SEO</option>
                     <option value="other">Other</option>
                   </select>
                 </div>
@@ -256,13 +253,14 @@ const Contact = () => {
           <div className="bg-white p-2 rounded-xl shadow-lg">
             <iframe
               title="Office Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.9034454645394!2d72.5008!3d23.0333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDAyJzAwLjAiTiA3MsKwMzAnMDMuMCJF!5e0!3m2!1sen!2sin!4v1635835669112!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.169202432397!2d73.16878167596472!3d22.309439742562773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc5873e594259%3A0xda3dc91c20f4beec!2sAnant%20Soft%20Computing!5e0!3m2!1sen!2sin!4v1731308281495!5m2!1sen!2sin"
               width="100%"
               height="400"
               style={{ border: 0, borderRadius: '0.75rem' }}
               allowFullScreen=""
               loading="lazy"
             />
+
           </div>
         </motion.div>
       </Container>

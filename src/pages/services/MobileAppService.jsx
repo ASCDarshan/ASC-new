@@ -1,19 +1,18 @@
 // src/pages/services/MobileAppService.jsx
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Container, Button, Card, Badge } from '../../components/common';
-import { CTA } from '../../components/sections';
-import { 
-  FaMobile, 
-  FaAndroid, 
-  FaApple, 
-  FaCode, 
+import { Testimonials } from '../../components/sections';
+import {
+  FaAndroid,
+  FaApple,
+  FaCode,
   FaRocket,
   FaShieldAlt,
   FaTools,
   FaCloud,
   FaBolt,
-  FaChartLine
 } from 'react-icons/fa';
+import phoneImg from "../../assets/images/phone.png"
 
 const MobileAppService = () => {
   const { scrollY } = useScroll();
@@ -104,7 +103,7 @@ const MobileAppService = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <Badge 
+              <Badge
                 variant="primary"
                 className="mb-6 bg-primary-100 text-primary-600 px-4 py-2"
               >
@@ -114,11 +113,11 @@ const MobileAppService = () => {
                 Transform Your Ideas Into Mobile Reality
               </h1>
               <p className="text-lg text-gray-600 mb-8">
-                We craft beautiful, high-performance mobile applications that deliver 
+                We craft beautiful, high-performance mobile applications that deliver
                 exceptional user experiences across all platforms.
               </p>
               <div className="flex gap-4">
-                <Button 
+                <Button
                   variant="primary"
                   className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700"
                 >
@@ -148,21 +147,27 @@ const MobileAppService = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="relative"
+              className="relative max-w-md mx-auto"
             >
               {/* Phone Mockup */}
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-secondary-500/10 rounded-3xl transform rotate-6" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-3xl transform rotate-6" />
                 <Card className="p-8 backdrop-blur-sm">
                   <div className="relative mx-auto w-[280px] h-[580px] bg-gray-900 rounded-[3rem] ring-1 ring-gray-900/10">
+                    {/* Notch */}
                     <div className="absolute top-[0.8rem] left-1/2 transform -translate-x-1/2 w-16 h-4 bg-gray-800 rounded-full" />
+
+                    {/* Screen Content */}
                     <div className="absolute top-[2rem] bottom-[2rem] left-[0.8rem] right-[0.8rem] bg-white rounded-[2.25rem] overflow-hidden">
-                      <img 
-                        src="/api/placeholder/280/580" 
+                      <img
+                        src={phoneImg}
                         alt="App Interface"
                         className="w-full h-full object-cover"
+
                       />
                     </div>
+
+                    {/* Home Button */}
                     <div className="absolute bottom-[0.8rem] left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gray-800 rounded-full" />
                   </div>
                 </Card>
@@ -228,7 +233,7 @@ const MobileAppService = () => {
 
           <div className="relative max-w-4xl mx-auto">
             {[
-              { 
+              {
                 phase: "Discovery",
                 description: "Understanding your requirements and planning the solution",
                 duration: "1-2 Weeks",
@@ -329,7 +334,7 @@ const MobileAppService = () => {
               viewport={{ once: true }}
               className="grid grid-cols-2 gap-6"
             >
-              {features.map((feature, index) => (
+              {features.map((feature) => (
                 <Card key={feature.title} className="p-6 text-center">
                   <div className="w-12 h-12 mx-auto mb-4 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600">
                     {feature.icon}
@@ -435,11 +440,6 @@ const MobileAppService = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Button variant="outline" size="lg">
-              View All Projects
-            </Button>
-          </div>
         </Container>
       </section>
 
@@ -501,16 +501,13 @@ const MobileAppService = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className={`relative mb-12 ${
-                    index % 2 === 0 ? 'ml-[50%] pl-8' : 'mr-[50%] pr-8 text-right'
-                  }`}
+                  className={`relative mb-12 ${index % 2 === 0 ? 'ml-[50%] pl-8' : 'mr-[50%] pr-8 text-right'
+                    }`}
                 >
                   <div
-                    className={`absolute top-0 ${
-                      index % 2 === 0 ? 'left-0' : 'right-0'
-                    } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${
-                      index % 2 === 0 ? '-translate-x-1/2' : 'translate-x-1/2'
-                    }`}
+                    className={`absolute top-0 ${index % 2 === 0 ? 'left-0' : 'right-0'
+                      } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${index % 2 === 0 ? '-translate-x-1/2' : 'translate-x-1/2'
+                      }`}
                   >
                     <span className="absolute inset-0 flex items-center justify-center text-lg">
                       {phase.icon}
@@ -530,72 +527,7 @@ const MobileAppService = () => {
         </Container>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl font-bold mb-4">Client Success Stories</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Hear from our satisfied clients about their app development experience
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Sarah Johnson",
-                role: "CEO",
-                company: "HealthTech Solutions",
-                image: "/api/placeholder/64/64",
-                quote: "The team delivered an exceptional healthcare app that exceeded our expectations."
-              },
-              {
-                name: "Michael Chen",
-                role: "Product Manager",
-                company: "EduTech Inc",
-                image: "/api/placeholder/64/64",
-                quote: "Outstanding development process and excellent communication throughout."
-              },
-              {
-                name: "Amanda Smith",
-                role: "Founder",
-                company: "FinanceFlow",
-                image: "/api/placeholder/64/64",
-                quote: "Their expertise in fintech app development is truly remarkable."
-              }
-            ].map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="w-16 h-16 rounded-full"
-                    />
-                    <div>
-                      <h3 className="font-semibold">{testimonial.name}</h3>
-                      <p className="text-sm text-gray-600">{testimonial.role}</p>
-                      <p className="text-sm text-primary-600">{testimonial.company}</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 italic">{testimonial.quote}</p>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <Testimonials />
 
       {/* Enhanced CTA Section */}
       <section className="py-20 bg-white">
@@ -606,7 +538,7 @@ const MobileAppService = () => {
                 Ready to Build Your Mobile App?
               </h2>
               <p className="text-lg text-gray-600 mb-8">
-                Let's transform your idea into a powerful mobile application.
+                Let&apos;s transform your idea into a powerful mobile application.
                 Get started with a free consultation today.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -629,7 +561,6 @@ const MobileAppService = () => {
         </Container>
       </section>
 
-      <CTA />
     </motion.div>
   );
 };

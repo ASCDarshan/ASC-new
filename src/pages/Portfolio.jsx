@@ -1,15 +1,26 @@
 // src/pages/Portfolio.jsx
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Container, Card, Badge, Button } from '../components/common';
-import { CTA } from '../components/sections';
 import { FaTimes, FaGlobe, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+
 
 const Portfolio = () => {
+  const navigate = useNavigate()
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
+
+  const startClickHandler = () => {
+    navigate("/contact")
+  }
+
+  const moreWorkclickHandler = () => {
+    navigate("/")
+  }
+
 
   const categories = [
     { id: 'all', name: 'All Projects', icon: '🌟' },
@@ -209,7 +220,7 @@ const Portfolio = () => {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   className="group"
                 >
-                  <Card 
+                  <Card
                     className="h-full overflow-hidden bg-white/80 backdrop-blur-sm
                              hover:shadow-2xl hover:shadow-primary-200/20 transition-all duration-500
                              border border-gray-100 hover:border-primary-200"
@@ -225,8 +236,8 @@ const Portfolio = () => {
                         <div className="absolute bottom-4 left-4 right-4">
                           <div className="flex flex-wrap gap-2">
                             {project.technologies.slice(0, 3).map((tech) => (
-                              <Badge 
-                                key={tech} 
+                              <Badge
+                                key={tech}
                                 variant="primary"
                                 className={`bg-gradient-to-r ${project.gradient} text-white`}
                               >
@@ -253,8 +264,8 @@ const Portfolio = () => {
                             </div>
                           ))}
                         </div>
-                        <Button 
-                          variant="outline" 
+                        <Button
+                          variant="outline"
                           size="sm"
                           className="group-hover:bg-primary-600 group-hover:text-white group-hover:border-primary-600"
                         >
@@ -303,8 +314,8 @@ const Portfolio = () => {
                       </h2>
                       <div className="flex flex-wrap gap-2">
                         {selectedProject.technologies.map((tech) => (
-                          <Badge 
-                            key={tech} 
+                          <Badge
+                            key={tech}
                             variant="primary"
                             className={`bg-gradient-to-r ${selectedProject.gradient} text-white`}
                           >
@@ -383,7 +394,7 @@ const Portfolio = () => {
                                 <span className="capitalize">{key.replace('_', ' ')}</span>
                               </a>
                             ))}
-                            </div>
+                          </div>
                         </Card>
 
                         <Card className="p-6">
@@ -417,7 +428,7 @@ const Portfolio = () => {
                         </Card>
 
                         <div className="flex gap-4">
-                          <Button 
+                          <Button
                             variant="primary"
                             className="flex-1 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700"
                             onClick={() => window.open(selectedProject.links.live, '_blank')}
@@ -425,7 +436,7 @@ const Portfolio = () => {
                             <FaGlobe className="mr-2" />
                             View Live
                           </Button>
-                          <Button 
+                          <Button
                             variant="outline"
                             className="flex-1"
                             onClick={() => window.open(selectedProject.links.case_study, '_blank')}
@@ -490,18 +501,20 @@ const Portfolio = () => {
               Ready to Start Your Project?
             </h2>
             <p className="text-lg text-gray-600 mb-8">
-              Let's discuss how we can help bring your vision to life with our expertise
+              Let&apos;s discuss how we can help bring your vision to life with our expertise
               in custom software development.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
+              <Button
+                onClick={startClickHandler}
                 variant="primary"
                 size="lg"
                 className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700"
               >
                 Start a Project
               </Button>
-              <Button 
+              <Button
+                onClick={moreWorkclickHandler}
                 variant="outline"
                 size="lg"
               >

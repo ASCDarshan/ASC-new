@@ -2,17 +2,11 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Container, Button, Card, Badge } from '../../components/common';
 import { CTA } from '../../components/sections';
-import { 
-  FaCode, 
-  FaCogs, 
-  FaServer, 
+import {
+  FaServer,
   FaDatabase,
   FaCloud,
   FaLaptopCode,
-  FaChartLine,
-  FaShieldAlt,
-  FaRocket,
-  FaTools
 } from 'react-icons/fa';
 
 const CustomDevelopment = () => {
@@ -106,7 +100,7 @@ const CustomDevelopment = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <Badge 
+              <Badge
                 variant="primary"
                 className="mb-6 bg-primary-100 text-primary-600 px-4 py-2"
               >
@@ -116,11 +110,11 @@ const CustomDevelopment = () => {
                 Tailored Solutions for Your Unique Challenges
               </h1>
               <p className="text-lg text-gray-600 mb-8">
-                We specialize in developing custom software solutions that perfectly 
+                We specialize in developing custom software solutions that perfectly
                 align with your business needs and drive digital transformation.
               </p>
               <div className="flex gap-4">
-                <Button 
+                <Button
                   variant="primary"
                   className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700"
                 >
@@ -216,15 +210,7 @@ const CustomDevelopment = () => {
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{solution.title}</h3>
                   <p className="text-gray-600">{solution.description}</p>
-                  <div className="mt-6 pt-6 border-t border-gray-100">
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      className="w-full justify-center"
-                    >
-                      Learn More
-                    </Button>
-                  </div>
+
                 </Card>
               </motion.div>
             ))}
@@ -360,7 +346,7 @@ const CustomDevelopment = () => {
                 Ready to Build Your Custom Solution?
               </h2>
               <p className="text-lg text-gray-600 mb-8">
-                Let's discuss your project requirements and create a solution that perfectly 
+                Let&apos;s discuss your project requirements and create a solution that perfectly
                 matches your business needs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -464,25 +450,21 @@ const CustomDevelopment = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className={`relative mb-12 ${
-                    index % 2 === 0 ? 'ml-[50%] pl-8' : 'mr-[50%] pr-8 text-right'
-                  }`}
+                  className={`relative mb-12 ${index % 2 === 0 ? 'ml-[50%] pl-8' : 'mr-[50%] pr-8 text-right'
+                    }`}
                 >
                   <div
-                    className={`absolute top-0 ${
-                      index % 2 === 0 ? 'left-0' : 'right-0'
-                    } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${
-                      index % 2 === 0 ? '-translate-x-1/2' : 'translate-x-1/2'
-                    }`}
+                    className={`absolute top-0 ${index % 2 === 0 ? 'left-0' : 'right-0'
+                      } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${index % 2 === 0 ? '-translate-x-1/2' : 'translate-x-1/2'
+                      }`}
                   >
                     <span className="absolute inset-0 flex items-center justify-center text-lg">
                       {phase.icon}
                     </span>
                   </div>
-                  <Card 
-                    className={`p-6 hover:shadow-lg transition-shadow duration-300 ${
-                      index % 2 === 0 ? '' : 'flex flex-col items-end'
-                    }`}
+                  <Card
+                    className={`p-6 hover:shadow-lg transition-shadow duration-300 ${index % 2 === 0 ? '' : 'flex flex-col items-end'
+                      }`}
                   >
                     <Badge variant="primary" className="mb-2">
                       {phase.duration}
@@ -518,7 +500,7 @@ const CustomDevelopment = () => {
           >
             <h2 className="text-3xl font-bold mb-4">Success Stories</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Real examples of custom solutions we've delivered
+              Real examples of custom solutions we&apos;ve delivered
             </p>
           </motion.div>
 
@@ -593,7 +575,7 @@ const CustomDevelopment = () => {
                         </div>
                       ))}
                     </div>
-                    <Button 
+                    <Button
                       variant="outline"
                       size="sm"
                       className="mt-6 w-full justify-center"
@@ -604,36 +586,6 @@ const CustomDevelopment = () => {
                 </Card>
               </motion.div>
             ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-20 bg-white">
-        <Container>
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">
-              Ready to Transform Your Business?
-            </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Let's discuss your project requirements and create a custom solution 
-              that drives your business forward.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                variant="primary"
-                size="lg"
-                className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700"
-              >
-                Get Started
-              </Button>
-              <Button 
-                variant="outline"
-                size="lg"
-              >
-                View All Case Studies
-              </Button>
-            </div>
           </div>
         </Container>
       </section>

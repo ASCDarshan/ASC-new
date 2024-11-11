@@ -2,7 +2,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Container, Button, Card, Badge } from '../../components/common';
 import { CTA } from '../../components/sections';
-import { FaSearch, FaChartLine, FaTools, FaCogs, FaRocket } from 'react-icons/fa';
+import { FaSearch, FaChartLine, FaTools, FaCogs } from 'react-icons/fa';
+import growthImg from "../../assets/images/growth.jpg";
 
 const SEOService = () => {
   const { scrollY } = useScroll();
@@ -81,7 +82,7 @@ const SEOService = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <Badge 
+              <Badge
                 variant="primary"
                 className="mb-6 bg-primary-100 text-primary-600 px-4 py-2"
               >
@@ -91,11 +92,11 @@ const SEOService = () => {
                 Boost Your Online Visibility
               </h1>
               <p className="text-lg text-gray-600 mb-8">
-                Drive organic traffic and increase your search engine rankings with our 
+                Drive organic traffic and increase your search engine rankings with our
                 data-driven SEO strategies and advanced optimization techniques.
               </p>
               <div className="flex gap-4">
-                <Button 
+                <Button
                   variant="primary"
                   className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700"
                 >
@@ -173,7 +174,7 @@ const SEOService = () => {
               Comprehensive SEO Solutions
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Our SEO services are designed to help you achieve sustainable growth 
+              Our SEO services are designed to help you achieve sustainable growth
               through improved search engine visibility.
             </p>
           </motion.div>
@@ -253,7 +254,7 @@ const SEOService = () => {
             >
               <h2 className="text-3xl font-bold">Real Results for Real Businesses</h2>
               <p className="text-gray-600">
-                Our SEO strategies have helped businesses achieve significant improvements 
+                Our SEO strategies have helped businesses achieve significant improvements
                 in their online visibility and organic traffic.
               </p>
               <div className="space-y-4">
@@ -283,7 +284,10 @@ const SEOService = () => {
               <Card className="p-8">
                 {/* Add a graph or chart component here */}
                 <div className="h-80 bg-gray-100 rounded-lg flex items-center justify-center">
-                  [Traffic Growth Chart]
+                  <img
+                    src={growthImg}
+                    alt="groth"
+                  />
                 </div>
               </Card>
             </motion.div>
