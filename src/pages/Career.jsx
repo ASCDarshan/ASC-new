@@ -2,12 +2,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Container, Button, Card, Badge } from '../components/common';
-import { CTA } from '../components/sections';
-import { 
-  FaBriefcase, 
-  FaGraduationCap, 
-  FaUsers, 
-  FaLaptopCode,
+import {
   FaRegClock,
   FaMapMarkerAlt,
   FaDollarSign,
@@ -83,7 +78,7 @@ const Careers = () => {
 
   const filteredJobs = jobOpenings
     .filter(job => selectedDepartment === 'all' || job.department === selectedDepartment)
-    .filter(job => 
+    .filter(job =>
       job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.department.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -120,7 +115,7 @@ const Careers = () => {
               transition={{ delay: 0.2 }}
               className="text-lg text-gray-600 mb-8"
             >
-              Work with talented individuals who share your passion for innovation and 
+              Work with talented individuals who share your passion for innovation and
               excellence. Discover exciting opportunities to grow your career with us.
             </motion.p>
 
@@ -276,7 +271,7 @@ const Careers = () => {
               Why Join Us?
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              We offer more than just a job. Join us and be part of a culture that 
+              We offer more than just a job. Join us and be part of a culture that
               values growth, innovation, and work-life balance.
             </p>
           </div>
@@ -316,7 +311,7 @@ const Careers = () => {
                 Our Culture
               </h2>
               <p className="text-gray-600">
-                Experience a workplace culture that encourages innovation, 
+                Experience a workplace culture that encourages innovation,
                 collaboration, and personal growth.
               </p>
             </div>
@@ -373,7 +368,7 @@ const Careers = () => {
         <Container>
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
                 Frequently Asked Questions
               </h2>
               <p className="text-gray-600">
@@ -471,16 +466,13 @@ const Careers = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className={`relative mb-12 ${
-                    index % 2 === 0 ? 'ml-[50%] pl-8' : 'mr-[50%] pr-8 text-right'
-                  }`}
+                  className={`relative mb-12 ${index % 2 === 0 ? 'ml-[50%] pl-8' : 'mr-[50%] pr-8 text-right'
+                    }`}
                 >
                   <div
-                    className={`absolute top-0 ${
-                      index % 2 === 0 ? 'left-0' : 'right-0'
-                    } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${
-                      index % 2 === 0 ? '-translate-x-1/2' : 'translate-x-1/2'
-                    }`}
+                    className={`absolute top-0 ${index % 2 === 0 ? 'left-0' : 'right-0'
+                      } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${index % 2 === 0 ? '-translate-x-1/2' : 'translate-x-1/2'
+                      }`}
                   >
                     <span className="absolute inset-0 flex items-center justify-center text-lg">
                       {phase.icon}
@@ -500,66 +492,6 @@ const Careers = () => {
         </Container>
       </section>
 
-      {/* Employee Testimonials */}
-      <section className="py-20 bg-white">
-        <Container>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Life at Anant Soft
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Hear from our team members about their experience working with us
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Priya Patel",
-                role: "Senior Developer",
-                image: "/api/placeholder/100/100",
-                quote: "The work culture here is amazing. I get to work on challenging projects while maintaining a great work-life balance."
-              },
-              {
-                name: "Raj Sharma",
-                role: "UI/UX Designer",
-                image: "/api/placeholder/100/100",
-                quote: "I love the creative freedom and support I get from my team. There's always room for innovation and experimentation."
-              },
-              {
-                name: "Amit Kumar",
-                role: "Project Manager",
-                image: "/api/placeholder/100/100",
-                quote: "The growth opportunities here are exceptional. The company truly invests in its employees' development."
-              }
-            ].map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="w-16 h-16 rounded-full object-cover"
-                    />
-                    <div>
-                      <h3 className="font-semibold text-gray-900">{testimonial.name}</h3>
-                      <p className="text-sm text-gray-600">{testimonial.role}</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 italic">"{testimonial.quote}"</p>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
       {/* Final CTA */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <Container>
@@ -569,7 +501,7 @@ const Careers = () => {
                 Ready to Start Your Journey With Us?
               </h2>
               <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-                Join our team of innovators and help us shape the future of technology. 
+                Join our team of innovators and help us shape the future of technology.
                 Explore our open positions and find your perfect role.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -591,8 +523,6 @@ const Careers = () => {
           </Card>
         </Container>
       </section>
-
-      <CTA />
     </motion.div>
   );
 };

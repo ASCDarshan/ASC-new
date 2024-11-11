@@ -12,10 +12,12 @@ import MobileAppService from './pages/services/MobileAppService';
 import CustomDevelopment from './pages/services/CustomDevelopment';
 import Careers from './pages/Career';
 import BlogPage from './pages/Blog';
+import ScrollToTop from './components/common/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-grow">
@@ -31,7 +33,7 @@ function App() {
             <Route path="/services/custom" element={<CustomDevelopment />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/blog" element={<BlogPage />} />
-            </Routes>
+          </Routes>
         </main>
         <Footer />
       </div>

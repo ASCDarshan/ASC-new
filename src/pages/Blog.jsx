@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
+import {
   Search,
   Calendar,
   Clock,
-  Tag,
   Share2,
   Bookmark,
-  TrendingUp,
   MessageCircle,
   Eye,
-  Filter,
   ArrowUp
 } from 'lucide-react';
 
@@ -18,8 +15,7 @@ const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [activeTab, setActiveTab] = useState('latest');
-  
+
   // Categories with SEO-optimized slugs
   const categories = [
     { name: 'All Posts', slug: 'all' },
@@ -126,7 +122,7 @@ const BlogPage = () => {
         <div className="container mx-auto px-4">
           {/* Category Navigation */}
           <div className="mb-12">
-            <motion.div 
+            <motion.div
               className="flex flex-wrap gap-3 justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -136,11 +132,10 @@ const BlogPage = () => {
                 <button
                   key={category.slug}
                   onClick={() => setSelectedCategory(category.slug)}
-                  className={`px-6 py-2 rounded-full transition-all duration-300 ${
-                    selectedCategory === category.slug
+                  className={`px-6 py-2 rounded-full transition-all duration-300 ${selectedCategory === category.slug
                       ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20'
                       : 'bg-white text-gray-600 hover:bg-primary-50'
-                  }`}
+                    }`}
                 >
                   {category.name}
                 </button>

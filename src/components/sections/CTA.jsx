@@ -11,16 +11,11 @@ const CTA = () => {
     navigate('/contact');
   };
 
-  const handleViewWork = () => {
-    navigate('/portfolio');  // Or whatever your work showcase page route is
-  };
-
-
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-8 relative overflow-hidden">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-white to-secondary/10" />
-      
+
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <motion.div
@@ -68,15 +63,15 @@ const CTA = () => {
               >
                 <FaRocket className="w-8 h-8 text-primary" />
               </motion.div>
-              
+
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Ready to Transform Your Digital Presence?
                 <span className="block text-primary mt-2">
-                  Let's Build Something Amazing Together
+                  Let&apos;s Build Something Amazing Together
                 </span>
               </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
-                Whether you need a custom CRM, mobile app, or enterprise solution, 
+                Whether you need a custom CRM, mobile app, or enterprise solution,
                 our team of experts is ready to bring your vision to life.
               </p>
             </motion.div>
@@ -93,10 +88,10 @@ const CTA = () => {
                   Start a Project
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  Ready to begin? Let's discuss your project and create a roadmap for success.
+                  Ready to begin? Let&apos;s discuss your project and create a roadmap for success.
                 </p>
-                <Button 
-                  variant="primary" 
+                <Button
+                  variant="primary"
                   onClick={handleGetStarted}
                   className="w-full justify-center"
                   icon={<FaArrowRight className="ml-2" />}
@@ -112,13 +107,13 @@ const CTA = () => {
               >
                 <h3 className="text-xl font-semibold text-gray-900 mb-2 flex items-center gap-2">
                   <FaComments className="text-secondary-dark" />
-                  Let's Talk
+                  Let&apos;s Talk
                 </h3>
                 <p className="text-gray-600 mb-4">
                   Have questions? Schedule a free consultation with our experts.
                 </p>
-                <Button 
-                  variant="secondary" 
+                <Button
+                  variant="secondary"
                   onClick={handleGetStarted}
                   className="w-full justify-center"
                   icon={<FaArrowRight className="ml-2" />}
