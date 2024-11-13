@@ -1,59 +1,62 @@
-// src/pages/services/SEOService.jsx
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Container, Button, Card, Badge } from '../../components/common';
-import { CTA } from '../../components/sections';
-import { FaSearch, FaChartLine, FaTools, FaCogs } from 'react-icons/fa';
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Container, Button, Card, Badge } from "../../components/common";
+import { CTA } from "../../components/sections";
+import { FaSearch, FaChartLine, FaTools, FaCogs } from "react-icons/fa";
 import growthImg from "../../assets/images/growth.jpg";
+
+const seoFeatures = [
+  {
+    icon: <FaSearch className="w-6 h-6" />,
+    title: "Keyword Research",
+    description:
+      "In-depth analysis to target the most valuable search terms for your business",
+  },
+  {
+    icon: <FaChartLine className="w-6 h-6" />,
+    title: "Performance Tracking",
+    description: "Real-time monitoring of your SEO metrics and rankings",
+  },
+  {
+    icon: <FaTools className="w-6 h-6" />,
+    title: "Technical SEO",
+    description:
+      "Optimization of your website's technical aspects for better rankings",
+  },
+  {
+    icon: <FaCogs className="w-6 h-6" />,
+    title: "On-Page SEO",
+    description:
+      "Optimization of content and meta elements for maximum visibility",
+  },
+];
+
+const processSteps = [
+  {
+    step: "01",
+    title: "Audit & Analysis",
+    description:
+      "Comprehensive analysis of your current SEO status and competitors",
+  },
+  {
+    step: "02",
+    title: "Strategy Development",
+    description: "Creating a customized SEO strategy based on analysis results",
+  },
+  {
+    step: "03",
+    title: "Implementation",
+    description: "Executing optimization techniques and content strategies",
+  },
+  {
+    step: "04",
+    title: "Monitoring & Adjustment",
+    description: "Continuous monitoring and strategy refinement",
+  },
+];
 
 const SEOService = () => {
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
-
-  const seoFeatures = [
-    {
-      icon: <FaSearch className="w-6 h-6" />,
-      title: "Keyword Research",
-      description: "In-depth analysis to target the most valuable search terms for your business"
-    },
-    {
-      icon: <FaChartLine className="w-6 h-6" />,
-      title: "Performance Tracking",
-      description: "Real-time monitoring of your SEO metrics and rankings"
-    },
-    {
-      icon: <FaTools className="w-6 h-6" />,
-      title: "Technical SEO",
-      description: "Optimization of your website's technical aspects for better rankings"
-    },
-    {
-      icon: <FaCogs className="w-6 h-6" />,
-      title: "On-Page SEO",
-      description: "Optimization of content and meta elements for maximum visibility"
-    }
-  ];
-
-  const processSteps = [
-    {
-      step: "01",
-      title: "Audit & Analysis",
-      description: "Comprehensive analysis of your current SEO status and competitors"
-    },
-    {
-      step: "02",
-      title: "Strategy Development",
-      description: "Creating a customized SEO strategy based on analysis results"
-    },
-    {
-      step: "03",
-      title: "Implementation",
-      description: "Executing optimization techniques and content strategies"
-    },
-    {
-      step: "04",
-      title: "Monitoring & Adjustment",
-      description: "Continuous monitoring and strategy refinement"
-    }
-  ];
 
   return (
     <motion.div
@@ -65,10 +68,7 @@ const SEOService = () => {
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-primary-50 via-white to-secondary-50">
         {/* Animated Background */}
-        <motion.div
-          style={{ y: backgroundY }}
-          className="absolute inset-0 z-0"
-        >
+        <motion.div style={{ y: backgroundY }} className="absolute inset-0 z-0">
           <div className="absolute inset-0">
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
@@ -92,8 +92,9 @@ const SEOService = () => {
                 Boost Your Online Visibility
               </h1>
               <p className="text-lg text-gray-600 mb-8">
-                Drive organic traffic and increase your search engine rankings with our
-                data-driven SEO strategies and advanced optimization techniques.
+                Drive organic traffic and increase your search engine rankings
+                with our data-driven SEO strategies and advanced optimization
+                techniques.
               </p>
               <div className="flex gap-4">
                 <Button
@@ -102,20 +103,20 @@ const SEOService = () => {
                 >
                   Get Started
                 </Button>
-                <Button variant="outline">
-                  Learn More
-                </Button>
+                <Button variant="outline">Learn More</Button>
               </div>
 
               {/* Key Metrics */}
               <div className="grid grid-cols-3 gap-6 mt-12">
                 {[
-                  { value: '200+', label: 'SEO Projects' },
-                  { value: '85%', label: 'Avg. Traffic Increase' },
-                  { value: '95%', label: 'Client Satisfaction' }
+                  { value: "200+", label: "SEO Projects" },
+                  { value: "85%", label: "Avg. Traffic Increase" },
+                  { value: "95%", label: "Client Satisfaction" },
                 ].map((metric) => (
                   <div key={metric.label} className="text-center">
-                    <div className="text-2xl font-bold text-primary-600">{metric.value}</div>
+                    <div className="text-2xl font-bold text-primary-600">
+                      {metric.value}
+                    </div>
                     <div className="text-sm text-gray-600">{metric.label}</div>
                   </div>
                 ))}
@@ -134,9 +135,21 @@ const SEOService = () => {
                 <Card className="p-8 backdrop-blur-sm">
                   <div className="space-y-6">
                     {[
-                      { label: 'Keyword Rankings', value: 85, color: 'bg-primary-500' },
-                      { label: 'Organic Traffic', value: 92, color: 'bg-secondary-500' },
-                      { label: 'Domain Authority', value: 78, color: 'bg-accent-500' }
+                      {
+                        label: "Keyword Rankings",
+                        value: 85,
+                        color: "bg-primary-500",
+                      },
+                      {
+                        label: "Organic Traffic",
+                        value: 92,
+                        color: "bg-secondary-500",
+                      },
+                      {
+                        label: "Domain Authority",
+                        value: 78,
+                        color: "bg-accent-500",
+                      },
                     ].map((metric) => (
                       <div key={metric.label}>
                         <div className="flex justify-between mb-2">
@@ -174,8 +187,8 @@ const SEOService = () => {
               Comprehensive SEO Solutions
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Our SEO services are designed to help you achieve sustainable growth
-              through improved search engine visibility.
+              Our SEO services are designed to help you achieve sustainable
+              growth through improved search engine visibility.
             </p>
           </motion.div>
 
@@ -192,7 +205,9 @@ const SEOService = () => {
                   <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600 mb-4">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    {feature.title}
+                  </h3>
                   <p className="text-gray-600">{feature.description}</p>
                 </Card>
               </motion.div>
@@ -252,16 +267,18 @@ const SEOService = () => {
               viewport={{ once: true }}
               className="space-y-6"
             >
-              <h2 className="text-3xl font-bold">Real Results for Real Businesses</h2>
+              <h2 className="text-3xl font-bold">
+                Real Results for Real Businesses
+              </h2>
               <p className="text-gray-600">
-                Our SEO strategies have helped businesses achieve significant improvements
-                in their online visibility and organic traffic.
+                Our SEO strategies have helped businesses achieve significant
+                improvements in their online visibility and organic traffic.
               </p>
               <div className="space-y-4">
                 {[
-                  { metric: 'Organic Traffic', increase: '+150%' },
-                  { metric: 'Keyword Rankings', increase: '+200%' },
-                  { metric: 'Conversion Rate', increase: '+85%' }
+                  { metric: "Organic Traffic", increase: "+150%" },
+                  { metric: "Keyword Rankings", increase: "+200%" },
+                  { metric: "Conversion Rate", increase: "+85%" },
                 ].map((stat) => (
                   <div key={stat.metric} className="flex items-center gap-4">
                     <div className="w-16 h-16 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600">
@@ -269,7 +286,9 @@ const SEOService = () => {
                     </div>
                     <div>
                       <div className="font-semibold">{stat.metric}</div>
-                      <div className="text-sm text-gray-600">Average Improvement</div>
+                      <div className="text-sm text-gray-600">
+                        Average Improvement
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -284,10 +303,7 @@ const SEOService = () => {
               <Card className="p-8">
                 {/* Add a graph or chart component here */}
                 <div className="h-80 bg-gray-100 rounded-lg flex items-center justify-center">
-                  <img
-                    src={growthImg}
-                    alt="groth"
-                  />
+                  <img src={growthImg} alt="groth" />
                 </div>
               </Card>
             </motion.div>

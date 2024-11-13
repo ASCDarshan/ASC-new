@@ -1,72 +1,82 @@
-import { motion } from 'framer-motion';
-import { Container, Badge, Card } from '../components/common';
-import { Stats, CTA } from '../components/sections';
-import { FaUsers, FaLightbulb, FaRocket, FaBullseye, FaHandshake } from 'react-icons/fa';
+import { motion } from "framer-motion";
+import { Container, Badge, Card } from "../components/common";
+import { Stats, CTA } from "../components/sections";
+import {
+  FaUsers,
+  FaLightbulb,
+  FaRocket,
+  FaBullseye,
+  FaHandshake,
+} from "react-icons/fa";
+
+const stats = [
+  { value: "11+", label: "Years Experience" },
+  { value: "250+", label: "Projects Delivered" },
+  { value: "95%", label: "Client Satisfaction" },
+  { value: "50+", label: "Team Members" },
+];
+
+const values = [
+  {
+    icon: <FaUsers className="w-6 h-6" />,
+    title: "Client-Centric",
+    description:
+      "Every decision we make is guided by our commitment to client success.",
+  },
+  {
+    icon: <FaLightbulb className="w-6 h-6" />,
+    title: "Innovation",
+    description:
+      "We continuously explore and implement cutting-edge technologies.",
+  },
+  {
+    icon: <FaRocket className="w-6 h-6" />,
+    title: "Excellence",
+    description:
+      "We maintain the highest standards in every project we undertake.",
+  },
+  {
+    icon: <FaHandshake className="w-6 h-6" />,
+    title: "Integrity",
+    description:
+      "Trust and transparency are the foundations of our relationships.",
+  },
+];
+
+const teamMembers = [
+  {
+    name: "Jigar Desai",
+    role: "CEO & Founder",
+    bio: "Visionary leader with 15+ years of software industry experience.",
+  },
+  {
+    name: "Vijendrasinh",
+    role: "SEO Manager",
+    bio: "Expert in enterprise solutions and system architecture.",
+  },
+  {
+    name: "Mehul Machhi",
+    role: "Back End Developer",
+    bio: "Full-stack developer specializing in scalable applications.",
+  },
+  {
+    name: "Sagar Ramani",
+    role: "Front End Developer",
+    bio: "Experienced front-end developer with a passion for crafting responsive, user-friendly interfaces.",
+  },
+  {
+    name: "Darshan Patel",
+    role: "Front End Developer (Intern)",
+    bio: "Creative problem solver focused on building dynamic and efficient web applications.",
+  },
+];
 
 const AboutPage = () => {
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true }
+    viewport: { once: true },
   };
-
-  const stats = [
-    { value: '11+', label: 'Years Experience' },
-    { value: '250+', label: 'Projects Delivered' },
-    { value: '95%', label: 'Client Satisfaction' },
-    { value: '50+', label: 'Team Members' }
-  ];
-
-  const values = [
-    {
-      icon: <FaUsers className="w-6 h-6" />,
-      title: 'Client-Centric',
-      description: 'Every decision we make is guided by our commitment to client success.'
-    },
-    {
-      icon: <FaLightbulb className="w-6 h-6" />,
-      title: 'Innovation',
-      description: 'We continuously explore and implement cutting-edge technologies.'
-    },
-    {
-      icon: <FaRocket className="w-6 h-6" />,
-      title: 'Excellence',
-      description: 'We maintain the highest standards in every project we undertake.'
-    },
-    {
-      icon: <FaHandshake className="w-6 h-6" />,
-      title: 'Integrity',
-      description: 'Trust and transparency are the foundations of our relationships.'
-    }
-  ];
-
-  const teamMembers = [
-    {
-      name: 'Jigar Desai',
-      role: 'CEO & Founder',
-      bio: 'Visionary leader with 15+ years of software industry experience.'
-    },
-    {
-      name: 'Vijendrasinh',
-      role: 'SEO Manager',
-      bio: 'Expert in enterprise solutions and system architecture.'
-    },
-    {
-      name: 'Mehul Machhi',
-      role: 'Back End Developer',
-      bio: 'Full-stack developer specializing in scalable applications.'
-    },
-    {
-      name: 'Sagar Ramani',
-      role: 'Front End Developer',
-      bio: 'Experienced front-end developer with a passion for crafting responsive, user-friendly interfaces.'
-    },
-    {
-      name: 'Darshan Patel',
-      role: 'Front End Developer',
-      bio: 'Creative problem solver focused on building dynamic and efficient web applications.'
-    }
-  ];
 
   return (
     <motion.div
@@ -102,14 +112,12 @@ const AboutPage = () => {
                   Since 2013
                 </span>
               </h1>
-              <motion.p
-                {...fadeIn}
-                className="text-lg text-gray-600 mb-8"
-              >
-                We are a passionate team of innovators, developers, and digital craftsmen
-                dedicated to transforming businesses through cutting-edge technology solutions.
-                Our decade-long journey has been marked by continuous innovation and
-                unwavering commitment to excellence.
+              <motion.p {...fadeIn} className="text-lg text-gray-600 mb-8">
+                We are a passionate team of innovators, developers, and digital
+                craftsmen dedicated to transforming businesses through
+                cutting-edge technology solutions. Our decade-long journey has
+                been marked by continuous innovation and unwavering commitment
+                to excellence.
               </motion.p>
 
               {/* Stats Grid */}
@@ -151,9 +159,21 @@ const AboutPage = () => {
                 >
                   <div className="space-y-6">
                     {[
-                      { label: 'Innovation Index', value: 95, color: 'bg-primary-500' },
-                      { label: 'Client Success Rate', value: 98, color: 'bg-secondary-500' },
-                      { label: 'Team Growth', value: 85, color: 'bg-accent-500' }
+                      {
+                        label: "Innovation Index",
+                        value: 95,
+                        color: "bg-primary-500",
+                      },
+                      {
+                        label: "Client Success Rate",
+                        value: 98,
+                        color: "bg-secondary-500",
+                      },
+                      {
+                        label: "Team Growth",
+                        value: 85,
+                        color: "bg-accent-500",
+                      },
                     ].map((metric) => (
                       <div key={metric.label}>
                         <div className="flex justify-between mb-2">
@@ -182,55 +202,55 @@ const AboutPage = () => {
       <section className="py-20 bg-white">
         <Container>
           <div className="grid md:grid-cols-2 gap-12">
-            <motion.div
-              {...fadeIn}
-              className="relative group"
-            >
+            <motion.div {...fadeIn} className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-primary-600/10 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform" />
               <Card className="p-8 backdrop-blur-sm relative hover:shadow-xl transition-shadow">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600 mr-4">
                     <FaLightbulb className="w-6 h-6" />
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900">Our Vision</h2>
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    Our Vision
+                  </h2>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
                   To be the leading technology partner for businesses worldwide,
                   enabling their digital transformation through innovative and
-                  sustainable solutions that drive real value and lasting success.
+                  sustainable solutions that drive real value and lasting
+                  success.
                 </p>
                 <motion.div
                   className="mt-6 h-1 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full"
                   initial={{ width: 0 }}
-                  whileInView={{ width: '100%' }}
+                  whileInView={{ width: "100%" }}
                   viewport={{ once: true }}
                   transition={{ duration: 1 }}
                 />
               </Card>
             </motion.div>
 
-            <motion.div
-              {...fadeIn}
-              className="relative group"
-            >
+            <motion.div {...fadeIn} className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-secondary-500/10 to-secondary-600/10 rounded-2xl transform -rotate-1 group-hover:-rotate-2 transition-transform" />
               <Card className="p-8 backdrop-blur-sm relative hover:shadow-xl transition-shadow">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center text-secondary-600 mr-4">
                     <FaBullseye className="w-6 h-6" />
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900">Our Mission</h2>
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    Our Mission
+                  </h2>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  To deliver exceptional software solutions that empower businesses to
-                  thrive in the digital age, while maintaining the highest standards of
-                  quality, innovation, and customer satisfaction through dedicated
-                  partnership and continuous improvement.
+                  To deliver exceptional software solutions that empower
+                  businesses to thrive in the digital age, while maintaining the
+                  highest standards of quality, innovation, and customer
+                  satisfaction through dedicated partnership and continuous
+                  improvement.
                 </p>
                 <motion.div
                   className="mt-6 h-1 bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-full"
                   initial={{ width: 0 }}
-                  whileInView={{ width: '100%' }}
+                  whileInView={{ width: "100%" }}
                   viewport={{ once: true }}
                   transition={{ duration: 1 }}
                 />
@@ -243,10 +263,7 @@ const AboutPage = () => {
       {/* Values Section */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <Container>
-          <motion.div
-            {...fadeIn}
-            className="text-center mb-16"
-          >
+          <motion.div {...fadeIn} className="text-center mb-16">
             <Badge
               variant="primary"
               className="mb-4 bg-primary-100 text-primary-600 px-4 py-2"
@@ -257,8 +274,8 @@ const AboutPage = () => {
               What Drives Us Forward
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Our values shape every decision we make and every solution we deliver,
-              ensuring consistent excellence in everything we do.
+              Our values shape every decision we make and every solution we
+              deliver, ensuring consistent excellence in everything we do.
             </p>
           </motion.div>
 
@@ -287,10 +304,7 @@ const AboutPage = () => {
       {/* Team Section */}
       <section className="py-20 bg-white">
         <Container>
-          <motion.div
-            {...fadeIn}
-            className="text-center mb-16"
-          >
+          <motion.div {...fadeIn} className="text-center mb-16">
             <Badge
               variant="primary"
               className="mb-4 bg-primary-100 text-primary-600 px-4 py-2"
@@ -298,8 +312,9 @@ const AboutPage = () => {
               Our Team
             </Badge>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Driven by passion and expertise, our leadership team brings together
-              decades of industry experience to guide our vision forward.
+              Driven by passion and expertise, our leadership team brings
+              together decades of industry experience to guide our vision
+              forward.
             </p>
           </motion.div>
 
@@ -312,7 +327,6 @@ const AboutPage = () => {
                 className="group"
               >
                 <Card className="overflow-hidden hover:shadow-xl transition-shadow">
-
                   <div className="p-6">
                     <h3 className="text-xl font-semibold text-gray-900">
                       {member.name}

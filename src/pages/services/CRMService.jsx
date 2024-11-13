@@ -1,7 +1,6 @@
-// src/pages/services/CRMService.jsx
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Container, Button, Card, Badge } from '../../components/common';
-import { CTA } from '../../components/sections';
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Container, Button, Card, Badge } from "../../components/common";
+import { CTA } from "../../components/sections";
 import {
   FaUsers,
   FaChartBar,
@@ -12,68 +11,70 @@ import {
   FaChartLine,
   FaClock,
   FaCheckCircle,
+} from "react-icons/fa";
 
-} from 'react-icons/fa';
+const crmModules = [
+  {
+    icon: <FaUsers />,
+    title: "Contact Management",
+    description:
+      "Centralized customer data management with detailed profiles and interaction history",
+  },
+  {
+    icon: <FaChartBar />,
+    title: "Sales Pipeline",
+    description:
+      "Visual deal tracking and sales forecasting with automated workflows",
+  },
+  {
+    icon: <FaCogs />,
+    title: "Automation",
+    description:
+      "Streamlined business processes with smart automation triggers",
+  },
+  {
+    icon: <FaRegChartBar />,
+    title: "Analytics & Reports",
+    description: "In-depth insights with customizable dashboards and reports",
+  },
+  {
+    icon: <FaCloud />,
+    title: "Cloud Integration",
+    description: "Seamless integration with third-party tools and services",
+  },
+  {
+    icon: <FaMobile />,
+    title: "Mobile Access",
+    description: "Access your CRM data on-the-go with mobile applications",
+  },
+];
+
+const benefits = [
+  {
+    title: "Increased Efficiency",
+    value: "45%",
+    description: "Reduction in administrative tasks",
+  },
+  {
+    title: "Better Lead Conversion",
+    value: "60%",
+    description: "Improvement in lead conversion rates",
+  },
+  {
+    title: "Customer Satisfaction",
+    value: "85%",
+    description: "Increase in customer satisfaction scores",
+  },
+  {
+    title: "Revenue Growth",
+    value: "35%",
+    description: "Average increase in revenue",
+  },
+];
 
 const CRMService = () => {
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
-
-  const crmModules = [
-    {
-      icon: <FaUsers />,
-      title: "Contact Management",
-      description: "Centralized customer data management with detailed profiles and interaction history"
-    },
-    {
-      icon: <FaChartBar />,
-      title: "Sales Pipeline",
-      description: "Visual deal tracking and sales forecasting with automated workflows"
-    },
-    {
-      icon: <FaCogs />,
-      title: "Automation",
-      description: "Streamlined business processes with smart automation triggers"
-    },
-    {
-      icon: <FaRegChartBar />,
-      title: "Analytics & Reports",
-      description: "In-depth insights with customizable dashboards and reports"
-    },
-    {
-      icon: <FaCloud />,
-      title: "Cloud Integration",
-      description: "Seamless integration with third-party tools and services"
-    },
-    {
-      icon: <FaMobile />,
-      title: "Mobile Access",
-      description: "Access your CRM data on-the-go with mobile applications"
-    }
-  ];
-
-  const benefits = [
-    {
-      title: "Increased Efficiency",
-      value: "45%",
-      description: "Reduction in administrative tasks"
-    },
-    {
-      title: "Better Lead Conversion",
-      value: "60%",
-      description: "Improvement in lead conversion rates"
-    },
-    {
-      title: "Customer Satisfaction",
-      value: "85%",
-      description: "Increase in customer satisfaction scores"
-    },
-    {
-      title: "Revenue Growth",
-      value: "35%",
-      description: "Average increase in revenue"
-    }
-  ];
 
   return (
     <motion.div
@@ -94,7 +95,6 @@ const CRMService = () => {
           </div>
         </motion.div>
 
-
         <Container className="relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -112,8 +112,9 @@ const CRMService = () => {
                 Custom CRM Solutions for Your Business Growth
               </h1>
               <p className="text-lg text-gray-600 mb-8">
-                Transform your customer relationships with our tailored CRM solutions.
-                Streamline operations, boost productivity, and drive growth with powerful automation.
+                Transform your customer relationships with our tailored CRM
+                solutions. Streamline operations, boost productivity, and drive
+                growth with powerful automation.
               </p>
               <div className="flex gap-4">
                 <Button
@@ -122,16 +123,18 @@ const CRMService = () => {
                 >
                   Schedule Demo
                 </Button>
-                <Button variant="outline">
-                  View Features
-                </Button>
+                <Button variant="outline">View Features</Button>
               </div>
 
               {/* Trust Indicators */}
               <div className="mt-12 flex items-center gap-8">
                 <div>
-                  <div className="font-semibold text-gray-900">Trusted by 500+ Businesses</div>
-                  <div className="text-sm text-gray-600">Across multiple industries</div>
+                  <div className="font-semibold text-gray-900">
+                    Trusted by 500+ Businesses
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    Across multiple industries
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -153,11 +156,17 @@ const CRMService = () => {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                           <FaChartBar className="w-6 h-6" />
-                          <h3 className="text-lg font-semibold">Sales Dashboard</h3>
+                          <h3 className="text-lg font-semibold">
+                            Sales Dashboard
+                          </h3>
                         </div>
                         <div className="flex items-center gap-2">
-                          <div className="px-2 py-1 bg-white/20 rounded-full text-xs">Live</div>
-                          <span className="text-sm">Last updated: Just now</span>
+                          <div className="px-2 py-1 bg-white/20 rounded-full text-xs">
+                            Live
+                          </div>
+                          <span className="text-sm">
+                            Last updated: Just now
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -167,16 +176,37 @@ const CRMService = () => {
                       {/* Stats Grid */}
                       <div className="grid grid-cols-3 gap-4 mb-6">
                         {[
-                          { label: 'Total Leads', value: '2,547', icon: <FaUsers /> },
-                          { label: 'Pipeline Value', value: '$1.2M', icon: <FaChartLine /> },
-                          { label: 'Conversion Rate', value: '24.8%', icon: <FaRegChartBar /> }
+                          {
+                            label: "Total Leads",
+                            value: "2,547",
+                            icon: <FaUsers />,
+                          },
+                          {
+                            label: "Pipeline Value",
+                            value: "$1.2M",
+                            icon: <FaChartLine />,
+                          },
+                          {
+                            label: "Conversion Rate",
+                            value: "24.8%",
+                            icon: <FaRegChartBar />,
+                          },
                         ].map((stat, index) => (
-                          <div key={index} className="bg-gray-50 rounded-lg p-3">
+                          <div
+                            key={index}
+                            className="bg-gray-50 rounded-lg p-3"
+                          >
                             <div className="flex justify-between items-start mb-2">
-                              <span className="text-sm text-gray-600">{stat.label}</span>
-                              <span className="text-primary-500">{stat.icon}</span>
+                              <span className="text-sm text-gray-600">
+                                {stat.label}
+                              </span>
+                              <span className="text-primary-500">
+                                {stat.icon}
+                              </span>
                             </div>
-                            <div className="text-lg font-bold text-gray-900">{stat.value}</div>
+                            <div className="text-lg font-bold text-gray-900">
+                              {stat.value}
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -201,15 +231,32 @@ const CRMService = () => {
                       {/* Recent Activities */}
                       <div className="space-y-3">
                         {[
-                          { title: 'New Lead', desc: 'Tech Solutions Ltd.', time: '2h ago' },
-                          { title: 'Deal Closed', desc: 'Project Alpha - $45,000', time: '4h ago' }
+                          {
+                            title: "New Lead",
+                            desc: "Tech Solutions Ltd.",
+                            time: "2h ago",
+                          },
+                          {
+                            title: "Deal Closed",
+                            desc: "Project Alpha - $45,000",
+                            time: "4h ago",
+                          },
                         ].map((activity, index) => (
-                          <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100">
+                          <div
+                            key={index}
+                            className="flex items-center justify-between py-2 border-b border-gray-100"
+                          >
                             <div>
-                              <div className="font-medium text-sm">{activity.title}</div>
-                              <div className="text-xs text-gray-600">{activity.desc}</div>
+                              <div className="font-medium text-sm">
+                                {activity.title}
+                              </div>
+                              <div className="text-xs text-gray-600">
+                                {activity.desc}
+                              </div>
                             </div>
-                            <div className="text-xs text-gray-500">{activity.time}</div>
+                            <div className="text-xs text-gray-500">
+                              {activity.time}
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -217,12 +264,18 @@ const CRMService = () => {
 
                     {/* Floating Stats */}
                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg">
-                      <div className="text-sm text-gray-600">Monthly Growth</div>
-                      <div className="text-2xl font-bold text-primary-600">+28%</div>
+                      <div className="text-sm text-gray-600">
+                        Monthly Growth
+                      </div>
+                      <div className="text-2xl font-bold text-primary-600">
+                        +28%
+                      </div>
                     </div>
                     <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg">
                       <div className="text-sm text-gray-600">Active Users</div>
-                      <div className="text-2xl font-bold text-primary-600">2.5k+</div>
+                      <div className="text-2xl font-bold text-primary-600">
+                        2.5k+
+                      </div>
                     </div>
                   </div>
                 </Card>
@@ -241,12 +294,10 @@ const CRMService = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold mb-4">
-              Powerful CRM Features
-            </h2>
+            <h2 className="text-3xl font-bold mb-4">Powerful CRM Features</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Our CRM solutions come packed with features designed to streamline your
-              business operations and enhance customer relationships.
+              Our CRM solutions come packed with features designed to streamline
+              your business operations and enhance customer relationships.
             </p>
           </motion.div>
 
@@ -285,8 +336,8 @@ const CRMService = () => {
                 Transform Your Business with Our CRM
               </h2>
               <p className="text-gray-600 mb-8">
-                Experience significant improvements across your business operations with
-                our custom CRM solutions.
+                Experience significant improvements across your business
+                operations with our custom CRM solutions.
               </p>
               <div className="grid grid-cols-2 gap-6">
                 {benefits.map((benefit, index) => (
@@ -325,10 +376,17 @@ const CRMService = () => {
                     {/* Header Section */}
                     <div className="flex justify-between items-center bg-primary-50 p-4 rounded-lg">
                       <div>
-                        <h3 className="text-xl font-semibold text-primary-600">ROI Dashboard</h3>
-                        <p className="text-sm text-gray-600">Real-time benefits tracking</p>
+                        <h3 className="text-xl font-semibold text-primary-600">
+                          ROI Dashboard
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                          Real-time benefits tracking
+                        </p>
                       </div>
-                      <Badge variant="primary" className="bg-primary-100 text-primary-600">
+                      <Badge
+                        variant="primary"
+                        className="bg-primary-100 text-primary-600"
+                      >
                         Live Metrics
                       </Badge>
                     </div>
@@ -339,43 +397,51 @@ const CRMService = () => {
                         {
                           title: "Productivity Increase",
                           value: "45%",
-                          icon: <FaChartLine className="text-green-500 w-5 h-5" />,
+                          icon: (
+                            <FaChartLine className="text-green-500 w-5 h-5" />
+                          ),
                           change: "+12%",
-                          color: "bg-green-50"
+                          color: "bg-green-50",
                         },
                         {
                           title: "Customer Satisfaction",
                           value: "92%",
                           icon: <FaUsers className="text-blue-500 w-5 h-5" />,
                           change: "+8%",
-                          color: "bg-blue-50"
+                          color: "bg-blue-50",
                         },
                         {
                           title: "Task Automation",
                           value: "75%",
                           icon: <FaCogs className="text-purple-500 w-5 h-5" />,
                           change: "+15%",
-                          color: "bg-purple-50"
+                          color: "bg-purple-50",
                         },
                         {
                           title: "Time Saved",
                           value: "12hrs",
                           icon: <FaClock className="text-orange-500 w-5 h-5" />,
                           change: "+4hrs",
-                          color: "bg-orange-50"
-                        }
+                          color: "bg-orange-50",
+                        },
                       ].map((metric, index) => (
                         <div
                           key={index}
                           className={`${metric.color} rounded-lg p-4 border border-white/50 backdrop-blur-sm`}
                         >
                           <div className="flex justify-between items-start mb-2">
-                            <span className="text-sm font-medium text-gray-600">{metric.title}</span>
+                            <span className="text-sm font-medium text-gray-600">
+                              {metric.title}
+                            </span>
                             {metric.icon}
                           </div>
                           <div className="flex items-baseline gap-2">
-                            <span className="text-2xl font-bold text-gray-900">{metric.value}</span>
-                            <span className="text-sm text-green-600">{metric.change}</span>
+                            <span className="text-2xl font-bold text-gray-900">
+                              {metric.value}
+                            </span>
+                            <span className="text-sm text-green-600">
+                              {metric.change}
+                            </span>
                           </div>
                         </div>
                       ))}
@@ -384,15 +450,18 @@ const CRMService = () => {
                     {/* Growth Chart */}
                     <div className="bg-white rounded-lg p-4 border border-gray-100">
                       <div className="flex justify-between items-center mb-4">
-                        <h4 className="font-semibold text-gray-700">Growth Trajectory</h4>
+                        <h4 className="font-semibold text-gray-700">
+                          Growth Trajectory
+                        </h4>
                         <div className="flex gap-2">
-                          {['1M', '3M', '6M', '1Y'].map((period) => (
+                          {["1M", "3M", "6M", "1Y"].map((period) => (
                             <button
                               key={period}
-                              className={`px-3 py-1 rounded-md text-sm ${period === '3M'
-                                ? 'bg-primary-100 text-primary-600'
-                                : 'text-gray-600 hover:bg-gray-100'
-                                }`}
+                              className={`px-3 py-1 rounded-md text-sm ${
+                                period === "3M"
+                                  ? "bg-primary-100 text-primary-600"
+                                  : "text-gray-600 hover:bg-gray-100"
+                              }`}
                             >
                               {period}
                             </button>
@@ -401,17 +470,19 @@ const CRMService = () => {
                       </div>
                       <div className="h-40 relative">
                         <div className="absolute inset-0 flex items-end justify-between">
-                          {[40, 55, 45, 65, 75, 65, 80, 85, 75, 90, 85, 95].map((height, index) => (
-                            <div
-                              key={index}
-                              style={{ height: `${height}%` }}
-                              className="w-full bg-primary-100 rounded-t-lg mx-0.5 relative group"
-                            >
-                              <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity">
-                                {height}%
+                          {[40, 55, 45, 65, 75, 65, 80, 85, 75, 90, 85, 95].map(
+                            (height, index) => (
+                              <div
+                                key={index}
+                                style={{ height: `${height}%` }}
+                                className="w-full bg-primary-100 rounded-t-lg mx-0.5 relative group"
+                              >
+                                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                                  {height}%
+                                </div>
                               </div>
-                            </div>
-                          ))}
+                            )
+                          )}
                         </div>
                       </div>
                       <div className="flex justify-between mt-2 text-xs text-gray-500">
@@ -426,7 +497,7 @@ const CRMService = () => {
                         "Improved Customer Retention",
                         "Enhanced Data Analytics",
                         "Streamlined Workflows",
-                        "Better Team Collaboration"
+                        "Better Team Collaboration",
                       ].map((benefit, index) => (
                         <div
                           key={index}
@@ -435,7 +506,9 @@ const CRMService = () => {
                           <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center">
                             <FaCheckCircle className="text-primary-600 w-4 h-4" />
                           </div>
-                          <span className="text-sm text-gray-700">{benefit}</span>
+                          <span className="text-sm text-gray-700">
+                            {benefit}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -444,12 +517,20 @@ const CRMService = () => {
                     <div className="flex justify-between items-center border-t border-gray-100 pt-4">
                       <div className="flex gap-6">
                         <div>
-                          <div className="text-sm text-gray-600">Total Users</div>
-                          <div className="text-xl font-bold text-gray-900">2,547</div>
+                          <div className="text-sm text-gray-600">
+                            Total Users
+                          </div>
+                          <div className="text-xl font-bold text-gray-900">
+                            2,547
+                          </div>
                         </div>
                         <div>
-                          <div className="text-sm text-gray-600">Active Projects</div>
-                          <div className="text-xl font-bold text-gray-900">168</div>
+                          <div className="text-sm text-gray-600">
+                            Active Projects
+                          </div>
+                          <div className="text-xl font-bold text-gray-900">
+                            168
+                          </div>
                         </div>
                       </div>
                       <Button variant="outline" size="sm">
@@ -473,11 +554,10 @@ const CRMService = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold mb-4">
-              Implementation Process
-            </h2>
+            <h2 className="text-3xl font-bold mb-4">Implementation Process</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Our structured approach ensures a smooth transition to your new CRM system
+              Our structured approach ensures a smooth transition to your new
+              CRM system
             </p>
           </motion.div>
 
@@ -486,23 +566,24 @@ const CRMService = () => {
               {
                 step: "01",
                 title: "Requirements Analysis",
-                description: "We analyze your business needs and processes"
+                description: "We analyze your business needs and processes",
               },
               {
                 step: "02",
                 title: "Custom Development",
-                description: "Building your CRM solution with customized features"
+                description:
+                  "Building your CRM solution with customized features",
               },
               {
                 step: "03",
                 title: "Data Migration",
-                description: "Seamless transfer of your existing data"
+                description: "Seamless transfer of your existing data",
               },
               {
                 step: "04",
                 title: "Training & Support",
-                description: "Comprehensive training and ongoing support"
-              }
+                description: "Comprehensive training and ongoing support",
+              },
             ].map((phase, index) => (
               <motion.div
                 key={phase.step}
