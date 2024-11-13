@@ -1,118 +1,133 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Container, Card, Button } from '../components/common';
-import { CTA } from '../components/sections';
-import { 
-  FaSearch, 
-  FaDesktop, 
-  FaMobile, 
-  FaDatabase, 
-  FaCode, 
-  FaChartLine,
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Container, Card, Button } from "../components/common";
+import { CTA } from "../components/sections";
+import {
+  FaSearch,
+  FaDesktop,
+  FaMobile,
   FaCheck,
   FaLightbulb,
   FaCogs,
   FaUsers,
   FaAward,
-  FaHandshake
-} from 'react-icons/fa';
+  FaHandshake,
+} from "react-icons/fa";
+
+const services = [
+  {
+    id: "seo",
+    icon: <FaSearch className="w-8 h-8" />,
+    title: "SEO Optimization",
+    shortDesc: "Boost your online visibility with data-driven SEO strategies.",
+    fullDesc:
+      "Comprehensive SEO services to improve your search engine rankings and drive organic traffic.",
+    features: [
+      "Keyword Research & Analysis",
+      "On-Page SEO Optimization",
+      "Technical SEO Audits",
+      "Content Strategy",
+      "Performance Tracking",
+      "Local SEO Optimization",
+      "Mobile SEO",
+      "Link Building Strategy",
+    ],
+    technologies: [
+      "Google Analytics",
+      "SEMrush",
+      "Ahrefs",
+      "Google Search Console",
+      "Moz",
+      "Screaming Frog",
+    ],
+    benefits: [
+      "Increased organic traffic",
+      "Higher conversion rates",
+      "Better ROI on marketing",
+      "Enhanced brand visibility",
+    ],
+  },
+  {
+    id: "crm",
+    icon: <FaDesktop className="w-8 h-8" />,
+    title: "CRM Development",
+    shortDesc: "Custom CRM solutions for improved business operations.",
+    fullDesc:
+      "Tailored CRM systems that streamline your business processes and enhance customer relationships.",
+    features: [
+      "Contact Management",
+      "Sales Pipeline Tracking",
+      "Reporting & Analytics",
+      "Email Integration",
+      "Task Automation",
+      "Customer Support Integration",
+      "Mobile Access",
+      "Custom Workflows",
+    ],
+    technologies: [
+      "Python",
+      "Django",
+      "React",
+      "PostgreSQL",
+      "Redis",
+      "Docker",
+      "AWS",
+    ],
+    benefits: [
+      "Improved customer retention",
+      "Streamlined operations",
+      "Data-driven decisions",
+      "Enhanced team collaboration",
+    ],
+  },
+  {
+    id: "mobile",
+    icon: <FaMobile className="w-8 h-8" />,
+    title: "Mobile App Development",
+    shortDesc: "Native and cross-platform mobile applications.",
+    fullDesc:
+      "Cutting-edge mobile applications that provide seamless user experiences across all platforms.",
+    features: [
+      "Native iOS & Android Apps",
+      "Cross-Platform Development",
+      "UI/UX Design",
+      "App Store Optimization",
+      "Maintenance & Support",
+      "Push Notifications",
+      "Offline Functionality",
+      "Analytics Integration",
+    ],
+    technologies: ["React Native", "Flutter", "Firebase", "Node.js", "MongoDB"],
+    benefits: [
+      "Wider market reach",
+      "Enhanced user engagement",
+      "Improved brand loyalty",
+      "Competitive advantage",
+    ],
+  },
+  // Add other services similarly...
+];
+
+const stats = [
+  { number: "98%", label: "Client Satisfaction" },
+  { number: "200+", label: "Projects Completed" },
+  { number: "15+", label: "Years Experience" },
+  { number: "50+", label: "Expert Team Members" },
+];
+
+const industries = [
+  "Healthcare",
+  "E-commerce",
+  "Education",
+  "Real Estate",
+  "Manufacturing",
+  "Non-Profit",
+  "Finance",
+  "Retail",
+];
 
 const Services = () => {
   const [selectedService, setSelectedService] = useState(null);
-
-  const services = [
-    {
-      id: 'seo',
-      icon: <FaSearch className="w-8 h-8" />,
-      title: 'SEO Optimization',
-      shortDesc: 'Boost your online visibility with data-driven SEO strategies.',
-      fullDesc: 'Comprehensive SEO services to improve your search engine rankings and drive organic traffic.',
-      features: [
-        'Keyword Research & Analysis',
-        'On-Page SEO Optimization',
-        'Technical SEO Audits',
-        'Content Strategy',
-        'Performance Tracking',
-        'Local SEO Optimization',
-        'Mobile SEO',
-        'Link Building Strategy'
-      ],
-      technologies: ['Google Analytics', 'SEMrush', 'Ahrefs', 'Google Search Console', 'Moz', 'Screaming Frog'],
-      benefits: [
-        'Increased organic traffic',
-        'Higher conversion rates',
-        'Better ROI on marketing',
-        'Enhanced brand visibility'
-      ]
-    },
-    {
-      id: 'crm',
-      icon: <FaDesktop className="w-8 h-8" />,
-      title: 'CRM Development',
-      shortDesc: 'Custom CRM solutions for improved business operations.',
-      fullDesc: 'Tailored CRM systems that streamline your business processes and enhance customer relationships.',
-      features: [
-        'Contact Management',
-        'Sales Pipeline Tracking',
-        'Reporting & Analytics',
-        'Email Integration',
-        'Task Automation',
-        'Customer Support Integration',
-        'Mobile Access',
-        'Custom Workflows'
-      ],
-      technologies: ['Python', 'Django', 'React', 'PostgreSQL', 'Redis', 'Docker', 'AWS'],
-      benefits: [
-        'Improved customer retention',
-        'Streamlined operations',
-        'Data-driven decisions',
-        'Enhanced team collaboration'
-      ]
-    },
-    {
-      id: 'mobile',
-      icon: <FaMobile className="w-8 h-8" />,
-      title: 'Mobile App Development',
-      shortDesc: 'Native and cross-platform mobile applications.',
-      fullDesc: 'Cutting-edge mobile applications that provide seamless user experiences across all platforms.',
-      features: [
-        'Native iOS & Android Apps',
-        'Cross-Platform Development',
-        'UI/UX Design',
-        'App Store Optimization',
-        'Maintenance & Support',
-        'Push Notifications',
-        'Offline Functionality',
-        'Analytics Integration'
-      ],
-      technologies: ['React Native', 'Flutter', 'Firebase', 'Node.js', 'MongoDB'],
-      benefits: [
-        'Wider market reach',
-        'Enhanced user engagement',
-        'Improved brand loyalty',
-        'Competitive advantage'
-      ]
-    },
-    // Add other services similarly...
-  ];
-
-  const stats = [
-    { number: '98%', label: 'Client Satisfaction' },
-    { number: '200+', label: 'Projects Completed' },
-    { number: '15+', label: 'Years Experience' },
-    { number: '50+', label: 'Expert Team Members' }
-  ];
-
-  const industries = [
-    'Healthcare',
-    'E-commerce',
-    'Education',
-    'Real Estate',
-    'Manufacturing',
-    'Non-Profit',
-    'Finance',
-    'Retail'
-  ];
 
   return (
     <motion.div
@@ -126,7 +141,7 @@ const Services = () => {
           <div className="absolute top-0 -left-4 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl" />
           <div className="absolute bottom-0 -right-4 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl" />
         </div>
-        
+
         <Container className="py-20">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h1
@@ -196,7 +211,7 @@ const Services = () => {
               Our Comprehensive Services
             </h2>
             <p className="text-gray-600">
-              From concept to execution, we provide end-to-end solutions 
+              From concept to execution, we provide end-to-end solutions
               tailored to your specific needs and industry requirements.
             </p>
           </div>
@@ -210,7 +225,7 @@ const Services = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card 
+                <Card
                   className="h-full cursor-pointer hover:-translate-y-2 transition-all duration-300
                             hover:shadow-xl hover:shadow-primary-100/50"
                   onClick={() => setSelectedService(service)}
@@ -250,24 +265,24 @@ const Services = () => {
                 {[
                   {
                     icon: <FaLightbulb />,
-                    title: 'Innovative Solutions',
-                    desc: 'Cutting-edge technology combined with creative problem-solving'
+                    title: "Innovative Solutions",
+                    desc: "Cutting-edge technology combined with creative problem-solving",
                   },
                   {
                     icon: <FaCogs />,
-                    title: 'Proven Process',
-                    desc: 'Streamlined development methodology ensuring project success'
+                    title: "Proven Process",
+                    desc: "Streamlined development methodology ensuring project success",
                   },
                   {
                     icon: <FaUsers />,
-                    title: 'Expert Team',
-                    desc: 'Highly skilled professionals with diverse industry experience'
+                    title: "Expert Team",
+                    desc: "Highly skilled professionals with diverse industry experience",
                   },
                   {
                     icon: <FaHandshake />,
-                    title: 'Client-Focused',
-                    desc: 'Dedicated support and collaboration throughout the project'
-                  }
+                    title: "Client-Focused",
+                    desc: "Dedicated support and collaboration throughout the project",
+                  },
                 ].map((item, index) => (
                   <motion.div
                     key={item.title}
@@ -326,32 +341,33 @@ const Services = () => {
               Our Development Process
             </h2>
             <p className="text-gray-600">
-              We follow a systematic approach to ensure the success of every project
+              We follow a systematic approach to ensure the success of every
+              project
             </p>
           </div>
 
           <div className="grid md:grid-cols-4 gap-8">
             {[
               {
-                step: '01',
-                title: 'Discovery',
-                desc: 'Understanding your requirements and project goals'
+                step: "01",
+                title: "Discovery",
+                desc: "Understanding your requirements and project goals",
               },
               {
-                step: '02',
-                title: 'Planning',
-                desc: 'Designing the solution and creating project roadmap'
+                step: "02",
+                title: "Planning",
+                desc: "Designing the solution and creating project roadmap",
               },
               {
-                step: '03',
-                title: 'Development',
-                desc: 'Building your solution with regular updates'
+                step: "03",
+                title: "Development",
+                desc: "Building your solution with regular updates",
               },
               {
-                step: '04',
-                title: 'Delivery',
-                desc: 'Testing, deployment and ongoing support'
-              }
+                step: "04",
+                title: "Delivery",
+                desc: "Testing, deployment and ongoing support",
+              },
             ].map((phase, index) => (
               <motion.div
                 key={phase.step}
@@ -387,16 +403,25 @@ const Services = () => {
               Technologies We Use
             </h2>
             <p className="text-gray-600">
-              We leverage the latest technologies to build robust and scalable solutions
+              We leverage the latest technologies to build robust and scalable
+              solutions
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              'React', 'Node.js', 'Python', 'AWS',
-              'Flutter', 'MongoDB', 'PostgreSQL', 'Docker',
-              'Firebase', 'Redux', 'Django',
-               'GraphQL', 
+              "React",
+              "Node.js",
+              "Python",
+              "AWS",
+              "Flutter",
+              "MongoDB",
+              "PostgreSQL",
+              "Docker",
+              "Firebase",
+              "Redux",
+              "Django",
+              "GraphQL",
             ].map((tech, index) => (
               <motion.div
                 key={tech}
@@ -422,30 +447,34 @@ const Services = () => {
               What Our Clients Say
             </h2>
             <p className="text-gray-600">
-              Don't just take our word for it - hear from some of our satisfied clients
+              Don&apos;t just take our word for it - hear from some of our satisfied
+              clients
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                quote: "Their expertise in CRM development helped us streamline our operations and improve customer satisfaction significantly.",
+                quote:
+                  "Their expertise in CRM development helped us streamline our operations and improve customer satisfaction significantly.",
                 author: "John Smith",
                 position: "CEO, TechCorp Inc.",
-                rating: 5
+                rating: 5,
               },
               {
-                quote: "The mobile app they developed for us exceeded our expectations. Great team to work with!",
+                quote:
+                  "The mobile app they developed for us exceeded our expectations. Great team to work with!",
                 author: "Sarah Johnson",
                 position: "Marketing Director, InnovateCo",
-                rating: 5
+                rating: 5,
               },
               {
-                quote: "Professional team that delivers quality work on time. Their SEO services have greatly improved our online presence.",
+                quote:
+                  "Professional team that delivers quality work on time. Their SEO services have greatly improved our online presence.",
                 author: "Michael Brown",
                 position: "Founder, GrowthStart",
-                rating: 5
-              }
+                rating: 5,
+              },
             ].map((testimonial, index) => (
               <motion.div
                 key={index}
@@ -460,10 +489,16 @@ const Services = () => {
                       <FaAward key={i} />
                     ))}
                   </div>
-                  <p className="text-gray-600 mb-4 italic">"{testimonial.quote}"</p>
+                  <p className="text-gray-600 mb-4 italic">
+                    &quot;{testimonial.quote}&quot;
+                  </p>
                   <div className="mt-auto">
-                    <div className="font-semibold text-gray-900">{testimonial.author}</div>
-                    <div className="text-sm text-gray-600">{testimonial.position}</div>
+                    <div className="font-semibold text-gray-900">
+                      {testimonial.author}
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      {testimonial.position}
+                    </div>
                   </div>
                 </Card>
               </motion.div>
@@ -488,20 +523,20 @@ const Services = () => {
             {[
               {
                 q: "What is your typical project timeline?",
-                a: "Project timelines vary based on complexity and scope. Typically, small projects take 4-8 weeks, while larger projects can take 3-6 months. We'll provide a detailed timeline during the initial consultation."
+                a: "Project timelines vary based on complexity and scope. Typically, small projects take 4-8 weeks, while larger projects can take 3-6 months. We'll provide a detailed timeline during the initial consultation.",
               },
               {
                 q: "Do you provide ongoing support?",
-                a: "Yes, we offer comprehensive maintenance and support packages for all our services. This includes regular updates, bug fixes, and technical support to ensure your solution continues to perform optimally."
+                a: "Yes, we offer comprehensive maintenance and support packages for all our services. This includes regular updates, bug fixes, and technical support to ensure your solution continues to perform optimally.",
               },
               {
                 q: "What is your development process?",
-                a: "We follow an agile development methodology with regular client check-ins and iterations. This ensures transparency and allows for feedback throughout the development process."
+                a: "We follow an agile development methodology with regular client check-ins and iterations. This ensures transparency and allows for feedback throughout the development process.",
               },
               {
                 q: "How do you ensure project quality?",
-                a: "We implement rigorous quality assurance processes, including automated testing, code reviews, and thorough QA testing before delivery. We also maintain open communication channels for feedback and improvements."
-              }
+                a: "We implement rigorous quality assurance processes, including automated testing, code reviews, and thorough QA testing before delivery. We also maintain open communication channels for feedback and improvements.",
+              },
             ].map((faq, index) => (
               <motion.div
                 key={index}
@@ -511,7 +546,9 @@ const Services = () => {
                 transition={{ delay: index * 0.1 }}
               >
                 <Card className="p-6 h-full hover:shadow-lg transition-all duration-300">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.q}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                    {faq.q}
+                  </h3>
                   <p className="text-gray-600">{faq.a}</p>
                 </Card>
               </motion.div>
@@ -528,7 +565,8 @@ const Services = () => {
               Ready to Get Started?
             </h2>
             <p className="text-gray-600 mb-8">
-              Contact us today to discuss your project and see how we can help transform your business
+              Contact us today to discuss your project and see how we can help
+              transform your business
             </p>
             <div className="flex gap-4 justify-center">
               <Button size="lg" variant="primary">
@@ -543,112 +581,117 @@ const Services = () => {
       </section>
 
       {/* Service Details Modal */}
-     {/* Service Details Modal */}
-{selectedService && (
-  <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-    >
-      <div className="p-6">
-        <div className="flex justify-between items-start mb-6">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-primary-600/10 rounded-lg flex items-center justify-center text-primary-600">
-              {selectedService.icon}
+      {/* Service Details Modal */}
+      {selectedService && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+          >
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-primary-600/10 rounded-lg flex items-center justify-center text-primary-600">
+                    {selectedService.icon}
+                  </div>
+                  <h3 className="text-2xl font-semibold text-gray-900">
+                    {selectedService.title}
+                  </h3>
+                </div>
+                <button
+                  onClick={() => setSelectedService(null)}
+                  className="text-gray-500 hover:text-gray-700 p-1"
+                  aria-label="Close modal"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <p className="text-gray-600 mb-8">{selectedService.fullDesc}</p>
+
+              {/* Key Features */}
+              <div className="mb-8">
+                <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                  Key Features
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {selectedService.features.map((feature) => (
+                    <div
+                      key={feature}
+                      className="flex items-center gap-2 text-gray-600"
+                    >
+                      <FaCheck className="text-primary-600 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Benefits */}
+              <div className="mb-8">
+                <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                  Key Benefits
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {selectedService.benefits.map((benefit) => (
+                    <div
+                      key={benefit}
+                      className="flex items-center gap-2 text-gray-600"
+                    >
+                      <FaCheck className="text-primary-600 flex-shrink-0" />
+                      <span>{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Technologies */}
+              <div className="mb-8">
+                <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                  Technologies & Tools
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {selectedService.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Call to Action */}
+              <div className="flex gap-4">
+                <Button
+                  variant="primary"
+                  className="flex-1 bg-gradient-to-r from-primary-500 to-primary-700 hover:from-primary-600 hover:to-primary-800"
+                >
+                  Get Started
+                </Button>
+                <Button variant="outline" className="flex-1">
+                  Learn More
+                </Button>
+              </div>
             </div>
-            <h3 className="text-2xl font-semibold text-gray-900">
-              {selectedService.title}
-            </h3>
-          </div>
-          <button
-            onClick={() => setSelectedService(null)}
-            className="text-gray-500 hover:text-gray-700 p-1"
-            aria-label="Close modal"
-          >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+          </motion.div>
         </div>
-
-        <p className="text-gray-600 mb-8">
-          {selectedService.fullDesc}
-        </p>
-
-        {/* Key Features */}
-        <div className="mb-8">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4">
-            Key Features
-          </h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {selectedService.features.map((feature) => (
-              <div 
-                key={feature}
-                className="flex items-center gap-2 text-gray-600"
-              >
-                <FaCheck className="text-primary-600 flex-shrink-0" />
-                <span>{feature}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Benefits */}
-        <div className="mb-8">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4">
-            Key Benefits
-          </h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {selectedService.benefits.map((benefit) => (
-              <div 
-                key={benefit}
-                className="flex items-center gap-2 text-gray-600"
-              >
-                <FaCheck className="text-primary-600 flex-shrink-0" />
-                <span>{benefit}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Technologies */}
-        <div className="mb-8">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4">
-            Technologies & Tools
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            {selectedService.technologies.map((tech) => (
-              <span
-                key={tech}
-                className="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="flex gap-4">
-          <Button 
-            variant="primary"
-            className="flex-1 bg-gradient-to-r from-primary-500 to-primary-700 hover:from-primary-600 hover:to-primary-800"
-          >
-            Get Started
-          </Button>
-          <Button 
-            variant="outline"
-            className="flex-1"
-          >
-            Learn More
-          </Button>
-        </div>
-      </div>
-    </motion.div>
-  </div>
-)}
+      )}
 
       <CTA />
     </motion.div>

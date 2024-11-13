@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Container, Input, Button } from '../components/common';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Container, Input, Button } from "../components/common";
 import {
   FaMapMarkerAlt,
   FaPhone,
@@ -8,17 +8,62 @@ import {
   FaClock,
   FaFacebook,
   FaInstagram,
-  FaGoogle
-} from 'react-icons/fa';
+  FaGoogle,
+} from "react-icons/fa";
+
+const contactInfo = [
+  {
+    icon: <FaMapMarkerAlt />,
+    title: "Visit Us",
+    details: [
+      "1C, Satyam Apartment",
+      "Aradhana Society,Vishwas Colony,Alkapuri",
+      "Vadodara, Gujarat 390005",
+    ],
+  },
+  {
+    icon: <FaPhone />,
+    title: "Call Us",
+    details: ["+91 9638544455"],
+  },
+  {
+    icon: <FaEnvelope />,
+    title: "Email Us",
+    details: ["info@anantsoftcomputing.com"],
+  },
+  {
+    icon: <FaClock />,
+    title: "Working Hours",
+    details: ["Monday - Friday: 9:00 AM - 6:00 PM"],
+  },
+];
+
+const socialLinks = [
+  {
+    icon: <FaFacebook />,
+    href: "https://www.facebook.com/anantsoftcomputing/",
+    label: "LinkedIn",
+  },
+  {
+    icon: <FaInstagram />,
+    href: "https://www.instagram.com/anantsoftcomputing/",
+    label: "Instagram",
+  },
+  {
+    icon: <FaGoogle />,
+    href: "https://www.google.com/maps/place/Anant+Soft+Computing/@22.3094348,73.1713566,17z/data=!3m1!4b1!4m6!3m5!1s0x395fc5873e594259:0xda3dc91c20f4beec!8m2!3d22.3094348!4d73.1713566!16s%2Fg%2F11bw1ylpm3?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D",
+    label: "Google",
+  },
+];
 
 const Contact = () => {
   const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    message: '',
-    service: 'default'
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    message: "",
+    service: "default",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,55 +71,16 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsSubmitting(false);
   };
 
   const handleChange = (e) => {
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
-
-  const contactInfo = [
-    {
-      icon: <FaMapMarkerAlt />,
-      title: 'Visit Us',
-      details: [
-        '1C, Satyam Apartment',
-        'Aradhana Society,Vishwas Colony,Alkapuri',
-        'Vadodara, Gujarat 390005'
-      ]
-    },
-    {
-      icon: <FaPhone />,
-      title: 'Call Us',
-      details: [
-        '+91 9638544455',
-      ]
-    },
-    {
-      icon: <FaEnvelope />,
-      title: 'Email Us',
-      details: [
-        'info@anantsoftcomputing.com',
-      ]
-    },
-    {
-      icon: <FaClock />,
-      title: 'Working Hours',
-      details: [
-        'Monday - Friday: 9:00 AM - 6:00 PM',
-      ]
-    }
-  ];
-
-  const socialLinks = [
-    { icon: <FaFacebook />, href: 'https://www.facebook.com/anantsoftcomputing/', label: 'LinkedIn' },
-    { icon: <FaInstagram />, href: 'https://www.instagram.com/anantsoftcomputing/', label: 'Instagram' },
-    { icon: <FaGoogle />, href: 'https://www.google.com/maps/place/Anant+Soft+Computing/@22.3094348,73.1713566,17z/data=!3m1!4b1!4m6!3m5!1s0x395fc5873e594259:0xda3dc91c20f4beec!8m2!3d22.3094348!4d73.1713566!16s%2Fg%2F11bw1ylpm3?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D', label: 'Google' },
-  ];
 
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50">
@@ -120,9 +126,13 @@ const Contact = () => {
                     {info.icon}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">{info.title}</h3>
+                    <h3 className="font-semibold text-gray-900">
+                      {info.title}
+                    </h3>
                     {info.details.map((detail, i) => (
-                      <p key={i} className="text-gray-600 text-sm">{detail}</p>
+                      <p key={i} className="text-gray-600 text-sm">
+                        {detail}
+                      </p>
                     ))}
                   </div>
                 </div>
@@ -131,7 +141,9 @@ const Contact = () => {
 
             {/* Social Links */}
             <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="font-semibold text-gray-900 mb-4">Connect With Us</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">
+                Connect With Us
+              </h3>
               <div className="flex gap-4">
                 {socialLinks.map((social) => (
                   <a
@@ -254,11 +266,10 @@ const Contact = () => {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.169202432397!2d73.16878167596472!3d22.309439742562773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc5873e594259%3A0xda3dc91c20f4beec!2sAnant%20Soft%20Computing!5e0!3m2!1sen!2sin!4v1731308281495!5m2!1sen!2sin"
               width="100%"
               height="400"
-              style={{ border: 0, borderRadius: '0.75rem' }}
+              style={{ border: 0, borderRadius: "0.75rem" }}
               allowFullScreen=""
               loading="lazy"
             />
-
           </div>
         </motion.div>
 
@@ -279,20 +290,20 @@ const Contact = () => {
                 {[
                   {
                     q: "What information should I prepare before contacting?",
-                    a: "Having a clear project overview, timeline, budget range, and specific requirements will help us understand your needs better."
+                    a: "Having a clear project overview, timeline, budget range, and specific requirements will help us understand your needs better.",
                   },
                   {
                     q: "How quickly can you start on my project?",
-                    a: "Our typical response time is within 24 hours, and we can usually begin project planning within a week of agreement."
+                    a: "Our typical response time is within 24 hours, and we can usually begin project planning within a week of agreement.",
                   },
                   {
                     q: "Do you provide post-development support?",
-                    a: "Yes, we offer comprehensive post-development support and maintenance packages tailored to your needs."
+                    a: "Yes, we offer comprehensive post-development support and maintenance packages tailored to your needs.",
                   },
                   {
                     q: "Can we have face-to-face meetings?",
-                    a: "Absolutely! We welcome both in-person meetings at our office and virtual meetings via your preferred platform."
-                  }
+                    a: "Absolutely! We welcome both in-person meetings at our office and virtual meetings via your preferred platform.",
+                  },
                 ].map((faq, index) => (
                   <motion.div
                     key={index}
@@ -331,15 +342,21 @@ const Contact = () => {
               </p>
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="bg-white p-6 rounded-xl shadow-lg">
-                  <div className="text-2xl font-bold text-primary mb-2">24hrs</div>
+                  <div className="text-2xl font-bold text-primary mb-2">
+                    24hrs
+                  </div>
                   <div className="text-gray-600">Initial Response</div>
                 </div>
                 <div className="bg-white p-6 rounded-xl shadow-lg">
-                  <div className="text-2xl font-bold text-primary mb-2">48hrs</div>
+                  <div className="text-2xl font-bold text-primary mb-2">
+                    48hrs
+                  </div>
                   <div className="text-gray-600">Detailed Proposal</div>
                 </div>
                 <div className="bg-white p-6 rounded-xl shadow-lg">
-                  <div className="text-2xl font-bold text-primary mb-2">7 Days</div>
+                  <div className="text-2xl font-bold text-primary mb-2">
+                    7 Days
+                  </div>
                   <div className="text-gray-600">Project Kickoff</div>
                 </div>
               </div>

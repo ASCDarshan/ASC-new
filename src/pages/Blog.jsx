@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   Search,
   Calendar,
@@ -8,51 +8,49 @@ import {
   Bookmark,
   MessageCircle,
   Eye,
-  ArrowUp
-} from 'lucide-react';
+  ArrowUp,
+} from "lucide-react";
+
+const categories = [
+  { name: "All Posts", slug: "all" },
+  { name: "Web Development", slug: "web-development" },
+  { name: "Tech Insights", slug: "tech-insights" },
+  { name: "Industry News", slug: "industry-news" },
+  { name: "Case Studies", slug: "case-studies" },
+  { name: "Tutorials", slug: "tutorials" },
+];
+
+const blogPosts = [
+  {
+    id: 1,
+    title: "10 Essential Tips for Modern Web Development in 2024",
+    slug: "essential-web-development-tips-2024",
+    excerpt:
+      "Discover the latest best practices and tools that are shaping modern web development...",
+    category: "web-development",
+    author: {
+      name: "Sarah Johnson",
+      avatar: "/api/placeholder/32/32",
+      role: "Senior Developer",
+    },
+    publishedAt: "2024-02-15",
+    readTime: "8 min read",
+    featured: true,
+    thumbnail: "/api/placeholder/600/400",
+    tags: ["React", "Performance", "Best Practices"],
+    engagement: {
+      views: 1520,
+      comments: 23,
+      shares: 45,
+      bookmarks: 67,
+    },
+  },
+];
 
 const BlogPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const [showScrollTop, setShowScrollTop] = useState(false);
-
-  // Categories with SEO-optimized slugs
-  const categories = [
-    { name: 'All Posts', slug: 'all' },
-    { name: 'Web Development', slug: 'web-development' },
-    { name: 'Tech Insights', slug: 'tech-insights' },
-    { name: 'Industry News', slug: 'industry-news' },
-    { name: 'Case Studies', slug: 'case-studies' },
-    { name: 'Tutorials', slug: 'tutorials' }
-  ];
-
-  // Sample blog posts with rich metadata
-  const blogPosts = [
-    {
-      id: 1,
-      title: "10 Essential Tips for Modern Web Development in 2024",
-      slug: "essential-web-development-tips-2024",
-      excerpt: "Discover the latest best practices and tools that are shaping modern web development...",
-      category: "web-development",
-      author: {
-        name: "Sarah Johnson",
-        avatar: "/api/placeholder/32/32",
-        role: "Senior Developer"
-      },
-      publishedAt: "2024-02-15",
-      readTime: "8 min read",
-      featured: true,
-      thumbnail: "/api/placeholder/600/400",
-      tags: ["React", "Performance", "Best Practices"],
-      engagement: {
-        views: 1520,
-        comments: 23,
-        shares: 45,
-        bookmarks: 67
-      }
-    },
-    // Add more posts...
-  ];
 
   // Scroll to top functionality
   useEffect(() => {
@@ -60,8 +58,8 @@ const BlogPage = () => {
       setShowScrollTop(window.scrollY > 300);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -94,7 +92,8 @@ const BlogPage = () => {
               transition={{ delay: 0.1 }}
               className="text-lg text-gray-600 mb-8"
             >
-              Explore the latest in technology, development insights, and industry trends
+              Explore the latest in technology, development insights, and
+              industry trends
             </motion.p>
 
             {/* Search Bar */}
@@ -132,10 +131,11 @@ const BlogPage = () => {
                 <button
                   key={category.slug}
                   onClick={() => setSelectedCategory(category.slug)}
-                  className={`px-6 py-2 rounded-full transition-all duration-300 ${selectedCategory === category.slug
-                      ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/20'
-                      : 'bg-white text-gray-600 hover:bg-primary-50'
-                    }`}
+                  className={`px-6 py-2 rounded-full transition-all duration-300 ${
+                    selectedCategory === category.slug
+                      ? "bg-primary-600 text-white shadow-lg shadow-primary-600/20"
+                      : "bg-white text-gray-600 hover:bg-primary-50"
+                  }`}
                 >
                   {category.name}
                 </button>
@@ -144,7 +144,7 @@ const BlogPage = () => {
           </div>
 
           {/* Featured Post */}
-          {blogPosts.find(post => post.featured) && (
+          {blogPosts.find((post) => post.featured) && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -173,9 +173,7 @@ const BlogPage = () => {
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">
                       {blogPosts[0].title}
                     </h2>
-                    <p className="text-gray-600 mb-6">
-                      {blogPosts[0].excerpt}
-                    </p>
+                    <p className="text-gray-600 mb-6">{blogPosts[0].excerpt}</p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <img
@@ -209,57 +207,57 @@ const BlogPage = () => {
 
           {/* Post Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.filter(post => !post.featured).map((post, index) => (
-              <motion.article
-                key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-              >
-                <div className="aspect-w-16 aspect-h-9">
-                  <img
-                    src={post.thumbnail}
-                    alt={post.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    {post.tags.map(tag => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 bg-primary-50 text-primary-600 rounded-full text-sm"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+            {blogPosts
+              .filter((post) => !post.featured)
+              .map((post, index) => (
+                <motion.article
+                  key={post.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                >
+                  <div className="aspect-w-16 aspect-h-9">
+                    <img
+                      src={post.thumbnail}
+                      alt={post.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    {post.excerpt}
-                  </p>
-                  <div className="flex items-center justify-between text-sm text-gray-500">
-                    <div className="flex items-center gap-4">
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      {post.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 bg-primary-50 text-primary-600 rounded-full text-sm"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                    <div className="flex items-center justify-between text-sm text-gray-500">
+                      <div className="flex items-center gap-4">
+                        <span className="flex items-center gap-1">
+                          <Eye className="w-4 h-4" />
+                          {post.engagement.views}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <MessageCircle className="w-4 h-4" />
+                          {post.engagement.comments}
+                        </span>
+                      </div>
                       <span className="flex items-center gap-1">
-                        <Eye className="w-4 h-4" />
-                        {post.engagement.views}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <MessageCircle className="w-4 h-4" />
-                        {post.engagement.comments}
+                        <Clock className="w-4 h-4" />
+                        {post.readTime}
                       </span>
                     </div>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      {post.readTime}
-                    </span>
                   </div>
-                </div>
-              </motion.article>
-            ))}
+                </motion.article>
+              ))}
           </div>
         </div>
       </section>
@@ -272,7 +270,8 @@ const BlogPage = () => {
               Stay Updated with Our Newsletter
             </h2>
             <p className="text-primary-100 mb-8">
-              Get the latest insights and updates delivered directly to your inbox
+              Get the latest insights and updates delivered directly to your
+              inbox
             </p>
             <form className="flex gap-4 max-w-md mx-auto">
               <input
@@ -294,7 +293,7 @@ const BlogPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="fixed bottom-8 right-8 p-3 bg-primary-600 text-white rounded-full shadow-lg hover:bg-primary-700 transition-colors"
         >
           <ArrowUp className="w-6 h-6" />
