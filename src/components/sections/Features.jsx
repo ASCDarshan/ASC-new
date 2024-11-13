@@ -12,49 +12,50 @@ import {
   FaChartLine
 } from 'react-icons/fa';
 
+const features = [
+  {
+    icon: <FaCode />,
+    title: 'Clean Code',
+    description: 'Well-structured, maintainable code following best practices and design patterns.'
+  },
+  {
+    icon: <FaRocket />,
+    title: 'Fast Performance',
+    description: 'Optimized applications that deliver exceptional speed and responsiveness.'
+  },
+  {
+    icon: <FaShieldAlt />,
+    title: 'Secure Solutions',
+    description: 'Built-in security measures to protect your data and users.'
+  },
+  {
+    icon: <FaCloud />,
+    title: 'Cloud Ready',
+    description: 'Applications designed for seamless cloud deployment and scaling.'
+  },
+  {
+    icon: <FaMobile />,
+    title: 'Mobile First',
+    description: 'Responsive designs that work perfectly on all devices.'
+  },
+  {
+    icon: <FaUsers />,
+    title: 'User Focused',
+    description: 'Intuitive interfaces designed for the best user experience.'
+  },
+  {
+    icon: <FaCogs />,
+    title: 'Easy Integration',
+    description: 'Systems that integrate smoothly with your existing infrastructure.'
+  },
+  {
+    icon: <FaChartLine />,
+    title: 'Scalable Architecture',
+    description: 'Solutions that grow with your business needs.'
+  }
+];
+
 const Features = () => {
-  const features = [
-    {
-      icon: <FaCode />,
-      title: 'Clean Code',
-      description: 'Well-structured, maintainable code following best practices and design patterns.'
-    },
-    {
-      icon: <FaRocket />,
-      title: 'Fast Performance',
-      description: 'Optimized applications that deliver exceptional speed and responsiveness.'
-    },
-    {
-      icon: <FaShieldAlt />,
-      title: 'Secure Solutions',
-      description: 'Built-in security measures to protect your data and users.'
-    },
-    {
-      icon: <FaCloud />,
-      title: 'Cloud Ready',
-      description: 'Applications designed for seamless cloud deployment and scaling.'
-    },
-    {
-      icon: <FaMobile />,
-      title: 'Mobile First',
-      description: 'Responsive designs that work perfectly on all devices.'
-    },
-    {
-      icon: <FaUsers />,
-      title: 'User Focused',
-      description: 'Intuitive interfaces designed for the best user experience.'
-    },
-    {
-      icon: <FaCogs />,
-      title: 'Easy Integration',
-      description: 'Systems that integrate smoothly with your existing infrastructure.'
-    },
-    {
-      icon: <FaChartLine />,
-      title: 'Scalable Architecture',
-      description: 'Solutions that grow with your business needs.'
-    }
-  ];
 
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50">

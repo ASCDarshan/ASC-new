@@ -3,49 +3,50 @@ import { Link } from 'react-router-dom';
 import Container from './Container';
 import { FaFacebook, FaGoogle, FaInstagram } from 'react-icons/fa';
 
+const navigation = {
+  solutions: [
+    { name: 'SEO Services', href: '/services/seo' },
+    { name: 'CRM Development', href: '/services/crm' },
+    { name: 'Mobile Apps', href: '/services/mobile' },
+    { name: 'Custom Solutions', href: '/services/custom' },
+  ],
+  company: [
+    { name: 'About Us', href: '/about' },
+    { name: 'Portfolio', href: '/portfolio' },
+    { name: 'Contact', href: '/contact' },
+    { name: 'Careers', href: '/careers' },
+  ],
+  contacts: [
+    { name: '1 C Satyam Apartment, Vishwas Colony Alkapuri, Vadodara - 390007', href: null },
+    { name: 'Phone: 9638544455', href: 'tel:9638544455' },
+    { name: 'Email: info@anantsoftcomputing.com', href: 'mailto:info@anantsoftcomputing.com' },
+  ],
+  social: [
+    {
+      name: 'Facebook',
+      href: 'https://www.facebook.com/anantsoftcomputing/',
+      icon: () => (
+        <FaFacebook />
+      ),
+    },
+    {
+      name: 'Instagram',
+      href: 'https://www.instagram.com/anantsoftcomputing/',
+      icon: () => (
+        <FaInstagram />
+      ),
+    },
+    {
+      name: 'Google',
+      href: 'https://www.google.com/maps/place/Anant+Soft+Computing/@22.3094348,73.1713566,17z/data=!3m1!4b1!4m6!3m5!1s0x395fc5873e594259:0xda3dc91c20f4beec!8m2!3d22.3094348!4d73.1713566!16s%2Fg%2F11bw1ylpm3?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D',
+      icon: () => (
+        <FaGoogle />
+      ),
+    },
+  ],
+};
+
 const Footer = () => {
-  const navigation = {
-    solutions: [
-      { name: 'SEO Services', href: '/services/seo' },
-      { name: 'CRM Development', href: '/services/crm' },
-      { name: 'Mobile Apps', href: '/services/mobile' },
-      { name: 'Custom Solutions', href: '/services/custom' },
-    ],
-    company: [
-      { name: 'About Us', href: '/about' },
-      { name: 'Portfolio', href: '/portfolio' },
-      { name: 'Contact', href: '/contact' },
-      { name: 'Careers', href: '/careers' },
-    ],
-    contacts: [
-      { name: '1 C Satyam Apartment, Vishwas Colony Alkapuri, Vadodara - 390007', href: null },
-      { name: 'Phone: 9638544455', href: 'tel:9638544455' },
-      { name: 'Email: info@anantsoftcomputing.com', href: 'mailto:info@anantsoftcomputing.com' },
-    ],
-    social: [
-      {
-        name: 'Facebook',
-        href: 'https://www.facebook.com/anantsoftcomputing/',
-        icon: () => (
-          <FaFacebook />
-        ),
-      },
-      {
-        name: 'Instagram',
-        href: 'https://www.instagram.com/anantsoftcomputing/',
-        icon: () => (
-          <FaInstagram />
-        ),
-      },
-      {
-        name: 'Google',
-        href: 'https://www.google.com/maps/place/Anant+Soft+Computing/@22.3094348,73.1713566,17z/data=!3m1!4b1!4m6!3m5!1s0x395fc5873e594259:0xda3dc91c20f4beec!8m2!3d22.3094348!4d73.1713566!16s%2Fg%2F11bw1ylpm3?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D',
-        icon: () => (
-          <FaGoogle />
-        ),
-      },
-    ],
-  };
 
   return (
     <footer className="bg-white border-t border-gray-200" aria-labelledby="footer-heading">

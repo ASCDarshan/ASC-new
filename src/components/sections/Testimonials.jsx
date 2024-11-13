@@ -5,36 +5,36 @@ import { Container } from '../common';
 import { FaQuoteLeft } from 'react-icons/fa';
 import profileImg from "../../assets/images/profile.jpg"
 
+const testimonials = [
+  {
+    id: 1,
+    name: "Pratik Das",
+    quote: "It was absolutely amazing to interact with Jeegar at Anant Soft Computing. They are extremely professional in their work ethics and process and upfront about costs and Timelines. Was a great experience. Thank you Anant Soft Computing Team.",
+  },
+  {
+    id: 2,
+    name: "Sandip Patel",
+    quote: "I have given my LMS work to Anant soft Computing . Anant Soft Computing team had given nice support to us . The founder & CEO , Mr. Jigar Desai is personally involved in every project and also giving nice suggestion in each and every architect of system.",
+  },
+  {
+    id: 3,
+    name: "Jimish Sura",
+    quote: "Anant Soft assisted with analysis of requirements, technology feasibility, design and development of various IT projects implemented in Conart. And deliver multiple projects successfully on time.",
+  },
+  {
+    id: 3,
+    name: "Milind Dave",
+    quote: "Best web development company in Vadodara and the colleagues are open to sharing knowledge and real-time solutions with each other.",
+  },
+  {
+    id: 3,
+    name: "Pujan Shah",
+    quote: "I have engaged Anant soft Computing for revamping our existing website and to design a unique dashboard for our clients use. Also, I have felt overall service and communication to satisfactory level especially when I am dealing from Australia.",
+  }
+];
+
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const testimonials = [
-    {
-      id: 1,
-      name: "Pratik Das",
-      quote: "It was absolutely amazing to interact with Jeegar at Anant Soft Computing. They are extremely professional in their work ethics and process and upfront about costs and Timelines. Was a great experience. Thank you Anant Soft Computing Team.",
-    },
-    {
-      id: 2,
-      name: "Sandip Patel",
-      quote: "I have given my LMS work to Anant soft Computing . Anant Soft Computing team had given nice support to us . The founder & CEO , Mr. Jigar Desai is personally involved in every project and also giving nice suggestion in each and every architect of system.",
-    },
-    {
-      id: 3,
-      name: "Jimish Sura",
-      quote: "Anant Soft assisted with analysis of requirements, technology feasibility, design and development of various IT projects implemented in Conart. And deliver multiple projects successfully on time.",
-    },
-    {
-      id: 3,
-      name: "Milind Dave",
-      quote: "Best web development company in Vadodara and the colleagues are open to sharing knowledge and real-time solutions with each other.",
-    },
-    {
-      id: 3,
-      name: "Pujan Shah",
-      quote: "I have engaged Anant soft Computing for revamping our existing website and to design a unique dashboard for our clients use. Also, I have felt overall service and communication to satisfactory level especially when I am dealing from Australia.",
-    }
-  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -62,7 +62,7 @@ const Testimonials = () => {
             </span>
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Don't just take our word for it. Here's what our clients have to say about
+            Don&apos;t just take our word for it. Here&apos;s what our clients have to say about
             their experience working with us.
           </p>
         </motion.div>

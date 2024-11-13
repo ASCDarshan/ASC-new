@@ -1,17 +1,17 @@
 // src/App.jsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar, Footer } from './components/layout';
-import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import Portfolio from './pages/Portfolio';
-import Contact from './pages/Contact';
+import Home from './pages/Home/Home';
+import About from './pages/AboutUs/About';
+import Services from './pages/services/Services';
+import Portfolio from './pages/Portfolio/Portfolio';
+import Contact from './pages/Contact/Contact';
 import SEOService from './pages/services/SEOService';
 import CRMService from './pages/services/CRMService';
 import MobileAppService from './pages/services/MobileAppService';
 import CustomDevelopment from './pages/services/CustomDevelopment';
-import Careers from './pages/Career';
-import BlogPage from './pages/Blog';
+import Careers from './pages/Career/Career';
+import BlogPage from './pages/Blog/Blog';
 import ScrollToTop from './components/common/ScrollToTop';
 
 function App() {

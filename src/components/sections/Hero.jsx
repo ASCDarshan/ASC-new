@@ -10,7 +10,7 @@ const Hero = () => {
   };
 
   const handleViewWork = () => {
-    navigate('/portfolio');  // Or whatever your work showcase page route is
+    navigate('/portfolio');
   };
 
   return (
@@ -29,7 +29,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="mx-auto max-w-4xl"
         >
-          <motion.h1 
+          <motion.h1
             className="text-4xl font-bold tracking-tight text-dark sm:text-6xl md:text-7xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -38,15 +38,15 @@ const Hero = () => {
             Transforming Ideas into
             <span className="block text-primary-600">Digital Excellence</span>
           </motion.h1>
-          
+
           <motion.p
             className="mt-6 text-lg leading-8 text-gray-600 sm:text-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            We craft innovative software solutions that empower businesses to thrive 
-            in the digital age. From custom CRM systems to mobile applications, 
+            We craft innovative software solutions that empower businesses to thrive
+            in the digital age. From custom CRM systems to mobile applications,
             we bring your vision to life.
           </motion.p>
 
@@ -56,16 +56,16 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               variant="primary"
               onClick={handleGetStarted}
               className="bg-gradient-to-r from-primary-400 to-primary-600 hover:from-primary-500 hover:to-primary-700 shadow-xl shadow-primary-200/30"
             >
               Get Started
             </Button>
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               variant="outline"
               onClick={handleViewWork}
               className="border-primary-400 text-primary-600 hover:bg-primary-50"

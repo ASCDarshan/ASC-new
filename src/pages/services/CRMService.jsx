@@ -457,11 +457,10 @@ const CRMService = () => {
                           {["1M", "3M", "6M", "1Y"].map((period) => (
                             <button
                               key={period}
-                              className={`px-3 py-1 rounded-md text-sm ${
-                                period === "3M"
+                              className={`px-3 py-1 rounded-md text-sm ${period === "3M"
                                   ? "bg-primary-100 text-primary-600"
                                   : "text-gray-600 hover:bg-gray-100"
-                              }`}
+                                }`}
                             >
                               {period}
                             </button>

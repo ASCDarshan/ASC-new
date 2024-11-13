@@ -4,50 +4,49 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from '../common';
 
+const navItems = [
+  {
+    name: 'Home',
+    path: '/'
+  },
+  {
+    name: 'About',
+    path: '/about'
+  },
+  {
+    name: 'Services',
+    path: '/services',
+    dropdown: [
+      { name: 'SEO Optimization', path: '/services/seo' },
+      { name: 'CRM Development', path: '/services/crm' },
+      { name: 'Mobile Apps', path: '/services/mobile' },
+      { name: 'Custom Solutions', path: '/services/custom' },
+    ]
+  },
+  {
+    name: 'Portfolio',
+    path: '/portfolio'
+  },
+  {
+    name: 'Blog',
+    path: '/blog',
+    badge: 'New'
+  },
+  {
+    name: 'Careers',
+    path: '/careers',
+    badge: 'Hiring'
+  },
+  {
+    name: 'Contact',
+    path: '/contact'
+  },
+];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-
-  const navItems = [
-    { 
-      name: 'Home', 
-      path: '/' 
-    },
-    { 
-      name: 'About', 
-      path: '/about' 
-    },
-    { 
-      name: 'Services', 
-      path: '/services',
-      dropdown: [
-        { name: 'SEO Optimization',   path: '/services/seo' },
-        { name: 'CRM Development', path: '/services/crm' },
-        { name: 'Mobile Apps', path: '/services/mobile' },
-        { name: 'Custom Solutions', path: '/services/custom' },
-      ]
-    },
-    { 
-      name: 'Portfolio', 
-      path: '/portfolio' 
-    },
-    { 
-      name: 'Blog', 
-      path: '/blog',
-      badge: 'New'
-    },
-    { 
-      name: 'Careers', 
-      path: '/careers',
-      badge: 'Hiring'
-    },
-    { 
-      name: 'Contact', 
-      path: '/contact' 
-    },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,7 +62,7 @@ const Navbar = () => {
     const isActive = location.pathname === item.path;
 
     return (
-      <div 
+      <div
         className="relative"
         onMouseEnter={() => setShowDropdown(true)}
         onMouseLeave={() => setShowDropdown(false)}
@@ -126,11 +125,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav 
+    <nav
       className={`
         fixed w-full z-50 transition-all duration-300
-        ${scrolled 
-          ? 'bg-white/80 backdrop-blur-lg shadow-lg shadow-gray-200/20' 
+        ${scrolled
+          ? 'bg-white/80 backdrop-blur-lg shadow-lg shadow-gray-200/20'
           : 'bg-transparent'}
       `}
     >

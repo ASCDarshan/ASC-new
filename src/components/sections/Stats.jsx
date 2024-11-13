@@ -3,39 +3,40 @@ import { useEffect, useRef } from 'react';
 import { motion, useInView, useAnimation } from 'framer-motion';
 import { Container } from '../common';
 
+const stats = [
+  {
+    value: 150,
+    suffix: '+',
+    label: 'Projects Completed',
+    description: 'Successfully delivered projects across various industries'
+  },
+  {
+    value: 50,
+    suffix: '+',
+    label: 'Happy Clients',
+    description: 'Trusted by businesses worldwide'
+  },
+  {
+    value: 10,
+    suffix: '+',
+    label: 'Years Experience',
+    description: 'Delivering excellence in software development'
+  },
+  {
+    value: 25,
+    suffix: '+',
+    label: 'Team Members',
+    description: 'Skilled professionals at your service'
+  }
+];
+
 const Stats = () => {
-  const stats = [
-    {
-      value: 150,
-      suffix: '+',
-      label: 'Projects Completed',
-      description: 'Successfully delivered projects across various industries'
-    },
-    {
-      value: 50,
-      suffix: '+',
-      label: 'Happy Clients',
-      description: 'Trusted by businesses worldwide'
-    },
-    {
-      value: 10,
-      suffix: '+',
-      label: 'Years Experience',
-      description: 'Delivering excellence in software development'
-    },
-    {
-      value: 25,
-      suffix: '+',
-      label: 'Team Members',
-      description: 'Skilled professionals at your service'
-    }
-  ];
 
   const CounterAnimation = ({ value, suffix = '' }) => {
     const counterRef = useRef(null);
     const isInView = useInView(counterRef, { once: true });
     const controls = useAnimation();
-  
+
     useEffect(() => {
       if (isInView) {
         controls.start({

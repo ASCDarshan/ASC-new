@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Container, Button, Card, Badge } from "../components/common";
+import { Container, Button, Card, Badge } from "../../components/common";
 import {
   FaRegClock,
   FaMapMarkerAlt,
@@ -185,10 +185,9 @@ const Careers = () => {
                 onClick={() => setSelectedDepartment(dept.id)}
                 className={`
                   px-6 py-2 rounded-full text-sm font-medium transition-all
-                  ${
-                    selectedDepartment === dept.id
-                      ? "bg-primary-600 text-white shadow-lg shadow-primary-200/50"
-                      : "bg-gray-50 text-gray-600 hover:bg-gray-100"
+                  ${selectedDepartment === dept.id
+                    ? "bg-primary-600 text-white shadow-lg shadow-primary-200/50"
+                    : "bg-gray-50 text-gray-600 hover:bg-gray-100"
                   }
                 `}
               >
@@ -315,65 +314,6 @@ const Careers = () => {
         </Container>
       </section>
 
-      {/* Culture Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <Container>
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Our Culture
-              </h2>
-              <p className="text-gray-600">
-                Experience a workplace culture that encourages innovation,
-                collaboration, and personal growth.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                {
-                  image: "/api/placeholder/400/300",
-                  title: "Team Building",
-                  description: "Regular team activities and events",
-                },
-                {
-                  image: "/api/placeholder/400/300",
-                  title: "Learning Sessions",
-                  description: "Weekly knowledge sharing sessions",
-                },
-                {
-                  image: "/api/placeholder/400/300",
-                  title: "Fun at Work",
-                  description: "Celebration of achievements and festivals",
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card className="overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                        {item.title}
-                      </h3>
-                      <p className="text-gray-600">{item.description}</p>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
       {/* FAQs Section */}
       <section className="py-20 bg-white">
         <Container>
@@ -482,27 +422,23 @@ const Careers = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className={`relative mb-12 ${
-                    index % 2 === 0
-                      ? "ml-[50%] pl-8"
-                      : "mr-[50%] pr-8 text-right"
-                  }`}
+                  className={`relative mb-12 ${index % 2 === 0
+                    ? "ml-[50%] pl-8"
+                    : "mr-[50%] pr-8 text-right"
+                    }`}
                 >
                   <div
-                    className={`absolute top-0 ${
-                      index % 2 === 0 ? "left-0" : "right-0"
-                    } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${
-                      index % 2 === 0 ? "-translate-x-1/2" : "translate-x-1/2"
-                    }`}
+                    className={`absolute top-0 ${index % 2 === 0 ? "left-0" : "right-0"
+                      } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${index % 2 === 0 ? "-translate-x-1/2" : "translate-x-1/2"
+                      }`}
                   >
                     <span className="absolute inset-0 flex items-center justify-center text-lg">
                       {phase.icon}
                     </span>
                   </div>
                   <Card
-                    className={`p-6 ${
-                      index % 2 === 0 ? "" : "flex flex-col items-end"
-                    }`}
+                    className={`p-6 ${index % 2 === 0 ? "" : "flex flex-col items-end"
+                      }`}
                   >
                     <Badge variant="primary" className="mb-2">
                       {phase.duration}

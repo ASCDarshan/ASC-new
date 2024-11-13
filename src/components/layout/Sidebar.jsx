@@ -3,39 +3,39 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const menuItems = [
+  {
+    group: 'Services',
+    items: [
+      { name: 'SEO Services', path: '/services/seo' },
+      { name: 'CRM Development', path: '/services/crm' },
+      { name: 'Mobile Development', path: '/services/mobile' },
+      { name: 'Custom Solutions', path: '/services/custom' },
+    ],
+  },
+  {
+    group: 'Solutions',
+    items: [
+      { name: 'Healthcare', path: '/solutions/healthcare' },
+      { name: 'Education', path: '/solutions/education' },
+      { name: 'Non-Profit', path: '/solutions/non-profit' },
+      { name: 'Enterprise', path: '/solutions/enterprise' },
+    ],
+  },
+  {
+    group: 'Resources',
+    items: [
+      { name: 'Documentation', path: '/resources/docs' },
+      { name: 'API Reference', path: '/resources/api' },
+      { name: 'Support', path: '/resources/support' },
+      { name: 'Blog', path: '/resources/blog' },
+    ],
+  },
+];
+
 const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
   const [activeGroup, setActiveGroup] = useState(null);
-
-  const menuItems = [
-    {
-      group: 'Services',
-      items: [
-        { name: 'SEO Services', path: '/services/seo' },
-        { name: 'CRM Development', path: '/services/crm' },
-        { name: 'Mobile Development', path: '/services/mobile' },
-        { name: 'Custom Solutions', path: '/services/custom' },
-      ],
-    },
-    {
-      group: 'Solutions',
-      items: [
-        { name: 'Healthcare', path: '/solutions/healthcare' },
-        { name: 'Education', path: '/solutions/education' },
-        { name: 'Non-Profit', path: '/solutions/non-profit' },
-        { name: 'Enterprise', path: '/solutions/enterprise' },
-      ],
-    },
-    {
-      group: 'Resources',
-      items: [
-        { name: 'Documentation', path: '/resources/docs' },
-        { name: 'API Reference', path: '/resources/api' },
-        { name: 'Support', path: '/resources/support' },
-        { name: 'Blog', path: '/resources/blog' },
-      ],
-    },
-  ];
 
   return (
     <AnimatePresence>
@@ -77,9 +77,8 @@ const Sidebar = ({ isOpen, onClose }) => {
                     >
                       <span className="text-sm font-semibold">{menu.group}</span>
                       <svg
-                        className={`w-4 h-4 transform transition-transform ${
-                          activeGroup === menu.group ? 'rotate-180' : ''
-                        }`}
+                        className={`w-4 h-4 transform transition-transform ${activeGroup === menu.group ? 'rotate-180' : ''
+                          }`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -102,11 +101,10 @@ const Sidebar = ({ isOpen, onClose }) => {
                                 key={item.name}
                                 to={item.path}
                                 onClick={onClose}
-                                className={`block px-4 py-2 text-sm rounded-lg ${
-                                  location.pathname === item.path
-                                    ? 'bg-primary/10 text-primary'
-                                    : 'text-gray-600 hover:bg-gray-50'
-                                }`}
+                                className={`block px-4 py-2 text-sm rounded-lg ${location.pathname === item.path
+                                  ? 'bg-primary/10 text-primary'
+                                  : 'text-gray-600 hover:bg-gray-50'
+                                  }`}
                               >
                                 {item.name}
                               </Link>
