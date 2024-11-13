@@ -12,6 +12,45 @@ import {
   FaGoogle
 } from 'react-icons/fa';
 
+const contactInfo = [
+  {
+    icon: <FaMapMarkerAlt />,
+    title: 'Visit Us',
+    details: [
+      '1C, Satyam Apartment',
+      'Aradhana Society,Vishwas Colony,Alkapuri',
+      'Vadodara, Gujarat 390005'
+    ]
+  },
+  {
+    icon: <FaPhone />,
+    title: 'Call Us',
+    details: [
+      '+91 9638544455',
+    ]
+  },
+  {
+    icon: <FaEnvelope />,
+    title: 'Email Us',
+    details: [
+      'info@anantsoftcomputing.com',
+    ]
+  },
+  {
+    icon: <FaClock />,
+    title: 'Working Hours',
+    details: [
+      'Monday - Friday: 9:00 AM - 6:00 PM',
+    ]
+  }
+];
+
+const socialLinks = [
+  { icon: <FaFacebook />, href: 'https://www.facebook.com/anantsoftcomputing/', label: 'LinkedIn' },
+  { icon: <FaInstagram />, href: 'https://www.instagram.com/anantsoftcomputing/', label: 'Instagram' },
+  { icon: <FaGoogle />, href: 'https://www.google.com/maps/place/Anant+Soft+Computing/@22.3094348,73.1713566,17z/data=!3m1!4b1!4m6!3m5!1s0x395fc5873e594259:0xda3dc91c20f4beec!8m2!3d22.3094348!4d73.1713566!16s%2Fg%2F11bw1ylpm3?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D', label: 'Google' },
+];
+
 const Contact = () => {
   const [formState, setFormState] = useState({
     name: '',
@@ -38,45 +77,6 @@ const Contact = () => {
       [e.target.name]: e.target.value
     }));
   };
-
-  const contactInfo = [
-    {
-      icon: <FaMapMarkerAlt />,
-      title: 'Visit Us',
-      details: [
-        '1C, Satyam Apartment',
-        'Aradhana Society,Vishwas Colony,Alkapuri',
-        'Vadodara, Gujarat 390005'
-      ]
-    },
-    {
-      icon: <FaPhone />,
-      title: 'Call Us',
-      details: [
-        '+91 9638544455',
-      ]
-    },
-    {
-      icon: <FaEnvelope />,
-      title: 'Email Us',
-      details: [
-        'info@anantsoftcomputing.com',
-      ]
-    },
-    {
-      icon: <FaClock />,
-      title: 'Working Hours',
-      details: [
-        'Monday - Friday: 9:00 AM - 6:00 PM',
-      ]
-    }
-  ];
-
-  const socialLinks = [
-    { icon: <FaFacebook />, href: 'https://www.facebook.com/anantsoftcomputing/', label: 'LinkedIn' },
-    { icon: <FaInstagram />, href: 'https://www.instagram.com/anantsoftcomputing/', label: 'Instagram' },
-    { icon: <FaGoogle />, href: 'https://www.google.com/maps/place/Anant+Soft+Computing/@22.3094348,73.1713566,17z/data=!3m1!4b1!4m6!3m5!1s0x395fc5873e594259:0xda3dc91c20f4beec!8m2!3d22.3094348!4d73.1713566!16s%2Fg%2F11bw1ylpm3?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D', label: 'Google' },
-  ];
 
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50">

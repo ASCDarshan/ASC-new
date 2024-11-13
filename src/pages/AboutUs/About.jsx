@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Container, Badge, Card } from "../components/common";
-import { Stats, CTA } from "../components/sections";
+import { Container, Badge, Card } from "../../components/common";
+import { Stats, CTA } from "../../components/sections";
 import {
   FaUsers,
   FaLightbulb,

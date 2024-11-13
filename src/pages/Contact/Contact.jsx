@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Container, Input, Button } from "../components/common";
+import { Container, Input, Button } from "../../components/common";
 import {
   FaMapMarkerAlt,
   FaPhone,
@@ -57,23 +57,15 @@ const socialLinks = [
 ];
 
 const Contact = () => {
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    message: "",
-    service: "default",
-  });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsSubmitting(false);
-  };
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    service: 'default',
+    message: ''
+  });
 
   const handleChange = (e) => {
     setFormState((prev) => ({
@@ -81,6 +73,40 @@ const Contact = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('YOUR_API_ENDPOINT/contact-us', {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(formState),
+      });
+
+      if ([200, 201].includes(response.status)) {
+        setFormState({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          service: 'default',
+          message: ''
+        });
+      } else if ([400, 404].includes(response.status)) {
+        console.log("Some Problem Occurred. Please try again.");
+      }
+    } catch (error) {
+      console.log("Some Problem Occurred. Please try again.", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
 
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50">
@@ -187,7 +213,6 @@ const Contact = () => {
                     placeholder="john@example.com"
                   />
                 </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input
                     label="Phone Number"
@@ -204,7 +229,6 @@ const Contact = () => {
                     placeholder="Your Company Ltd."
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Service Interested In
@@ -225,7 +249,6 @@ const Contact = () => {
                     <option value="other">Other</option>
                   </select>
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Message
@@ -239,7 +262,6 @@ const Contact = () => {
                     placeholder="Tell us about your project..."
                   />
                 </div>
-
                 <Button
                   type="submit"
                   variant="primary"

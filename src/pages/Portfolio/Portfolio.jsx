@@ -5,7 +5,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { Container, Card, Badge, Button } from "../components/common";
+import { Container, Card, Badge, Button } from "../../components/common";
 import { FaTimes, FaGlobe, FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -71,7 +71,7 @@ const projects = [
     shortDesc: "A platform to connect donors with social causes",
     fullDesc:
       "Empowers non-profits to raise funds through campaigns and manage donor relationships.",
-    technologies: ["Ruby on Rails", "PostgreSQL", "React"],
+    technologies: ["Ruby", "PostgreSQL", "React"],
     features: [
       "Campaign Management",
       "Payment Gateway Integration",
@@ -261,10 +261,9 @@ const Portfolio = () => {
                 className={`
                   px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300
                   flex items-center gap-2 backdrop-blur-sm
-                  ${
-                    selectedCategory === category.id
-                      ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/25"
-                      : "bg-white/80 text-gray-600 hover:bg-primary-50 hover:text-primary-600 border border-gray-100"
+                  ${selectedCategory === category.id
+                    ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/25"
+                    : "bg-white/80 text-gray-600 hover:bg-primary-50 hover:text-primary-600 border border-gray-100"
                   }
                 `}
               >
@@ -325,20 +324,14 @@ const Portfolio = () => {
                       <p className="text-gray-600 mb-4">{project.shortDesc}</p>
                       <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
                         <div className="flex gap-4">
-                          {project.stats &&
-                            Object.entries(project.stats).map(
-                              ([key, value]) => (
-                                <div key={key} className="text-center">
-                                  <div className="text-primary-600 font-semibold">
-                                    {value}
-                                  </div>
-                                  <div className="text-xs text-gray-500 capitalize">
-                                    {key}
-                                  </div>
-                                </div>
-                              )
-                            )}
+                          {project.technologies && Object.entries(project.technologies).slice(0, 3).map(([key, value]) => (
+                            <div key={key} className="text-center">
+                              <div className="text-primary-600 font-semibold">{value}</div>
+                              {/* <div className="text-xs text-gray-500 capitalize">{key}</div> */}
+                            </div>
+                          ))}
                         </div>
+
                         <Button
                           variant="outline"
                           size="sm"
@@ -532,29 +525,6 @@ const Portfolio = () => {
                                 <span className="w-2 h-2 rounded-full bg-primary-500"></span>
                               </div>
                             ))}
-                          </div>
-                        </Card>
-
-                        <Card className="p-6">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                            Project Stats
-                          </h3>
-                          <div className="grid grid-cols-2 gap-4">
-                            {Object.entries(selectedProject.stats).map(
-                              ([key, value]) => (
-                                <div
-                                  key={key}
-                                  className="p-4 rounded-lg bg-gray-50 text-center"
-                                >
-                                  <div className="text-2xl font-bold text-primary-600">
-                                    {value}
-                                  </div>
-                                  <div className="text-sm text-gray-600 capitalize">
-                                    {key.replace("_", " ")}
-                                  </div>
-                                </div>
-                              )
-                            )}
                           </div>
                         </Card>
 

@@ -3,73 +3,74 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Container, Card, Badge } from '../common';
 
+const categories = [
+  { id: 'all', name: 'All Projects' },
+  { id: 'crm', name: 'CRM Systems' },
+  { id: 'healthcare', name: 'Healthcare' },
+  { id: 'education', name: 'Education' },
+  { id: 'mobile', name: 'Mobile Apps' }
+];
+
+const projects = [
+  {
+    id: 1,
+    title: 'Gaushala Management System',
+    category: 'crm',
+    tags: ['Python', 'Django', 'React'],
+    image: '/api/placeholder/600/400',
+    description: 'Comprehensive management system for Gaushalas with donation tracking and cattle management.',
+    gradient: 'from-primary-400 to-primary-600'
+  },
+  {
+    id: 2,
+    title: 'Hospital Management System',
+    category: 'healthcare',
+    tags: ['Node.js', 'React', 'MongoDB'],
+    image: '/api/placeholder/600/400',
+    description: 'End-to-end hospital management solution with patient records and appointment scheduling.',
+    gradient: 'from-secondary-400 to-secondary-600'
+  },
+  {
+    id: 3,
+    title: 'Learning Management System',
+    category: 'education',
+    tags: ['Django', 'React', 'PostgreSQL'],
+    image: '/api/placeholder/600/400',
+    description: 'Feature-rich LMS with course management and student progress tracking.',
+    gradient: 'from-accent-400 to-accent-600'
+  },
+  {
+    id: 4,
+    title: 'Overseas Education CRM',
+    category: 'crm',
+    tags: ['Node.js', 'Vue.js', 'MySQL'],
+    image: '/api/placeholder/600/400',
+    description: 'CRM system for overseas education consultants with student application tracking.',
+    gradient: 'from-primary-400 to-primary-600'
+  },
+  {
+    id: 5,
+    title: 'Healthcare Mobile App',
+    category: 'mobile',
+    tags: ['React Native', 'Node.js', 'Firebase'],
+    image: '/api/placeholder/600/400',
+    description: 'Mobile application for patient health monitoring and appointment booking.',
+    gradient: 'from-secondary-400 to-secondary-600'
+  },
+  {
+    id: 6,
+    title: 'Education Portal',
+    category: 'education',
+    tags: ['Python', 'React', 'AWS'],
+    image: '/api/placeholder/600/400',
+    description: 'Online education portal with live classes and resource management.',
+    gradient: 'from-accent-400 to-accent-600'
+  }
+];
+
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('all');
 
-  const categories = [
-    { id: 'all', name: 'All Projects' },
-    { id: 'crm', name: 'CRM Systems' },
-    { id: 'healthcare', name: 'Healthcare' },
-    { id: 'education', name: 'Education' },
-    { id: 'mobile', name: 'Mobile Apps' }
-  ];
-
-  const projects = [
-    {
-      id: 1,
-      title: 'Gaushala Management System',
-      category: 'crm',
-      tags: ['Python', 'Django', 'React'],
-      image: '/api/placeholder/600/400',
-      description: 'Comprehensive management system for Gaushalas with donation tracking and cattle management.',
-      gradient: 'from-primary-400 to-primary-600'
-    },
-    {
-      id: 2,
-      title: 'Hospital Management System',
-      category: 'healthcare',
-      tags: ['Node.js', 'React', 'MongoDB'],
-      image: '/api/placeholder/600/400',
-      description: 'End-to-end hospital management solution with patient records and appointment scheduling.',
-      gradient: 'from-secondary-400 to-secondary-600'
-    },
-    {
-      id: 3,
-      title: 'Learning Management System',
-      category: 'education',
-      tags: ['Django', 'React', 'PostgreSQL'],
-      image: '/api/placeholder/600/400',
-      description: 'Feature-rich LMS with course management and student progress tracking.',
-      gradient: 'from-accent-400 to-accent-600'
-    },
-    {
-      id: 4,
-      title: 'Overseas Education CRM',
-      category: 'crm',
-      tags: ['Node.js', 'Vue.js', 'MySQL'],
-      image: '/api/placeholder/600/400',
-      description: 'CRM system for overseas education consultants with student application tracking.',
-      gradient: 'from-primary-400 to-primary-600'
-    },
-    {
-      id: 5,
-      title: 'Healthcare Mobile App',
-      category: 'mobile',
-      tags: ['React Native', 'Node.js', 'Firebase'],
-      image: '/api/placeholder/600/400',
-      description: 'Mobile application for patient health monitoring and appointment booking.',
-      gradient: 'from-secondary-400 to-secondary-600'
-    },
-    {
-      id: 6,
-      title: 'Education Portal',
-      category: 'education',
-      tags: ['Python', 'React', 'AWS'],
-      image: '/api/placeholder/600/400',
-      description: 'Online education portal with live classes and resource management.',
-      gradient: 'from-accent-400 to-accent-600'
-    }
-  ];
 
   const filteredProjects = projects.filter(
     project => activeFilter === 'all' || project.category === activeFilter
@@ -156,8 +157,8 @@ const Portfolio = () => {
                       <div className="absolute bottom-4 left-4 right-4">
                         <div className="flex flex-wrap gap-2">
                           {project.tags.map((tag) => (
-                            <Badge 
-                              key={tag} 
+                            <Badge
+                              key={tag}
                               variant="primary"
                               size="sm"
                               className={`bg-gradient-to-r ${project.gradient} text-white shadow-sm`}

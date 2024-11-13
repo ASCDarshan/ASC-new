@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Container, Card, Button } from "../components/common";
-import { CTA } from "../components/sections";
+import { Container, Card, Button } from "../../components/common";
+import { CTA } from "../../components/sections";
 import {
   FaSearch,
   FaDesktop,

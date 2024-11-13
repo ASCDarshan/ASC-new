@@ -9,7 +9,7 @@ import {
   Stats,
   CTA,
   Contact
-} from '../components/sections';
+} from '../../components/sections';
 
 const Home = () => {
   useEffect(() => {
