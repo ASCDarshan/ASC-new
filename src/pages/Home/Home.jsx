@@ -4,12 +4,12 @@ import {
   Hero,
   Services,
   Features,
-  Portfolio,
   Testimonials,
   Stats,
   CTA,
   Contact
 } from '../../components/sections';
+import PortfolioSection from '../Portfolio/PortfolioSection';
 
 const Home = () => {
   useEffect(() => {
@@ -25,7 +25,7 @@ const Home = () => {
       <Hero />
       <Services />
       <Features />
-      <Portfolio />
+      <PortfolioSection />
       <Stats />
       <Testimonials />
       <CTA />
