@@ -1,8 +1,5 @@
 import { useState } from "react";
-import {
-    motion,
-    AnimatePresence,
-} from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Container, Card, Badge, Button } from "../../components/common";
 import { FaTimes, FaGlobe, FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import NarayanImg from "../../assets/images/Images/OurSolutions/Helthcare/PMS.png";
