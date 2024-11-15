@@ -10,6 +10,7 @@ import {
   Eye,
   ArrowUp,
 } from "lucide-react";
+import ajaxCall from "../../components/helpers/ajaxCall";
 
 const categories = [
   { name: "All Posts", slug: "all" },
@@ -51,6 +52,45 @@ const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showScrollTop, setShowScrollTop] = useState(false);
+
+  const [categoriess, setCategories] = useState();
+  const [tag, setTag] = useState();
+  const [auther, setAuther] = useState();
+  const [posts, setPosts] = useState();
+  const [comments, setComments] = useState();
+  const [newsletter, setNewsletter] = useState();
+
+  useEffect(() => {
+    fetchData("blogs/categories/", setCategories);
+    fetchData("blogs/tags/", setTag);
+    fetchData("blogs/authors/", setAuther);
+    fetchData("blogs/posts/", setPosts);
+    fetchData("blogs/comments/", setComments);
+    fetchData("blogs/newsletter/", setNewsletter);
+  }, []);
+
+  const fetchData = async (url, setData) => {
+    try {
+      const response = await ajaxCall(
+        url,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        },
+        8000
+      );
+      if (response?.status === 200) {
+        setData(response?.data || []);
+      } else {
+        console.error("Fetch error:", response);
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+    }
+  };
 
   // Scroll to top functionality
   useEffect(() => {
@@ -131,11 +171,10 @@ const BlogPage = () => {
                 <button
                   key={category.slug}
                   onClick={() => setSelectedCategory(category.slug)}
-                  className={`px-6 py-2 rounded-full transition-all duration-300 ${
-                    selectedCategory === category.slug
-                      ? "bg-primary-600 text-white shadow-lg shadow-primary-600/20"
-                      : "bg-white text-gray-600 hover:bg-primary-50"
-                  }`}
+                  className={`px-6 py-2 rounded-full transition-all duration-300 ${selectedCategory === category.slug
+                    ? "bg-primary-600 text-white shadow-lg shadow-primary-600/20"
+                    : "bg-white text-gray-600 hover:bg-primary-50"
+                    }`}
                 >
                   {category.name}
                 </button>

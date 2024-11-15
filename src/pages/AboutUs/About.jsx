@@ -8,6 +8,8 @@ import {
   FaBullseye,
   FaHandshake,
 } from "react-icons/fa";
+import ajaxCall from "../../components/helpers/ajaxCall";
+import { useEffect, useState } from "react";
 
 const stats = [
   { value: "11+", label: "Years Experience" },
@@ -76,6 +78,34 @@ const AboutPage = () => {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
+  };
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    fetchData("website/about/", setData);
+  }, []);
+
+  const fetchData = async (url, setData) => {
+    try {
+      const response = await ajaxCall(
+        url,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        },
+        8000
+      );
+      if (response?.status === 200) {
+        setData(response?.data || []);
+      } else {
+        console.error("Fetch error:", response);
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+    }
   };
 
   return (

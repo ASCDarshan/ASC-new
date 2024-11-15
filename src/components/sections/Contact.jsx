@@ -1,87 +1,180 @@
-// src/components/sections/Contact.jsx
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Container, Input, Button } from '../common';
 import {
-  FaMapMarkerAlt,
-  FaPhone,
-  FaEnvelope,
-  FaClock,
-  FaFacebook,
-  FaInstagram,
-  FaGoogle
-} from 'react-icons/fa';
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Facebook,
+  Instagram,
+  Globe
+} from 'lucide-react';
+import { toast } from 'react-toastify';
+import ajaxCall from '../helpers/ajaxCall';
 
 const contactInfo = [
   {
-    icon: <FaMapMarkerAlt />,
+    icon: <MapPin className="w-5 h-5" />,
     title: 'Visit Us',
     details: [
       '1C, Satyam Apartment',
-      'Aradhana Society,Vishwas Colony,Alkapuri',
+      'Aradhana Society, Vishwas Colony, Alkapuri',
       'Vadodara, Gujarat 390005'
     ]
   },
   {
-    icon: <FaPhone />,
+    icon: <Phone className="w-5 h-5" />,
     title: 'Call Us',
-    details: [
-      '+91 9638544455',
-    ]
+    details: ['+91 9638544455']
   },
   {
-    icon: <FaEnvelope />,
+    icon: <Mail className="w-5 h-5" />,
     title: 'Email Us',
-    details: [
-      'info@anantsoftcomputing.com',
-    ]
+    details: ['info@anantsoftcomputing.com']
   },
   {
-    icon: <FaClock />,
+    icon: <Clock className="w-5 h-5" />,
     title: 'Working Hours',
-    details: [
-      'Monday - Friday: 9:00 AM - 6:00 PM',
-    ]
+    details: ['Monday - Friday: 9:00 AM - 6:00 PM']
   }
 ];
 
 const socialLinks = [
-  { icon: <FaFacebook />, href: 'https://www.facebook.com/anantsoftcomputing/', label: 'LinkedIn' },
-  { icon: <FaInstagram />, href: 'https://www.instagram.com/anantsoftcomputing/', label: 'Instagram' },
-  { icon: <FaGoogle />, href: 'https://www.google.com/maps/place/Anant+Soft+Computing/@22.3094348,73.1713566,17z/data=!3m1!4b1!4m6!3m5!1s0x395fc5873e594259:0xda3dc91c20f4beec!8m2!3d22.3094348!4d73.1713566!16s%2Fg%2F11bw1ylpm3?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D', label: 'Google' },
+  {
+    icon: <Facebook className="w-5 h-5" />,
+    href: 'https://www.facebook.com/anantsoftcomputing/',
+    label: 'Facebook'
+  },
+  {
+    icon: <Instagram className="w-5 h-5" />,
+    href: 'https://www.instagram.com/anantsoftcomputing/',
+    label: 'Instagram'
+  },
+  {
+    icon: <Globe className="w-5 h-5" />,
+    href: 'https://www.google.com/maps/place/Anant+Soft+Computing',
+    label: 'Google Maps'
+  }
 ];
 
+const INITIAL_FORM_STATE = {
+  name: '',
+  email: '',
+  phone: '',
+  company: '',
+  message: '',
+  service: ''
+};
+
 const Contact = () => {
-  const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    message: '',
-    service: 'default'
-  });
-
+  const [formState, setFormState] = useState(INITIAL_FORM_STATE);
+  const [services, setServices] = useState([]);
+  console.log(services)
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    fetchData("contact/services/", setServices);
+  }, []);
+
+  const fetchData = async (url, setData) => {
+    try {
+      const response = await ajaxCall(
+        url,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        },
+        8000
+      );
+      if (response?.status === 200) {
+        setData(response?.data?.results?.name || []);
+      } else {
+        console.error("Fetch error:", response);
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formState.name.trim()) newErrors.name = 'Name is required';
+
+    if (!formState.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formState.email)) {
+      newErrors.email = 'Invalid email format';
+    }
+
+    if (!formState.service) newErrors.service = 'Please select a service';
+
+    if (!formState.message.trim()) newErrors.message = 'Message is required';
+
+    if (!formState.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^\d{10}$/.test(formState.phone.replace(/[^0-9]/g, ''))) {
+      newErrors.phone = 'Please enter a valid 10-digit phone number';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!validateForm()) {
+      toast.error('Please fill in all required fields correctly');
+      return;
+    }
+
     setIsSubmitting(true);
-    // Add your form submission logic here
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulated API call
-    setIsSubmitting(false);
+
+    try {
+      const response = await fetch('website/contact-us', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formState,
+          service: parseInt(formState.service)
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success('Message sent successfully!');
+        setFormState(INITIAL_FORM_STATE);
+      } else {
+        throw new Error(data.message || 'Something went wrong');
+      }
+    } catch (error) {
+      toast.error(error.message || 'Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
-    setFormState(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    const { name, value } = e.target;
+    setFormState(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
 
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50">
       <Container>
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -101,7 +194,6 @@ const Contact = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-12">
-          {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -131,7 +223,6 @@ const Contact = () => {
               </motion.div>
             ))}
 
-            {/* Social Links */}
             <div className="bg-white p-6 rounded-xl shadow-lg">
               <h3 className="font-semibold text-gray-900 mb-4">Connect With Us</h3>
               <div className="flex gap-4">
@@ -139,6 +230,8 @@ const Contact = () => {
                   <a
                     key={social.label}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors duration-300"
                     aria-label={social.label}
                   >
@@ -149,7 +242,6 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -157,42 +249,63 @@ const Contact = () => {
             className="lg:col-span-2"
           >
             <div className="bg-white p-8 rounded-xl shadow-lg">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Input
-                    label="Full Name"
-                    name="name"
-                    value={formState.name}
-                    onChange={handleChange}
-                    required
-                    placeholder="John Doe"
-                  />
-                  <Input
-                    label="Email Address"
-                    name="email"
-                    type="email"
-                    value={formState.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="john@example.com"
-                  />
+                  <div>
+                    <Input
+                      label="Full Name"
+                      name="name"
+                      value={formState.name}
+                      onChange={handleChange}
+                      required
+                      placeholder="John Doe"
+                      error={errors.name}
+                    />
+                    {errors.name && (
+                      <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                    )}
+                  </div>
+                  <div>
+                    <Input
+                      label="Email Address"
+                      name="email"
+                      type="email"
+                      value={formState.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="john@example.com"
+                      error={errors.email}
+                    />
+                    {errors.email && (
+                      <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                    )}
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Input
-                    label="Phone Number"
-                    name="phone"
-                    value={formState.phone}
-                    onChange={handleChange}
-                    placeholder="+91 98765 43210"
-                  />
-                  <Input
-                    label="Company"
-                    name="company"
-                    value={formState.company}
-                    onChange={handleChange}
-                    placeholder="Your Company Ltd."
-                  />
+                  <div>
+                    <Input
+                      label="Phone Number"
+                      name="phone"
+                      value={formState.phone}
+                      onChange={handleChange}
+                      required
+                      placeholder="+91 98765 43210"
+                      error={errors.phone}
+                    />
+                    {errors.phone && (
+                      <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
+                    )}
+                  </div>
+                  <div>
+                    <Input
+                      label="Company"
+                      name="company"
+                      value={formState.company}
+                      onChange={handleChange}
+                      placeholder="Your Company Ltd."
+                    />
+                  </div>
                 </div>
 
                 <div>
@@ -203,17 +316,20 @@ const Contact = () => {
                     name="service"
                     value={formState.service}
                     onChange={handleChange}
-                    className="block w-full rounded-lg border-2 border-gray-200 px-4 py-3 focus:border-primary focus:ring-primary"
+                    className={`block w-full rounded-lg border-2 ${errors.service ? 'border-red-500' : 'border-gray-200'
+                      } px-4 py-3 focus:border-primary focus:ring-primary`}
+                    required
                   >
-                    <option value="default">Select a Service</option>
-                    <option value="web">Web Development</option>
-                    <option value="mobile">Mobile Development</option>
-                    <option value="crm">CRM Development</option>
-                    <option value="erp">ERP Solutions</option>
-                    <option value="host">Hosting</option>
-                    <option value="seo">SEO</option>
-                    <option value="other">Other</option>
+                    <option value="">Select a Service</option>
+                    {services.map(service => (
+                      <option key={service.id} value={service.id}>
+                        {service.name}
+                      </option>
+                    ))}
                   </select>
+                  {errors.service && (
+                    <p className="mt-1 text-sm text-red-600">{errors.service}</p>
+                  )}
                 </div>
 
                 <div>
@@ -225,44 +341,28 @@ const Contact = () => {
                     value={formState.message}
                     onChange={handleChange}
                     rows={4}
-                    className="block w-full rounded-lg border-2 border-gray-200 px-4 py-3 focus:border-primary focus:ring-primary"
+                    className={`block w-full rounded-lg border-2 ${errors.message ? 'border-red-500' : 'border-gray-200'
+                      } px-4 py-3 focus:border-primary focus:ring-primary`}
                     placeholder="Tell us about your project..."
+                    required
                   />
+                  {errors.message && (
+                    <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+                  )}
                 </div>
 
                 <Button
                   type="submit"
                   variant="primary"
                   className="w-full"
-                  loading={isSubmitting}
+                  disabled={isSubmitting}
                 >
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
               </form>
             </div>
           </motion.div>
         </div>
-
-        {/* Map Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16"
-        >
-          <div className="bg-white p-2 rounded-xl shadow-lg">
-            <iframe
-              title="Office Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.169202432397!2d73.16878167596472!3d22.309439742562773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc5873e594259%3A0xda3dc91c20f4beec!2sAnant%20Soft%20Computing!5e0!3m2!1sen!2sin!4v1731308281495!5m2!1sen!2sin"
-              width="100%"
-              height="400"
-              style={{ border: 0, borderRadius: '0.75rem' }}
-              allowFullScreen=""
-              loading="lazy"
-            />
-
-          </div>
-        </motion.div>
       </Container>
     </section>
   );

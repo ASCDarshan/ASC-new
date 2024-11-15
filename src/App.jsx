@@ -1,5 +1,7 @@
 // src/App.jsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Navbar, Footer } from './components/layout';
 import Home from './pages/Home/Home';
 import About from './pages/AboutUs/About';
@@ -17,6 +19,7 @@ import ScrollToTop from './components/common/ScrollToTop';
 function App() {
   return (
     <Router>
+      <ToastContainer theme="colored" position="top-center" autoClose={3000} />
       <ScrollToTop />
       <div className="flex flex-col min-h-screen">
         <Navbar />
