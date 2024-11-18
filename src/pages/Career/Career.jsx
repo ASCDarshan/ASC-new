@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Container, Button, Card, Badge } from "../../components/common";
 import {
@@ -11,6 +11,7 @@ import {
   FaRegSmile,
   FaSearch,
 } from "react-icons/fa";
+import ajaxCall from "../../components/helpers/ajaxCall";
 
 const departments = [
   { id: "all", name: "All Departments" },
@@ -71,8 +72,24 @@ const benefits = [
 ];
 
 const Careers = () => {
+
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [departmentss, setDepartment] = useState([]);
+  const [locations, setLocation] = useState([]);
+  const [project, setSkills] = useState([]);
+  const [jobs, setJobs] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
+  const [benefitss, setBenefits] = useState([]);
+
+  useEffect(() => {
+    fetchData("career/departments/", setDepartment);
+    fetchData("career/locations/", setLocation);
+    fetchData("career/skills/", setSkills);
+    fetchData("career/jobs/", setJobs);
+    fetchData("career/testimonials/", setTestimonials);
+    fetchData("career/benefits/", setBenefits);
+  }, []);
 
   const filteredJobs = jobOpenings
     .filter(
@@ -84,6 +101,29 @@ const Careers = () => {
         job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.department.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+  const fetchData = async (url, setData) => {
+    try {
+      const response = await ajaxCall(
+        url,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        },
+        8000
+      );
+      if (response?.status === 200) {
+        setData(response?.data?.results?.name || []);
+      } else {
+        console.error("Fetch error:", response);
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+    }
+  };
 
   return (
     <motion.div

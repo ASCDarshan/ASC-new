@@ -11,6 +11,8 @@ import {
   ArrowUp,
 } from "lucide-react";
 import ajaxCall from "../../components/helpers/ajaxCall";
+import blogImg from "../../assets/images/blog.png"
+import ProfileImg from "../../assets/images/profile.jpg"
 
 const categories = [
   { name: "All Posts", slug: "all" },
@@ -31,13 +33,13 @@ const blogPosts = [
     category: "web-development",
     author: {
       name: "Sarah Johnson",
-      avatar: "/api/placeholder/32/32",
+      avatar: ProfileImg,
       role: "Senior Developer",
     },
     publishedAt: "2024-02-15",
     readTime: "8 min read",
     featured: true,
-    thumbnail: "/api/placeholder/600/400",
+    thumbnail: blogImg,
     tags: ["React", "Performance", "Best Practices"],
     engagement: {
       views: 1520,
@@ -59,6 +61,7 @@ const BlogPage = () => {
   const [posts, setPosts] = useState();
   const [comments, setComments] = useState();
   const [newsletter, setNewsletter] = useState();
+  const [skills, setSkills] = useState();
 
   useEffect(() => {
     fetchData("blogs/categories/", setCategories);
@@ -67,6 +70,7 @@ const BlogPage = () => {
     fetchData("blogs/posts/", setPosts);
     fetchData("blogs/comments/", setComments);
     fetchData("blogs/newsletter/", setNewsletter);
+    fetchData("blogs/skills/", setSkills);
   }, []);
 
   const fetchData = async (url, setData) => {

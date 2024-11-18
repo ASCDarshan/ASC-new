@@ -10,7 +10,7 @@ const ajaxCall = async (
     }, timeOut);
 
     const response = await fetch(
-      `https://gocrm.one/ascbackend/api/${url}`,
+      `https://anantsoftcomputing.com/asc/api/${url}`,
       fetchObj
     );
 

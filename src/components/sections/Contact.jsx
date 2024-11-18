@@ -70,7 +70,6 @@ const INITIAL_FORM_STATE = {
 const Contact = () => {
   const [formState, setFormState] = useState(INITIAL_FORM_STATE);
   const [services, setServices] = useState([]);
-  console.log(services)
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -92,7 +91,7 @@ const Contact = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data?.results?.name || []);
+        setData(response?.data?.results || []);
       } else {
         console.error("Fetch error:", response);
       }
@@ -137,30 +136,31 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('website/contact-us', {
+      const response = await ajaxCall('contact/enquiries/', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ...formState,
-          service: parseInt(formState.service)
+          name: formState.name,
+          email: formState.email,
+          phone: formState.phone,
+          company: formState.company,
+          service: parseInt(formState.service),
+          message: formState.message
         }),
       });
 
-      const data = await response.json();
 
       if (response.ok) {
         toast.success('Message sent successfully!');
         setFormState(INITIAL_FORM_STATE);
       } else {
-        throw new Error(data.message || 'Something went wrong');
+        toast.error('Something went wrong');
       }
     } catch (error) {
       toast.error(error.message || 'Failed to send message. Please try again.');
-    } finally {
-      setIsSubmitting(false);
     }
   };
 

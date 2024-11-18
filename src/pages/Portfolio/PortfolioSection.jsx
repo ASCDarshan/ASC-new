@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container, Card, Badge, Button } from "../../components/common";
 import { FaTimes, FaGlobe, FaGithub, FaExternalLinkAlt } from "react-icons/fa";
@@ -14,6 +14,7 @@ import ESPI from "../../assets/images/Images/OurSolutions/Education/WSU.jpg";
 import ESPIonline from "../../assets/images/Images/OurSolutions/Helthcare/ABS.jpg";
 import flyUrDream from "../../assets/images/Images/OurSolutions/Retail/CRM.png";
 import Gaushala from "../../assets/images/Images/OurSolutions/Retail/CRM.png";
+import ajaxCall from "../../components/helpers/ajaxCall";
 
 const categories = [
     { id: "all", name: "All Projects", icon: "🌟" },
@@ -268,9 +269,9 @@ const projects = [
             "Higher course completion rate",
         ],
         links: {
-            live: "https://virtualclassroom.com",
-            github: "https://github.com",
-            case_study: "/case-study/virtual-classroom",
+            live: "https://espionline.in/",
+            github: "#",
+            case_study: "#",
         },
         stats: { classes: "500+", students: "10K+", uptime: "99%" },
         gradient: "from-yellow-400 to-yellow-600",
@@ -294,9 +295,9 @@ const projects = [
             "Higher course completion rate",
         ],
         links: {
-            live: "https://virtualclassroom.com",
-            github: "https://github.com",
-            case_study: "/case-study/virtual-classroom",
+            live: "https://oecindia.com/",
+            github: "#",
+            case_study: "#",
         },
         stats: { classes: "500+", students: "10K+", uptime: "99%" },
         gradient: "from-yellow-400 to-yellow-600",
@@ -317,9 +318,9 @@ const projects = [
         ],
         results: ["Over $1M raised for social causes", "Improved donor engagement"],
         links: {
-            live: "https://ngoplatform.com",
-            github: "https://github.com",
-            case_study: "/case-study/non-profit",
+            live: "https://gocrm.one/gaushala/admin/",
+            github: "#",
+            case_study: "#",
         },
         stats: { campaigns: "100+", donors: "10K+", uptime: "99.5%" },
         gradient: "from-pink-400 to-pink-600",
@@ -389,6 +390,41 @@ const PortfolioSection = () => {
 
     const currentCategory =
         categories.find((cat) => cat.id === selectedCategory) || categories[0];
+
+    const [categoriess, setCategories] = useState([]);
+    const [technologies, setTechnologies] = useState([]);
+    const [project, setProject] = useState([]);
+    const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        fetchData("portfolio/categories/", setCategories);
+        fetchData("portfolio/technologies/", setTechnologies);
+        fetchData("portfolio/projects/", setProject);
+        fetchData("portfolio/images/", setImages);
+    }, []);
+
+    const fetchData = async (url, setData) => {
+        try {
+            const response = await ajaxCall(
+                url,
+                {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    method: "GET",
+                },
+                8000
+            );
+            if (response?.status === 200) {
+                setData(response?.data?.results?.name || []);
+            } else {
+                console.error("Fetch error:", response);
+            }
+        } catch (error) {
+            console.error("Network error:", error);
+        }
+    };
 
     return (
         <motion.div
