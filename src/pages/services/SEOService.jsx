@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Container, Button, Card, Badge } from "../../components/common";
 import { CTA } from "../../components/sections";
 import { FaSearch, FaChartLine, FaTools, FaCogs } from "react-icons/fa";
-import growthImg from "../../assets/images/growth.jpg";
+import growthImg from "../../assets/images/growth.png";
 
 const seoFeatures = [
   {
@@ -303,7 +303,7 @@ const SEOService = () => {
               <Card className="p-8">
                 {/* Add a graph or chart component here */}
                 <div className="h-80 bg-gray-100 rounded-lg flex items-center justify-center">
-                  <img src={growthImg} alt="groth" />
+                  <img src={growthImg} alt="growth" />
                 </div>
               </Card>
             </motion.div>

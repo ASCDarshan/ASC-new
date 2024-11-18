@@ -2,55 +2,11 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Container, Button, Card } from '../common';
 import { FaSearch, FaDesktop, FaMobile, FaDatabase, FaCode, FaChartLine } from 'react-icons/fa';
-
-const services = [
-  {
-    icon: <FaSearch className="w-8 h-8" />,
-    title: "SEO Optimization",
-    description: "Boost your online visibility with data-driven SEO strategies and advanced optimization techniques.",
-    gradient: "from-primary-400 to-primary-600",
-    path: "/services/seo"
-  },
-  {
-    icon: <FaDesktop className="w-8 h-8" />,
-    title: "CRM Development",
-    description: "Custom CRM solutions designed to streamline your business operations and boost productivity.",
-    gradient: "from-secondary-400 to-secondary-600",
-    path: "/services/crm"
-  },
-  {
-    icon: <FaMobile className="w-8 h-8" />,
-    title: "Mobile Apps",
-    description: "Native and cross-platform mobile applications built with cutting-edge technologies.",
-    gradient: "from-accent-400 to-accent-600",
-    path: "/services/mobile"
-  },
-  {
-    icon: <FaDatabase className="w-8 h-8" />,
-    title: "ERP Systems",
-    description: "Comprehensive ERP solutions tailored for various industries and business needs.",
-    gradient: "from-primary-400 to-primary-600",
-    path: "/services/custom"
-  },
-  {
-    icon: <FaCode className="w-8 h-8" />,
-    title: "Custom Development",
-    description: "Specialized systems for non-profits including Gaushala and Hospital Management.",
-    gradient: "from-secondary-400 to-secondary-600",
-    path: "/services/custom"
-  },
-  {
-    icon: <FaChartLine className="w-8 h-8" />,
-    title: "Digital Strategy",
-    description: "Strategic consulting to help your business thrive in the digital landscape.",
-    gradient: "from-accent-400 to-accent-600",
-    path: "/services/custom"
-  }
-];
+import { useEffect, useState } from 'react';
+import ajaxCall from '../helpers/ajaxCall';
 
 const Services = () => {
   const navigate = useNavigate();
-
 
   const handleServiceClick = (path) => {
     navigate(path);
@@ -59,6 +15,86 @@ const Services = () => {
   const handleExploreAll = () => {
     navigate('/services');
   };
+
+  const [categoriess, setCategories] = useState([]);
+  const [servicess, setServices] = useState([]);
+  const [features, setFeatures] = useState([]);
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    fetchData("services/categories/", setCategories);
+    fetchData("services/services/", setServices);
+    fetchData("services/features/", setFeatures);
+    fetchData("services/images/", setImages);
+  }, []);
+
+  const fetchData = async (url, setData) => {
+    try {
+      const response = await ajaxCall(
+        url,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        },
+        8000
+      );
+      if (response?.status === 200) {
+        setData(response?.data?.results || []);
+      } else {
+        console.error("Fetch error:", response);
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+    }
+  };
+
+  const services = [
+    {
+      icon: <FaSearch className="w-8 h-8" />,
+      title: "SEO Optimization",
+      description: "Boost your online visibility with data-driven SEO strategies and advanced optimization techniques.",
+      gradient: "from-primary-400 to-primary-600",
+      path: "/services/seo"
+    },
+    {
+      icon: <FaDesktop className="w-8 h-8" />,
+      title: "CRM Development",
+      description: "Custom CRM solutions designed to streamline your business operations and boost productivity.",
+      gradient: "from-secondary-400 to-secondary-600",
+      path: "/services/crm"
+    },
+    {
+      icon: <FaMobile className="w-8 h-8" />,
+      title: "Mobile Apps",
+      description: "Native and cross-platform mobile applications built with cutting-edge technologies.",
+      gradient: "from-accent-400 to-accent-600",
+      path: "/services/mobile"
+    },
+    {
+      icon: <FaDatabase className="w-8 h-8" />,
+      title: "ERP Systems",
+      description: "Comprehensive ERP solutions tailored for various industries and business needs.",
+      gradient: "from-primary-400 to-primary-600",
+      path: "/services/custom"
+    },
+    {
+      icon: <FaCode className="w-8 h-8" />,
+      title: "Custom Development",
+      description: "Specialized systems for non-profits including Gaushala and Hospital Management.",
+      gradient: "from-secondary-400 to-secondary-600",
+      path: "/services/custom"
+    },
+    {
+      icon: <FaChartLine className="w-8 h-8" />,
+      title: "Digital Strategy",
+      description: "Strategic consulting to help your business thrive in the digital landscape.",
+      gradient: "from-accent-400 to-accent-600",
+      path: "/services/custom"
+    }
+  ];
 
   return (
     <section className="py-20 relative bg-gradient-to-b from-secondary-50 via-white to-primary-50">
@@ -88,7 +124,7 @@ const Services = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
+          {servicess.map((service, index) => (
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 20 }}

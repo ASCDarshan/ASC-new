@@ -79,7 +79,7 @@ const AboutPage = () => {
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
   };
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     fetchData("website/about/", setData);
@@ -99,7 +99,7 @@ const AboutPage = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data || []);
+        setData(response?.data?.results || []);
       } else {
         console.error("Fetch error:", response);
       }
@@ -137,7 +137,8 @@ const AboutPage = () => {
                 About Our Company
               </Badge>
               <h1 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-800">
-                Crafting Digital Excellence
+                {(data[0]?.aboutus_title)}
+
                 <span className="block text-2xl mt-2 font-normal text-gray-600">
                   Since 2013
                 </span>
@@ -244,10 +245,7 @@ const AboutPage = () => {
                   </h2>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  To be the leading technology partner for businesses worldwide,
-                  enabling their digital transformation through innovative and
-                  sustainable solutions that drive real value and lasting
-                  success.
+                  {data[0]?.Vision}
                 </p>
                 <motion.div
                   className="mt-6 h-1 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full"
@@ -271,11 +269,7 @@ const AboutPage = () => {
                   </h2>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  To deliver exceptional software solutions that empower
-                  businesses to thrive in the digital age, while maintaining the
-                  highest standards of quality, innovation, and customer
-                  satisfaction through dedicated partnership and continuous
-                  improvement.
+                  {data[0]?.Mission}
                 </p>
                 <motion.div
                   className="mt-6 h-1 bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-full"
