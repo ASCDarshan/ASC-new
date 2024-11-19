@@ -22,32 +22,6 @@ const departments = [
   { id: "marketing", name: "Marketing" },
 ];
 
-const jobOpenings = [
-  {
-    id: 1,
-    title: "Senior Full Stack Developer",
-    department: "engineering",
-    type: "Full-time",
-    location: "Ahmedabad, Gujarat",
-    experience: "5+ years",
-    salary: "18-25 LPA",
-    skills: ["React", "Node.js", "Python", "AWS"],
-    posted: "2 days ago",
-    urgent: true,
-  },
-  {
-    id: 2,
-    title: "UX/UI Designer",
-    department: "design",
-    type: "Full-time",
-    location: "Remote",
-    experience: "3+ years",
-    salary: "12-18 LPA",
-    skills: ["Figma", "Adobe XD", "User Research"],
-    posted: "1 week ago",
-  },
-];
-
 const benefits = [
   {
     icon: <FaRegBuilding className="w-6 h-6" />,
@@ -75,32 +49,11 @@ const Careers = () => {
 
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
-  const [departmentss, setDepartment] = useState([]);
-  const [locations, setLocation] = useState([]);
-  const [project, setSkills] = useState([]);
   const [jobs, setJobs] = useState([]);
-  const [testimonials, setTestimonials] = useState([]);
-  const [benefitss, setBenefits] = useState([]);
 
   useEffect(() => {
-    fetchData("career/departments/", setDepartment);
-    fetchData("career/locations/", setLocation);
-    fetchData("career/skills/", setSkills);
     fetchData("career/jobs/", setJobs);
-    fetchData("career/testimonials/", setTestimonials);
-    fetchData("career/benefits/", setBenefits);
   }, []);
-
-  const filteredJobs = jobOpenings
-    .filter(
-      (job) =>
-        selectedDepartment === "all" || job.department === selectedDepartment
-    )
-    .filter(
-      (job) =>
-        job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.department.toLowerCase().includes(searchTerm.toLowerCase())
-    );
 
   const fetchData = async (url, setData) => {
     try {
@@ -116,7 +69,7 @@ const Careers = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data?.results?.name || []);
+        setData(response?.data?.results || []);
       } else {
         console.error("Fetch error:", response);
       }
@@ -242,7 +195,7 @@ const Careers = () => {
       <section className="py-12 bg-gray-50">
         <Container>
           <div className="grid md:grid-cols-2 gap-6">
-            {filteredJobs.map((job) => (
+            {jobs.map((job) => (
               <motion.div
                 key={job.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -260,15 +213,15 @@ const Careers = () => {
                           variant="primary"
                           className="bg-primary-100 text-primary-600"
                         >
-                          {job.department}
+                          {job.department.name}
                         </Badge>
                         <Badge
                           variant="secondary"
                           className="bg-gray-100 text-gray-600"
                         >
-                          {job.type}
+                          {job.job_type.replace('_', ' ').toUpperCase()}
                         </Badge>
-                        {job.urgent && (
+                        {job.is_urgent && (
                           <Badge
                             variant="accent"
                             className="bg-red-100 text-red-600"
@@ -278,37 +231,42 @@ const Careers = () => {
                         )}
                       </div>
                     </div>
-                    <div className="text-sm text-gray-500">{job.posted}</div>
+                    <div className="text-sm text-gray-500">
+                      {new Date(job.posting_date).toLocaleDateString()}
+                    </div>
                   </div>
 
                   <div className="space-y-3 mb-6">
                     <div className="flex items-center gap-2 text-gray-600">
                       <FaMapMarkerAlt className="w-4 h-4" />
-                      <span>{job.location}</span>
+                      <span>
+                        {job.location.city}, {job.location.state}, {job.location.country}
+                        {job.location.is_remote && " (Remote)"}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-600">
                       <FaRegClock className="w-4 h-4" />
-                      <span>{job.experience}</span>
+                      <span>{job.experience_range}</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-600">
                       <FaDollarSign className="w-4 h-4" />
-                      <span>{job.salary}</span>
+                      <span>{job.salary_range}</span>
                     </div>
                   </div>
 
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {job.skills.map((skill) => (
+                    {job.required_skills.map((skill) => (
                       <span
-                        key={skill}
+                        key={skill.id}
                         className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600"
                       >
-                        {skill}
+                        {skill.name}
                       </span>
                     ))}
                   </div>
 
                   <Button variant="outline" className="w-full justify-center">
-                    View Details
+                    Apply Now
                   </Button>
                 </Card>
               </motion.div>

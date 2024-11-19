@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Container, Card, Button } from "../../components/common";
-import { CTA } from "../../components/sections";
+import { CTA, Testimonials } from "../../components/sections";
 import {
   FaSearch,
   FaDesktop,
@@ -13,6 +13,7 @@ import {
   FaAward,
   FaHandshake,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const services = [
   {
@@ -128,6 +129,15 @@ const industries = [
 
 const Services = () => {
   const [selectedService, setSelectedService] = useState(null);
+  const navigate = useNavigate()
+
+  const handleconsulting = () => {
+    navigate("/contact")
+  }
+
+  const handlePortfolio = () => {
+    navigate("/portfolio")
+  }
 
   return (
     <motion.div
@@ -169,10 +179,10 @@ const Services = () => {
               transition={{ delay: 0.3 }}
               className="flex gap-4 justify-center"
             >
-              <Button size="lg" variant="primary">
+              <Button size="lg" variant="primary" onClick={handleconsulting}>
                 Schedule Consultation
               </Button>
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" onClick={handlePortfolio}>
                 View Portfolio
               </Button>
             </motion.div>
@@ -439,73 +449,7 @@ const Services = () => {
         </Container>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              What Our Clients Say
-            </h2>
-            <p className="text-gray-600">
-              Don&apos;t just take our word for it - hear from some of our satisfied
-              clients
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                quote:
-                  "Their expertise in CRM development helped us streamline our operations and improve customer satisfaction significantly.",
-                author: "John Smith",
-                position: "CEO, TechCorp Inc.",
-                rating: 5,
-              },
-              {
-                quote:
-                  "The mobile app they developed for us exceeded our expectations. Great team to work with!",
-                author: "Sarah Johnson",
-                position: "Marketing Director, InnovateCo",
-                rating: 5,
-              },
-              {
-                quote:
-                  "Professional team that delivers quality work on time. Their SEO services have greatly improved our online presence.",
-                author: "Michael Brown",
-                position: "Founder, GrowthStart",
-                rating: 5,
-              },
-            ].map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="p-6 h-full hover:shadow-lg transition-all duration-300">
-                  <div className="flex gap-1 text-yellow-400 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <FaAward key={i} />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-4 italic">
-                    &quot;{testimonial.quote}&quot;
-                  </p>
-                  <div className="mt-auto">
-                    <div className="font-semibold text-gray-900">
-                      {testimonial.author}
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      {testimonial.position}
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <Testimonials />
 
       {/* FAQ Section */}
       <section className="py-20 bg-gray-50">

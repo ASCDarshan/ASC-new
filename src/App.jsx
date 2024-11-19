@@ -15,6 +15,7 @@ import CustomDevelopment from './pages/services/CustomDevelopment';
 import Careers from './pages/Career/Career';
 import BlogPage from './pages/Blog/Blog';
 import ScrollToTop from './components/common/ScrollToTop';
+import BlogPostPage from './pages/Blog/BlogPostPage';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/services/custom" element={<CustomDevelopment />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:blogpostpage" element={<BlogPostPage />} />
           </Routes>
         </main>
         <Footer />

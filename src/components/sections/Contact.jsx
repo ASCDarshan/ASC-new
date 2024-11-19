@@ -152,12 +152,12 @@ const Contact = () => {
         }),
       });
 
-
-      if (response.ok) {
-        toast.success('Message sent successfully!');
+      if ([200, 201].includes(response.status)) {
+        toast.success("Message Send Successfully");
         setFormState(INITIAL_FORM_STATE);
-      } else {
-        toast.error('Something went wrong');
+
+      } else if ([400, 404].includes(response.status)) {
+        toast.error("Some Problem Occurred. Please try again.");
       }
     } catch (error) {
       toast.error(error.message || 'Failed to send message. Please try again.');
