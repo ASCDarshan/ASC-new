@@ -1,49 +1,50 @@
-// src/components/sections/Testimonials.jsx
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from '../common';
 import { FaQuoteLeft } from 'react-icons/fa';
-import profileImg from "../../assets/images/profile.jpg"
-
-const testimonials = [
-  {
-    id: 1,
-    name: "Pratik Das",
-    quote: "It was absolutely amazing to interact with Jeegar at Anant Soft Computing. They are extremely professional in their work ethics and process and upfront about costs and Timelines. Was a great experience. Thank you Anant Soft Computing Team.",
-  },
-  {
-    id: 2,
-    name: "Sandip Patel",
-    quote: "I have given my LMS work to Anant soft Computing . Anant Soft Computing team had given nice support to us . The founder & CEO , Mr. Jigar Desai is personally involved in every project and also giving nice suggestion in each and every architect of system.",
-  },
-  {
-    id: 3,
-    name: "Jimish Sura",
-    quote: "Anant Soft assisted with analysis of requirements, technology feasibility, design and development of various IT projects implemented in Conart. And deliver multiple projects successfully on time.",
-  },
-  {
-    id: 3,
-    name: "Milind Dave",
-    quote: "Best web development company in Vadodara and the colleagues are open to sharing knowledge and real-time solutions with each other.",
-  },
-  {
-    id: 3,
-    name: "Pujan Shah",
-    quote: "I have engaged Anant soft Computing for revamping our existing website and to design a unique dashboard for our clients use. Also, I have felt overall service and communication to satisfactory level especially when I am dealing from Australia.",
-  }
-];
+import profileImg from "../../assets/images/profile.jpg";
+import ajaxCall from '../helpers/ajaxCall';
 
 const Testimonials = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0); // Initialize with 0
+  const [testimonials, setTestimonials] = useState([]);
+
+  const fetchData = async (url, setData) => {
+    try {
+      const response = await ajaxCall(
+        url,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        },
+        8000
+      );
+      if (response?.status === 200) {
+        setData(response?.data?.results || []);
+      } else {
+        console.error("Fetch error:", response);
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+    }
+  };
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000);
+    fetchData("website/testimonials/", setTestimonials);
+  }, []);
 
-    return () => clearInterval(timer);
+  useEffect(() => {
+    if (testimonials.length > 0) {
+      const timer = setInterval(() => {
+        setCurrentIndex((prevIndex) =>
+          prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
+        );
+      }, 5000);
+      return () => clearInterval(timer);
+    }
   }, [testimonials.length]);
 
   return (
@@ -79,26 +80,24 @@ const Testimonials = () => {
           {/* Testimonials Slider */}
           <div className="relative">
             <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5 }}
-                className="bg-white rounded-2xl shadow-xl p-8 md:p-12"
-              >
-                <div className="text-primary opacity-80 mb-6">
-                  <FaQuoteLeft size={40} />
-                </div>
-
-                <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-8">
-                  {testimonials[currentIndex].quote}
-                </p>
-
-                <div className="flex items-center justify-between">
+              {testimonials.length > 0 && (
+                <motion.div
+                  key={currentIndex} // Key based on the current index
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.5 }}
+                  className="bg-white rounded-2xl shadow-xl p-8 md:p-12"
+                >
+                  <div className="text-primary opacity-80 mb-6">
+                    <FaQuoteLeft size={40} />
+                  </div>
+                  <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
+                    {testimonials[currentIndex].content}
+                  </p>
                   <div className="flex items-center gap-4">
                     <img
-                      src={profileImg}
+                      src={profileImg} // Replace with testimonial-specific image if available
                       alt={testimonials[currentIndex].name}
                       className="w-12 h-12 rounded-full object-cover"
                     />
@@ -106,16 +105,10 @@ const Testimonials = () => {
                       <h4 className="font-semibold text-gray-900">
                         {testimonials[currentIndex].name}
                       </h4>
-                      <p className="text-gray-600 text-sm">
-                        {testimonials[currentIndex].role}
-                      </p>
-                      <p className="text-primary text-sm">
-                        {testimonials[currentIndex].organization}
-                      </p>
                     </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              )}
             </AnimatePresence>
 
             {/* Navigation Dots */}

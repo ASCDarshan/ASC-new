@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { Container, Button, Card } from '../common';
-import { FaSearch, FaDesktop, FaMobile, FaDatabase, FaCode, FaChartLine } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
-import ajaxCall from '../helpers/ajaxCall';
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { Container, Button, Card } from "../common";
+
+import { useEffect, useState } from "react";
+import ajaxCall from "../helpers/ajaxCall";
 
 const Services = () => {
   const navigate = useNavigate();
@@ -13,19 +13,13 @@ const Services = () => {
   };
 
   const handleExploreAll = () => {
-    navigate('/services');
+    navigate("/services");
   };
 
-  const [categoriess, setCategories] = useState([]);
   const [servicess, setServices] = useState([]);
-  const [features, setFeatures] = useState([]);
-  const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetchData("services/categories/", setCategories);
     fetchData("services/services/", setServices);
-    fetchData("services/features/", setFeatures);
-    fetchData("services/images/", setImages);
   }, []);
 
   const fetchData = async (url, setData) => {
@@ -51,50 +45,6 @@ const Services = () => {
     }
   };
 
-  const services = [
-    {
-      icon: <FaSearch className="w-8 h-8" />,
-      title: "SEO Optimization",
-      description: "Boost your online visibility with data-driven SEO strategies and advanced optimization techniques.",
-      gradient: "from-primary-400 to-primary-600",
-      path: "/services/seo"
-    },
-    {
-      icon: <FaDesktop className="w-8 h-8" />,
-      title: "CRM Development",
-      description: "Custom CRM solutions designed to streamline your business operations and boost productivity.",
-      gradient: "from-secondary-400 to-secondary-600",
-      path: "/services/crm"
-    },
-    {
-      icon: <FaMobile className="w-8 h-8" />,
-      title: "Mobile Apps",
-      description: "Native and cross-platform mobile applications built with cutting-edge technologies.",
-      gradient: "from-accent-400 to-accent-600",
-      path: "/services/mobile"
-    },
-    {
-      icon: <FaDatabase className="w-8 h-8" />,
-      title: "ERP Systems",
-      description: "Comprehensive ERP solutions tailored for various industries and business needs.",
-      gradient: "from-primary-400 to-primary-600",
-      path: "/services/custom"
-    },
-    {
-      icon: <FaCode className="w-8 h-8" />,
-      title: "Custom Development",
-      description: "Specialized systems for non-profits including Gaushala and Hospital Management.",
-      gradient: "from-secondary-400 to-secondary-600",
-      path: "/services/custom"
-    },
-    {
-      icon: <FaChartLine className="w-8 h-8" />,
-      title: "Digital Strategy",
-      description: "Strategic consulting to help your business thrive in the digital landscape.",
-      gradient: "from-accent-400 to-accent-600",
-      path: "/services/custom"
-    }
-  ];
 
   return (
     <section className="py-20 relative bg-gradient-to-b from-secondary-50 via-white to-primary-50">
@@ -118,8 +68,8 @@ const Services = () => {
             </span>
           </h2>
           <p className="text-gray-600 text-lg">
-            We deliver end-to-end digital solutions that help businesses transform,
-            innovate, and stay ahead in the digital age.
+            We deliver end-to-end digital solutions that help businesses
+            transform, innovate, and stay ahead in the digital age.
           </p>
         </motion.div>
 
@@ -137,16 +87,22 @@ const Services = () => {
                           border border-gray-100 hover:border-primary-200
                           hover:shadow-xl hover:shadow-primary-200/20"
               >
-                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6
-                                bg-gradient-to-br ${service.gradient} shadow-lg shadow-primary-200/20`}>
-                  {service.icon}
+                <div
+                  className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6
+  bg-gradient-to-br ${service.gradient || "from-gray-400 to-gray-600"
+                    } shadow-lg shadow-primary-200/20`}
+                >
+                  {service.icon ? (
+                    <service.icon className="w-8 h-8" />
+                  ) : (
+                    <span className="text-sm"></span>
+                  )}
                 </div>
+
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 mb-6">
-                  {service.description}
-                </p>
+                <p className="text-gray-600 mb-6">{service.description}</p>
                 <Button
                   variant="outline"
                   size="sm"

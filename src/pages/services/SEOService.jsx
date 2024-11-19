@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Container, Button, Card, Badge } from "../../components/common";
 import { CTA } from "../../components/sections";
 import { FaSearch, FaChartLine, FaTools, FaCogs } from "react-icons/fa";
-import growthImg from "../../assets/images/growth.png";
+import growthImg from "../../assets/images/SEo.jpeg";
 
 const seoFeatures = [
   {

@@ -3,16 +3,13 @@ import { motion } from "framer-motion";
 import {
   Search,
   Calendar,
-  Clock,
-  Share2,
   Bookmark,
-  MessageCircle,
-  Eye,
   ArrowUp,
+  Share2,
 } from "lucide-react";
 import ajaxCall from "../../components/helpers/ajaxCall";
-import blogImg from "../../assets/images/blog.png"
 import ProfileImg from "../../assets/images/profile.jpg"
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   { name: "All Posts", slug: "all" },
@@ -23,55 +20,13 @@ const categories = [
   { name: "Tutorials", slug: "tutorials" },
 ];
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "10 Essential Tips for Modern Web Development in 2024",
-    slug: "essential-web-development-tips-2024",
-    excerpt:
-      "Discover the latest best practices and tools that are shaping modern web development...",
-    category: "web-development",
-    author: {
-      name: "Sarah Johnson",
-      avatar: ProfileImg,
-      role: "Senior Developer",
-    },
-    publishedAt: "2024-02-15",
-    readTime: "8 min read",
-    featured: true,
-    thumbnail: blogImg,
-    tags: ["React", "Performance", "Best Practices"],
-    engagement: {
-      views: 1520,
-      comments: 23,
-      shares: 45,
-      bookmarks: 67,
-    },
-  },
-];
-
 const BlogPage = () => {
+  const navigate = useNavigate()
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const [categoriess, setCategories] = useState();
-  const [tag, setTag] = useState();
-  const [auther, setAuther] = useState();
-  const [posts, setPosts] = useState();
-  const [comments, setComments] = useState();
-  const [newsletter, setNewsletter] = useState();
-  const [skills, setSkills] = useState();
-
-  useEffect(() => {
-    fetchData("blogs/categories/", setCategories);
-    fetchData("blogs/tags/", setTag);
-    fetchData("blogs/authors/", setAuther);
-    fetchData("blogs/posts/", setPosts);
-    fetchData("blogs/comments/", setComments);
-    fetchData("blogs/newsletter/", setNewsletter);
-    fetchData("blogs/skills/", setSkills);
-  }, []);
+  const [posts, setPosts] = useState([]);
 
   const fetchData = async (url, setData) => {
     try {
@@ -87,7 +42,7 @@ const BlogPage = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data || []);
+        setData(response?.data?.results || []);
       } else {
         console.error("Fetch error:", response);
       }
@@ -95,6 +50,10 @@ const BlogPage = () => {
       console.error("Network error:", error);
     }
   };
+
+  useEffect(() => {
+    fetchData("blogs/posts/", setPosts);
+  }, []);
 
   // Scroll to top functionality
   useEffect(() => {
@@ -105,6 +64,10 @@ const BlogPage = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleBlog = (postId) => {
+    navigate(`/blog/${postId}`);
+  }
 
   return (
     <motion.div
@@ -187,8 +150,9 @@ const BlogPage = () => {
           </div>
 
           {/* Featured Post */}
-          {blogPosts.find((post) => post.featured) && (
+          {posts.map((post) => (
             <motion.div
+              key={post.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -196,48 +160,70 @@ const BlogPage = () => {
             >
               <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
                 <div className="grid md:grid-cols-2 gap-8">
+                  {/* Thumbnail Section */}
                   <div className="aspect-w-16 aspect-h-9 md:aspect-none md:h-full">
                     <img
-                      src={blogPosts[0].thumbnail}
-                      alt={blogPosts[0].title}
+                      src={post.featured_image}
+                      alt={post.featured_image_alt || post.title}
                       className="w-full h-full object-cover"
                     />
                   </div>
+                  {/* Content Section */}
                   <div className="p-8 flex flex-col justify-center">
                     <div className="flex items-center gap-4 mb-4">
-                      <span className="px-3 py-1 bg-primary-100 text-primary-600 rounded-full text-sm">
-                        Featured
-                      </span>
+                      {/* Category Tag */}
+                      {post.category?.name && (
+                        <span className="px-3 py-1 bg-primary-100 text-primary-600 rounded-full text-sm">
+                          {post.category.name}
+                        </span>
+                      )}
+                      {/* Published Date */}
                       <span className="text-gray-500 text-sm flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
-                        {blogPosts[0].publishedAt}
+                        {new Intl.DateTimeFormat("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        }).format(new Date(post.published_at))}
                       </span>
                     </div>
+                    {/* Title */}
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                      {blogPosts[0].title}
+                      <button onClick={() => handleBlog(post.id)}>
+                        {post.title}
+                      </button>
                     </h2>
-                    <p className="text-gray-600 mb-6">{blogPosts[0].excerpt}</p>
+                    {/* Excerpt */}
+                    <p className="text-gray-600 mb-6">{post.excerpt}</p>
+                    {/* Author and Actions */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <img
-                          src={blogPosts[0].author.avatar}
-                          alt={blogPosts[0].author.name}
+                          src={ProfileImg}
+                          alt={post?.author?.user?.username || "Author"}
                           className="w-8 h-8 rounded-full"
                         />
                         <div>
                           <div className="font-medium text-gray-900">
-                            {blogPosts[0].author.name}
+                            {post?.author?.user?.username || "Anonymous"}
                           </div>
                           <div className="text-sm text-gray-500">
-                            {blogPosts[0].author.role}
+                            {post.author?.role || "Contributor"}
                           </div>
                         </div>
                       </div>
+                      {/* Share and Bookmark Actions */}
                       <div className="flex items-center gap-4">
-                        <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                        <button
+                          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                          aria-label="Share Post"
+                        >
                           <Share2 className="w-5 h-5 text-gray-600" />
                         </button>
-                        <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                        <button
+                          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                          aria-label="Bookmark Post"
+                        >
                           <Bookmark className="w-5 h-5 text-gray-600" />
                         </button>
                       </div>
@@ -246,62 +232,11 @@ const BlogPage = () => {
                 </div>
               </div>
             </motion.div>
-          )}
+          ))}
 
-          {/* Post Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts
-              .filter((post) => !post.featured)
-              .map((post, index) => (
-                <motion.article
-                  key={post.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                >
-                  <div className="aspect-w-16 aspect-h-9">
-                    <img
-                      src={post.thumbnail}
-                      alt={post.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 bg-primary-50 text-primary-600 rounded-full text-sm"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
-                      {post.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <div className="flex items-center gap-4">
-                        <span className="flex items-center gap-1">
-                          <Eye className="w-4 h-4" />
-                          {post.engagement.views}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <MessageCircle className="w-4 h-4" />
-                          {post.engagement.comments}
-                        </span>
-                      </div>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        {post.readTime}
-                      </span>
-                    </div>
-                  </div>
-                </motion.article>
-              ))}
-          </div>
+
+
+
         </div>
       </section>
 
