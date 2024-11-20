@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Container, Card, Badge, Button } from "../../components/common";
-import { FaTimes, FaGlobe, FaExternalLinkAlt } from "react-icons/fa";
+import { FaTimes, FaGlobe, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 
 const ProjectDetailsModal = ({ project, onClose }) => {
     if (!project) return null;
@@ -72,6 +72,70 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                                         </p>
                                     </div>
 
+                                    {/* Adding Key Features section from previous code */}
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                                            Key Features
+                                        </h3>
+                                        <ul className="space-y-3">
+                                            {project.features && project.features.map((feature) => (
+                                                <li
+                                                    key={feature}
+                                                    className="flex items-start gap-3"
+                                                >
+                                                    <span className="mt-1 w-5 h-5 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center">
+                                                        <svg
+                                                            className="w-3 h-3"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d="M5 13l4 4L19 7"
+                                                            />
+                                                        </svg>
+                                                    </span>
+                                                    <span className="text-gray-600">{feature}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    {/* Adding Results & Impact section from previous code */}
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                                            Results & Impact
+                                        </h3>
+                                        <ul className="space-y-3">
+                                            {project.results && project.results.map((result) => (
+                                                <li
+                                                    key={result}
+                                                    className="flex items-start gap-3"
+                                                >
+                                                    <span className="mt-1 w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
+                                                        <svg
+                                                            className="w-3 h-3"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                                                            />
+                                                        </svg>
+                                                    </span>
+                                                    <span className="text-gray-600">{result}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
                                     {project.images.length > 1 && (
                                         <div>
                                             <h3 className="text-xl font-semibold text-gray-900 mb-4">
@@ -92,6 +156,7 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                                 </div>
 
                                 <div className="space-y-6">
+                                    {/* Project Details Card */}
                                     <Card className="p-6">
                                         <h3 className="text-lg font-semibold text-gray-900 mb-4">
                                             Project Details
@@ -103,27 +168,52 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                                                     <span className="font-medium">{project.client}</span>
                                                 </div>
                                             )}
-                                            {/* {project.duration && (
-                                                <div className="flex justify-between items-center">
-                                                    <span className="text-gray-600">Duration</span>
-                                                    <span className="font-medium">
-                                                        {project.duration} months
-                                                    </span>
-                                                </div>
-                                            )}
-                                            {project.completion_date && (
-                                                <div className="flex justify-between items-center">
-                                                    <span className="text-gray-600">Completed</span>
-                                                    <span className="font-medium">
-                                                        {new Date(
-                                                            project.completion_date
-                                                        ).toLocaleDateString()}
-                                                    </span>
-                                                </div>
-                                            )} */}
                                         </div>
                                     </Card>
 
+                                    {/* Adding Project Links card from previous code */}
+                                    <Card className="p-6">
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                                            Project Links
+                                        </h3>
+                                        <div className="space-y-3">
+                                            {project.live_url && (
+                                                <a
+                                                    href={project.live_url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-3 text-gray-600 hover:text-primary-600 transition-colors"
+                                                >
+                                                    <FaGlobe className="w-5 h-5" />
+                                                    <span>Live Demo</span>
+                                                </a>
+                                            )}
+                                            {project.github_url && (
+                                                <a
+                                                    href={project.github_url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-3 text-gray-600 hover:text-primary-600 transition-colors"
+                                                >
+                                                    <FaGithub className="w-5 h-5" />
+                                                    <span>GitHub</span>
+                                                </a>
+                                            )}
+                                            {project.case_study_url && (
+                                                <a
+                                                    href={project.case_study_url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-3 text-gray-600 hover:text-primary-600 transition-colors"
+                                                >
+                                                    <FaExternalLinkAlt className="w-5 h-5" />
+                                                    <span>Case Study</span>
+                                                </a>
+                                            )}
+                                        </div>
+                                    </Card>
+
+                                    {/* Technology Stack Card */}
                                     <Card className="p-6">
                                         <h3 className="text-lg font-semibold text-gray-900 mb-4">
                                             Technology Stack

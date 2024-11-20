@@ -263,7 +263,7 @@ const BlogPostPage = () => {
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             src={filteredPost.featured_image}
-                            alt={filteredPost.featured_image_alt}
+                            alt="img"
                             className="w-full aspect-[15/7] object-cover rounded-2xl shadow-xl"
                         />
                     </motion.div>

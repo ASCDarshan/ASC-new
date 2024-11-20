@@ -1,15 +1,22 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Container, Button, Card } from "../common";
-
+import {
+  FaSearch,
+  FaDesktop,
+  FaMobile,
+  FaDatabase,
+  FaChartLine,
+  FaCode
+} from "react-icons/fa";
 import { useEffect, useState } from "react";
 import ajaxCall from "../helpers/ajaxCall";
 
 const Services = () => {
   const navigate = useNavigate();
 
-  const handleServiceClick = (path) => {
-    navigate(path);
+  const handleServiceClick = () => {
+    navigate("/services");
   };
 
   const handleExploreAll = () => {
@@ -45,6 +52,18 @@ const Services = () => {
     }
   };
 
+  const getIconComponent = (iconName) => {
+    const icons = {
+      FaSearch: FaSearch,
+      FaDesktop: FaDesktop,
+      FaMobile: FaMobile,
+      FaChartLine: FaChartLine,
+      FaDatabase: FaDatabase,
+      FaCode: FaCode
+    };
+    const IconComponent = icons[iconName];
+    return IconComponent ? <IconComponent /> : null;
+  };
 
   return (
     <section className="py-20 relative bg-gradient-to-b from-secondary-50 via-white to-primary-50">
@@ -93,7 +112,7 @@ const Services = () => {
                     } shadow-lg shadow-primary-200/20`}
                 >
                   {service.icon ? (
-                    <service.icon className="w-8 h-8" />
+                    getIconComponent(service.icon)
                   ) : (
                     <span className="text-sm"></span>
                   )}
@@ -106,7 +125,7 @@ const Services = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => handleServiceClick(service.path)}
+                  onClick={handleServiceClick}
                   className="w-full justify-center hover:bg-gradient-to-r hover:from-primary-400 hover:to-primary-600 hover:text-white
                             transition-all duration-300"
                 >

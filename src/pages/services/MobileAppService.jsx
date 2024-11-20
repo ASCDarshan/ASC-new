@@ -12,6 +12,7 @@ import {
   FaBolt,
 } from "react-icons/fa";
 import phoneImg from "../../assets/images/phone.png";
+import { useNavigate } from "react-router-dom";
 
 const capabilities = [
   {
@@ -72,9 +73,17 @@ const techStack = [
 ];
 
 const MobileAppService = () => {
+  const navigate = useNavigate()
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
 
+  const handleconsulting = () => {
+    navigate("/contact");
+  }
+
+  const handleLearnmore = () => {
+    navigate("/portfolio")
+  }
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -119,10 +128,11 @@ const MobileAppService = () => {
                 <Button
                   variant="primary"
                   className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700"
+                  onClick={handleconsulting}
                 >
                   Start Your Project
                 </Button>
-                <Button variant="outline">View Portfolio</Button>
+                <Button variant="outline" onClick={handleLearnmore}>View Portfolio</Button>
               </div>
 
               {/* Key Stats */}
@@ -518,27 +528,23 @@ const MobileAppService = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className={`relative mb-12 ${
-                    index % 2 === 0
-                      ? "ml-[50%] pl-8"
-                      : "mr-[50%] pr-8 text-right"
-                  }`}
+                  className={`relative mb-12 ${index % 2 === 0
+                    ? "ml-[50%] pl-8"
+                    : "mr-[50%] pr-8 text-right"
+                    }`}
                 >
                   <div
-                    className={`absolute top-0 ${
-                      index % 2 === 0 ? "left-0" : "right-0"
-                    } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${
-                      index % 2 === 0 ? "-translate-x-1/2" : "translate-x-1/2"
-                    }`}
+                    className={`absolute top-0 ${index % 2 === 0 ? "left-0" : "right-0"
+                      } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${index % 2 === 0 ? "-translate-x-1/2" : "translate-x-1/2"
+                      }`}
                   >
                     <span className="absolute inset-0 flex items-center justify-center text-lg">
                       {phase.icon}
                     </span>
                   </div>
                   <Card
-                    className={`p-6 ${
-                      index % 2 === 0 ? "" : "flex flex-col items-end"
-                    }`}
+                    className={`p-6 ${index % 2 === 0 ? "" : "flex flex-col items-end"
+                      }`}
                   >
                     <Badge variant="primary" className="mb-2">
                       {phase.duration}

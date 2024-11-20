@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Container, Button, Card, Badge } from "../../components/common";
 import { CTA } from "../../components/sections";
 import { FaServer, FaDatabase, FaCloud, FaLaptopCode } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const solutions = [
   {
@@ -70,9 +71,17 @@ const technologies = {
 };
 
 const CustomDevelopment = () => {
+  const navigate = useNavigate()
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
 
+  const handleconsulting = () => {
+    navigate("/contact");
+  }
+
+  const handleLearnmore = () => {
+    navigate("/services")
+  }
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -117,10 +126,11 @@ const CustomDevelopment = () => {
                 <Button
                   variant="primary"
                   className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700"
+                  onClick={handleconsulting}
                 >
                   Discuss Your Project
                 </Button>
-                <Button variant="outline">Explore Solutions</Button>
+                <Button variant="outline" onClick={handleLearnmore}>Explore Solutions</Button>
               </div>
 
               {/* Achievement Stats */}
@@ -485,27 +495,23 @@ const CustomDevelopment = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className={`relative mb-12 ${
-                    index % 2 === 0
-                      ? "ml-[50%] pl-8"
-                      : "mr-[50%] pr-8 text-right"
-                  }`}
+                  className={`relative mb-12 ${index % 2 === 0
+                    ? "ml-[50%] pl-8"
+                    : "mr-[50%] pr-8 text-right"
+                    }`}
                 >
                   <div
-                    className={`absolute top-0 ${
-                      index % 2 === 0 ? "left-0" : "right-0"
-                    } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${
-                      index % 2 === 0 ? "-translate-x-1/2" : "translate-x-1/2"
-                    }`}
+                    className={`absolute top-0 ${index % 2 === 0 ? "left-0" : "right-0"
+                      } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${index % 2 === 0 ? "-translate-x-1/2" : "translate-x-1/2"
+                      }`}
                   >
                     <span className="absolute inset-0 flex items-center justify-center text-lg">
                       {phase.icon}
                     </span>
                   </div>
                   <Card
-                    className={`p-6 hover:shadow-lg transition-shadow duration-300 ${
-                      index % 2 === 0 ? "" : "flex flex-col items-end"
-                    }`}
+                    className={`p-6 hover:shadow-lg transition-shadow duration-300 ${index % 2 === 0 ? "" : "flex flex-col items-end"
+                      }`}
                   >
                     <Badge variant="primary" className="mb-2">
                       {phase.duration}
@@ -515,9 +521,8 @@ const CustomDevelopment = () => {
                     </h3>
                     <p className="text-gray-600 mb-4">{phase.description}</p>
                     <ul
-                      className={`space-y-2 text-sm ${
-                        index % 2 === 0 ? "" : "text-right"
-                      }`}
+                      className={`space-y-2 text-sm ${index % 2 === 0 ? "" : "text-right"
+                        }`}
                     >
                       {phase.details.map((detail) => (
                         <li key={detail} className="flex items-center gap-2">

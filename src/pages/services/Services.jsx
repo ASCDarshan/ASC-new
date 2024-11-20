@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Container, Card, Button } from "../../components/common";
 import { CTA, Testimonials } from "../../components/sections";
@@ -10,105 +10,13 @@ import {
   FaLightbulb,
   FaCogs,
   FaUsers,
-  FaAward,
   FaHandshake,
+  FaDatabase,
+  FaChartLine,
+  FaCode
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-
-const services = [
-  {
-    id: "seo",
-    icon: <FaSearch className="w-8 h-8" />,
-    title: "SEO Optimization",
-    shortDesc: "Boost your online visibility with data-driven SEO strategies.",
-    fullDesc:
-      "Comprehensive SEO services to improve your search engine rankings and drive organic traffic.",
-    features: [
-      "Keyword Research & Analysis",
-      "On-Page SEO Optimization",
-      "Technical SEO Audits",
-      "Content Strategy",
-      "Performance Tracking",
-      "Local SEO Optimization",
-      "Mobile SEO",
-      "Link Building Strategy",
-    ],
-    technologies: [
-      "Google Analytics",
-      "SEMrush",
-      "Ahrefs",
-      "Google Search Console",
-      "Moz",
-      "Screaming Frog",
-    ],
-    benefits: [
-      "Increased organic traffic",
-      "Higher conversion rates",
-      "Better ROI on marketing",
-      "Enhanced brand visibility",
-    ],
-  },
-  {
-    id: "crm",
-    icon: <FaDesktop className="w-8 h-8" />,
-    title: "CRM Development",
-    shortDesc: "Custom CRM solutions for improved business operations.",
-    fullDesc:
-      "Tailored CRM systems that streamline your business processes and enhance customer relationships.",
-    features: [
-      "Contact Management",
-      "Sales Pipeline Tracking",
-      "Reporting & Analytics",
-      "Email Integration",
-      "Task Automation",
-      "Customer Support Integration",
-      "Mobile Access",
-      "Custom Workflows",
-    ],
-    technologies: [
-      "Python",
-      "Django",
-      "React",
-      "PostgreSQL",
-      "Redis",
-      "Docker",
-      "AWS",
-    ],
-    benefits: [
-      "Improved customer retention",
-      "Streamlined operations",
-      "Data-driven decisions",
-      "Enhanced team collaboration",
-    ],
-  },
-  {
-    id: "mobile",
-    icon: <FaMobile className="w-8 h-8" />,
-    title: "Mobile App Development",
-    shortDesc: "Native and cross-platform mobile applications.",
-    fullDesc:
-      "Cutting-edge mobile applications that provide seamless user experiences across all platforms.",
-    features: [
-      "Native iOS & Android Apps",
-      "Cross-Platform Development",
-      "UI/UX Design",
-      "App Store Optimization",
-      "Maintenance & Support",
-      "Push Notifications",
-      "Offline Functionality",
-      "Analytics Integration",
-    ],
-    technologies: ["React Native", "Flutter", "Firebase", "Node.js", "MongoDB"],
-    benefits: [
-      "Wider market reach",
-      "Enhanced user engagement",
-      "Improved brand loyalty",
-      "Competitive advantage",
-    ],
-  },
-  // Add other services similarly...
-];
-
+import ajaxCall from "../../components/helpers/ajaxCall";
 const stats = [
   { number: "98%", label: "Client Satisfaction" },
   { number: "200+", label: "Projects Completed" },
@@ -128,8 +36,36 @@ const industries = [
 ];
 
 const Services = () => {
-  const [selectedService, setSelectedService] = useState(null);
   const navigate = useNavigate()
+  const [selectedService, setSelectedService] = useState(null);
+  const [servicess, setServices] = useState([]);
+
+  useEffect(() => {
+    fetchData("services/services/", setServices);
+  }, []);
+
+  const fetchData = async (url, setData) => {
+    try {
+      const response = await ajaxCall(
+        url,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        },
+        8000
+      );
+      if (response?.status === 200) {
+        setData(response?.data?.results || []);
+      } else {
+        console.error("Fetch error:", response);
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+    }
+  };
 
   const handleconsulting = () => {
     navigate("/contact")
@@ -138,6 +74,28 @@ const Services = () => {
   const handlePortfolio = () => {
     navigate("/portfolio")
   }
+
+
+  const transformServiceData = (service) => ({
+    ...service,
+    fullDesc: service.detailed_description || service.description,
+    features: service.feature_list || service.features?.split(',').filter(Boolean) || [],
+    benefits: (service.benefits || '').split(',').filter(Boolean),
+    technologies: [],
+  });
+
+  const getIconComponent = (iconName) => {
+    const icons = {
+      FaSearch: FaSearch,
+      FaDesktop: FaDesktop,
+      FaMobile: FaMobile,
+      FaChartLine: FaChartLine,
+      FaDatabase: FaDatabase,
+      FaCode: FaCode
+    };
+    const IconComponent = icons[iconName];
+    return IconComponent ? <IconComponent /> : null;
+  };
 
   return (
     <motion.div
@@ -227,7 +185,7 @@ const Services = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+            {servicess.map((service, index) => (
               <motion.div
                 key={service.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -238,17 +196,24 @@ const Services = () => {
                 <Card
                   className="h-full cursor-pointer hover:-translate-y-2 transition-all duration-300
                             hover:shadow-xl hover:shadow-primary-100/50"
-                  onClick={() => setSelectedService(service)}
+                  onClick={() => setSelectedService(transformServiceData(service))}
                 >
                   <div className="p-6">
                     <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
-                      {service.icon}
+                      {getIconComponent(service.icon)}
                     </div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">
                       {service.title}
                     </h3>
-                    <p className="text-gray-600 mb-4">{service.shortDesc}</p>
-                    <Button variant="primary" size="sm">
+                    <p className="text-gray-600 mb-4">{service.description}</p>
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedService(transformServiceData(service));
+                      }}
+                    >
                       Learn More
                     </Button>
                   </div>
@@ -525,7 +490,6 @@ const Services = () => {
       </section>
 
       {/* Service Details Modal */}
-      {/* Service Details Modal */}
       {selectedService && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <motion.div
@@ -538,7 +502,7 @@ const Services = () => {
               <div className="flex justify-between items-start mb-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-primary-600/10 rounded-lg flex items-center justify-center text-primary-600">
-                    {selectedService.icon}
+                    {getIconComponent(selectedService.icon)}
                   </div>
                   <h3 className="text-2xl font-semibold text-gray-900">
                     {selectedService.title}
@@ -565,72 +529,58 @@ const Services = () => {
                 </button>
               </div>
 
-              <p className="text-gray-600 mb-8">{selectedService.fullDesc}</p>
+              <p className="text-gray-600 mb-8">{selectedService.fullDesc || selectedService.description}</p>
 
               {/* Key Features */}
-              <div className="mb-8">
-                <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                  Key Features
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {selectedService.features.map((feature) => (
-                    <div
-                      key={feature}
-                      className="flex items-center gap-2 text-gray-600"
-                    >
-                      <FaCheck className="text-primary-600 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
+              {selectedService.features.length > 0 && (
+                <div className="mb-8">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                    Key Features
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {selectedService?.features?.map((feature, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center gap-2 text-gray-600"
+                      >
+                        <FaCheck className="text-primary-600 flex-shrink-0" />
+                        <span>{feature.title}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Benefits */}
-              <div className="mb-8">
-                <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                  Key Benefits
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {selectedService.benefits.map((benefit) => (
-                    <div
-                      key={benefit}
-                      className="flex items-center gap-2 text-gray-600"
-                    >
-                      <FaCheck className="text-primary-600 flex-shrink-0" />
-                      <span>{benefit}</span>
-                    </div>
-                  ))}
+              {selectedService?.benefits?.length > 0 && (
+                <div className="mb-8">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                    Key Benefits
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-1 gap-3">
+                    {selectedService.benefits.map((benefit, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center gap-4 text-gray-600"
+                      >
+                        <FaCheck className="text-primary-600 flex-shrink-0" />
+                        <span>{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-
-              {/* Technologies */}
-              <div className="mb-8">
-                <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                  Technologies & Tools
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedService.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              )}
 
               {/* Call to Action */}
               <div className="flex gap-4">
                 <Button
                   variant="primary"
                   className="flex-1 bg-gradient-to-r from-primary-500 to-primary-700 hover:from-primary-600 hover:to-primary-800"
+                  onClick={handleconsulting}
                 >
                   Get Started
                 </Button>
-                <Button variant="outline" className="flex-1">
-                  Learn More
-                </Button>
+
               </div>
             </div>
           </motion.div>

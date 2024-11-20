@@ -15,6 +15,7 @@ const navigation = {
     { name: 'Portfolio', href: '/portfolio' },
     { name: 'Contact', href: '/contact' },
     { name: 'Careers', href: '/careers' },
+    { name: 'Privacy Policy', href: '/privacy-policy' },
   ],
   contacts: [
     { name: '1 C Satyam Apartment, Vishwas Colony Alkapuri, Vadodara - 390007', href: null },
