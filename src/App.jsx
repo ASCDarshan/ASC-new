@@ -16,6 +16,7 @@ import Careers from './pages/Career/Career';
 import BlogPage from './pages/Blog/Blog';
 import ScrollToTop from './components/common/ScrollToTop';
 import BlogPostPage from './pages/Blog/BlogPostPage';
+import Privacypolicy from './pages/Privacy/Privacypolicy';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogpostpage" element={<BlogPostPage />} />
+            <Route path="/privacy-policy" element={<Privacypolicy />} />
           </Routes>
         </main>
         <Footer />

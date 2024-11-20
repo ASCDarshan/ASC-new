@@ -1,34 +1,8 @@
 // src/components/sections/Stats.jsx
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useAnimation } from 'framer-motion';
 import { Container } from '../common';
-
-const stats = [
-  {
-    value: 150,
-    suffix: '+',
-    label: 'Projects Completed',
-    description: 'Successfully delivered projects across various industries'
-  },
-  {
-    value: 50,
-    suffix: '+',
-    label: 'Happy Clients',
-    description: 'Trusted by businesses worldwide'
-  },
-  {
-    value: 10,
-    suffix: '+',
-    label: 'Years Experience',
-    description: 'Delivering excellence in software development'
-  },
-  {
-    value: 25,
-    suffix: '+',
-    label: 'Team Members',
-    description: 'Skilled professionals at your service'
-  }
-];
+import ajaxCall from '../helpers/ajaxCall';
 
 const Stats = () => {
 
@@ -45,25 +19,33 @@ const Stats = () => {
         });
       }
     }, [isInView, controls]);
-
-    return (
-      <motion.div
-        ref={counterRef}
-        initial={{ opacity: 0 }}
-        animate={controls}
-        className="text-4xl md:text-5xl font-bold text-gray-900"
-      >
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          {value}
-          {suffix}
-        </motion.span>
-      </motion.div>
-    );
   };
+  const [impacts, setImpacts] = useState([]);
+  const fetchData = async (url, setData) => {
+    try {
+      const response = await ajaxCall(
+        url,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        },
+        8000
+      );
+      if (response?.status === 200) {
+        setData(response?.data?.results || []);
+      } else {
+        console.error("Fetch error:", response);
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+    }
+  };
+  useEffect(() => {
+    fetchData("master/impacts/", setImpacts);
+  }, []);
 
   return (
     <section className="py-20 bg-gradient-to-r from-primary/5 via-white to-secondary/5">
@@ -83,9 +65,9 @@ const Stats = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat, index) => (
+          {impacts.map((impact, index) => (
             <motion.div
-              key={stat.label}
+              key={impact.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -95,13 +77,13 @@ const Stats = () => {
               <div className="absolute inset-0 bg-white rounded-2xl shadow-lg transform group-hover:-translate-y-2 transition-all duration-300" />
               <div className="relative p-8 text-center">
                 <div className="mb-4">
-                  <CounterAnimation value={stat.value} suffix={stat.suffix} />
+                  <b>{impact.metrics} +</b>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {stat.label}
+                  {impact.title}
                 </h3>
                 <p className="text-gray-600">
-                  {stat.description}
+                  {impact.description}
                 </p>
               </div>
             </motion.div>

@@ -12,6 +12,7 @@ import {
   FaClock,
   FaCheckCircle,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const crmModules = [
   {
@@ -73,9 +74,17 @@ const benefits = [
 ];
 
 const CRMService = () => {
+  const navigate = useNavigate()
+
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
+  const handleconsulting = () => {
+    navigate("/contact");
+  }
 
+  const handleLearnmore = () => {
+    navigate("/services")
+  }
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -120,10 +129,11 @@ const CRMService = () => {
                 <Button
                   variant="primary"
                   className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700"
+                  onClick={handleconsulting}
                 >
                   Schedule Demo
                 </Button>
-                <Button variant="outline">View Features</Button>
+                <Button variant="outline" onClick={handleLearnmore}>View Features</Button>
               </div>
 
               {/* Trust Indicators */}
@@ -458,8 +468,8 @@ const CRMService = () => {
                             <button
                               key={period}
                               className={`px-3 py-1 rounded-md text-sm ${period === "3M"
-                                  ? "bg-primary-100 text-primary-600"
-                                  : "text-gray-600 hover:bg-gray-100"
+                                ? "bg-primary-100 text-primary-600"
+                                : "text-gray-600 hover:bg-gray-100"
                                 }`}
                             >
                               {period}

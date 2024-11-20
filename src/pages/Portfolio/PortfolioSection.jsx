@@ -84,7 +84,9 @@ const PortfolioSection = () => {
     const filteredProjects =
         selectedCategory === "all"
             ? project
-            : project.filter((project) => project.category.identifier === selectedCategory);
+            : project.filter(
+                (project) => project.category.identifier === selectedCategory
+            );
     const currentCategory =
         categories.find((cat) => cat.id === selectedCategory) || categories[0];
 

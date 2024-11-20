@@ -3,6 +3,7 @@ import { Container, Button, Card, Badge } from "../../components/common";
 import { CTA } from "../../components/sections";
 import { FaSearch, FaChartLine, FaTools, FaCogs } from "react-icons/fa";
 import growthImg from "../../assets/images/SEo.jpeg";
+import { useNavigate } from "react-router-dom";
 
 const seoFeatures = [
   {
@@ -53,11 +54,18 @@ const processSteps = [
     description: "Continuous monitoring and strategy refinement",
   },
 ];
-
 const SEOService = () => {
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
+  const navigate = useNavigate()
 
+  const handleconsulting = () => {
+    navigate("/contact");
+  }
+
+  const handleLearnmore = () => {
+    navigate("/services")
+  }
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -100,10 +108,11 @@ const SEOService = () => {
                 <Button
                   variant="primary"
                   className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700"
+                  onClick={handleconsulting}
                 >
                   Get Started
                 </Button>
-                <Button variant="outline">Learn More</Button>
+                <Button variant="outline" onClick={handleLearnmore}>Learn More</Button>
               </div>
 
               {/* Key Metrics */}

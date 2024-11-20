@@ -164,7 +164,7 @@ const BlogPage = () => {
                   <div className="aspect-w-16 aspect-h-9 md:aspect-none md:h-full">
                     <img
                       src={post.featured_image}
-                      alt={post.featured_image_alt || post.title}
+                      alt="img"
                       className="w-full h-full object-cover"
                     />
                   </div>
