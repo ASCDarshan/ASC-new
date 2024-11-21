@@ -91,7 +91,7 @@ const Contact = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data?.results || []);
+        setData(response?.data || []);
       } else {
         console.error("Fetch error:", response);
       }

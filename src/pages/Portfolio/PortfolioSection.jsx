@@ -51,9 +51,9 @@ const categories = [
 const PortfolioSection = () => {
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [selectedProject, setSelectedProject] = useState(null);
+    console.log(selectedProject)
 
     const [project, setProject] = useState([]);
-
     useEffect(() => {
         fetchData("portfolio/projects/", setProject);
     }, []);
@@ -72,7 +72,7 @@ const PortfolioSection = () => {
                 8000
             );
             if (response?.status === 200) {
-                setData(response?.data?.results || []);
+                setData(response?.data || []);
             } else {
                 console.error("Fetch error:", response);
             }

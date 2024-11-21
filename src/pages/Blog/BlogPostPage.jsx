@@ -59,8 +59,8 @@ const BlogPostPage = () => {
                 8000
             );
             if (response?.status === 200) {
-                setData(response?.data?.results || []);
-                filterPostsByBlogPageId(response?.data?.results);
+                setData(response?.data || []);
+                filterPostsByBlogPageId(response?.data);
             } else {
                 console.error("Fetch error:", response);
             }

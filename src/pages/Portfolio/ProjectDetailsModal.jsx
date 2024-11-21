@@ -78,9 +78,9 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                                             Key Features
                                         </h3>
                                         <ul className="space-y-3">
-                                            {project.features && project.features.map((feature) => (
+                                            {project.keyfeature.map((feature) => (
                                                 <li
-                                                    key={feature}
+                                                    key={feature.id}
                                                     className="flex items-start gap-3"
                                                 >
                                                     <span className="mt-1 w-5 h-5 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center">
@@ -98,39 +98,7 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                                                             />
                                                         </svg>
                                                     </span>
-                                                    <span className="text-gray-600">{feature}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-
-                                    {/* Adding Results & Impact section from previous code */}
-                                    <div>
-                                        <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                                            Results & Impact
-                                        </h3>
-                                        <ul className="space-y-3">
-                                            {project.results && project.results.map((result) => (
-                                                <li
-                                                    key={result}
-                                                    className="flex items-start gap-3"
-                                                >
-                                                    <span className="mt-1 w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
-                                                        <svg
-                                                            className="w-3 h-3"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            stroke="currentColor"
-                                                        >
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                strokeWidth={2}
-                                                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                                                            />
-                                                        </svg>
-                                                    </span>
-                                                    <span className="text-gray-600">{result}</span>
+                                                    <span className="text-gray-600">{feature.title}</span>
                                                 </li>
                                             ))}
                                         </ul>
@@ -188,9 +156,9 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                                                     <span>Live Demo</span>
                                                 </a>
                                             )}
-                                            {project.github_url && (
+                                            {project.repository_url && (
                                                 <a
-                                                    href={project.github_url}
+                                                    href={project.repository_url}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="flex items-center gap-3 text-gray-600 hover:text-primary-600 transition-colors"
