@@ -25,6 +25,8 @@ const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [categoriess, setCategories] = useState([]);
+  console.log(categoriess);
 
   const [posts, setPosts] = useState([]);
 
@@ -42,7 +44,7 @@ const BlogPage = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data?.results || []);
+        setData(response?.data || []);
       } else {
         console.error("Fetch error:", response);
       }
@@ -53,6 +55,7 @@ const BlogPage = () => {
 
   useEffect(() => {
     fetchData("blogs/posts/", setPosts);
+    fetchData("blogs/categories/", setCategories);
   }, []);
 
   // Scroll to top functionality
