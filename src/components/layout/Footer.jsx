@@ -1,7 +1,8 @@
 // src/components/layout/Footer.jsx
 import { Link } from 'react-router-dom';
 import Container from './Container';
-import { FaFacebook, FaGoogle, FaInstagram } from 'react-icons/fa';
+import { FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FaLocationDot } from 'react-icons/fa6';
 
 const navigation = {
   solutions: [
@@ -20,7 +21,7 @@ const navigation = {
   contacts: [
     { name: '1 C Satyam Apartment, Vishwas Colony Alkapuri, Vadodara - 390007', href: null },
     { name: 'Phone: 9638544455', href: 'tel:9638544455' },
-    { name: 'Email: info@anantsoftcomputing.com', href: 'mailto:info@anantsoftcomputing.com' },
+    { name: 'Email: support@anantsoftcomputing.com', href: 'mailto:support@anantsoftcomputing.com' },
   ],
   social: [
     {
@@ -41,7 +42,7 @@ const navigation = {
       name: 'Google',
       href: 'https://www.google.com/maps/place/Anant+Soft+Computing/@22.3094348,73.1713566,17z/data=!3m1!4b1!4m6!3m5!1s0x395fc5873e594259:0xda3dc91c20f4beec!8m2!3d22.3094348!4d73.1713566!16s%2Fg%2F11bw1ylpm3?entry=ttu&g_ep=EgoyMDI0MTEwNi4wIKXMDSoASAFQAw%3D%3D',
       icon: () => (
-        <FaGoogle />
+        <FaLocationDot />
       ),
     },
   ],

@@ -8,7 +8,6 @@ import {
   Clock,
   Facebook,
   Instagram,
-  Globe
 } from 'lucide-react';
 import { toast } from 'react-toastify';
 import ajaxCall from '../helpers/ajaxCall';
@@ -31,7 +30,7 @@ const contactInfo = [
   {
     icon: <Mail className="w-5 h-5" />,
     title: 'Email Us',
-    details: ['info@anantsoftcomputing.com']
+    details: ['support@anantsoftcomputing.com']
   },
   {
     icon: <Clock className="w-5 h-5" />,
@@ -52,7 +51,7 @@ const socialLinks = [
     label: 'Instagram'
   },
   {
-    icon: <Globe className="w-5 h-5" />,
+    icon: <MapPin className="w-5 h-5" />,
     href: 'https://www.google.com/maps/place/Anant+Soft+Computing',
     label: 'Google Maps'
   }
@@ -117,8 +116,10 @@ const Contact = () => {
 
     if (!formState.phone.trim()) {
       newErrors.phone = 'Phone number is required';
-    } else if (!/^\d{10}$/.test(formState.phone.replace(/[^0-9]/g, ''))) {
-      newErrors.phone = 'Please enter a valid 10-digit phone number';
+    } else if (
+      !/^(\+91[-\s]?)?[0]?[6789]\d{9}$/.test(formState.phone.replace(/[^0-9+]/g, ''))
+    ) {
+      newErrors.phone = 'Please enter a valid 10-digit phone number with or without +91';
     }
 
     setErrors(newErrors);
@@ -155,7 +156,7 @@ const Contact = () => {
       if ([200, 201].includes(response.status)) {
         toast.success("Message Send Successfully");
         setFormState(INITIAL_FORM_STATE);
-
+        setIsSubmitting(false);
       } else if ([400, 404].includes(response.status)) {
         toast.error("Some Problem Occurred. Please try again.");
       }
@@ -259,7 +260,6 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       placeholder="John Doe"
-                      error={errors.name}
                     />
                     {errors.name && (
                       <p className="mt-1 text-sm text-red-600">{errors.name}</p>
@@ -274,7 +274,6 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       placeholder="john@example.com"
-                      error={errors.email}
                     />
                     {errors.email && (
                       <p className="mt-1 text-sm text-red-600">{errors.email}</p>
@@ -290,8 +289,7 @@ const Contact = () => {
                       value={formState.phone}
                       onChange={handleChange}
                       required
-                      placeholder="+91 98765 43210"
-                      error={errors.phone}
+                      placeholder="98765 43210"
                     />
                     {errors.phone && (
                       <p className="mt-1 text-sm text-red-600">{errors.phone}</p>

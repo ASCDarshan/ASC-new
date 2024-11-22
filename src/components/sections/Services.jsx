@@ -12,6 +12,33 @@ import {
 import { useEffect, useState } from "react";
 import ajaxCall from "../helpers/ajaxCall";
 
+const servicesIcons = [
+  {
+    icon: <FaSearch className="w-8 h-8" />,
+    gradient: "from-primary-400 to-primary-600",
+  },
+  {
+    icon: <FaDesktop className="w-8 h-8" />,
+    gradient: "from-secondary-400 to-secondary-600",
+  },
+  {
+    icon: <FaMobile className="w-8 h-8" />,
+    gradient: "from-accent-400 to-accent-600",
+  },
+  {
+    icon: <FaDatabase className="w-8 h-8" />,
+    gradient: "from-primary-400 to-primary-600",
+  },
+  {
+    icon: <FaCode className="w-8 h-8" />,
+    gradient: "from-secondary-400 to-secondary-600",
+  },
+  {
+    icon: <FaChartLine className="w-8 h-8" />,
+    gradient: "from-accent-400 to-accent-600",
+  }
+];
+
 const Services = () => {
   const navigate = useNavigate();
 
@@ -50,19 +77,6 @@ const Services = () => {
     } catch (error) {
       console.error("Network error:", error);
     }
-  };
-
-  const getIconComponent = (iconName) => {
-    const icons = {
-      FaSearch: FaSearch,
-      FaDesktop: FaDesktop,
-      FaMobile: FaMobile,
-      FaChartLine: FaChartLine,
-      FaDatabase: FaDatabase,
-      FaCode: FaCode
-    };
-    const IconComponent = icons[iconName];
-    return IconComponent ? <IconComponent /> : null;
   };
 
   return (
@@ -108,14 +122,10 @@ const Services = () => {
               >
                 <div
                   className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6
-  bg-gradient-to-br ${service.gradient || "from-gray-400 to-gray-600"
-                    } shadow-lg shadow-primary-200/20`}
+                        bg-gradient-to-br ${servicesIcons[index]?.gradient || "from-gray-400 to-gray-600"} 
+                        shadow-lg shadow-primary-200/20`}
                 >
-                  {service.icon ? (
-                    getIconComponent(service.icon)
-                  ) : (
-                    <span className="text-sm"></span>
-                  )}
+                  {servicesIcons[index]?.icon || <span className="text-sm"></span>}
                 </div>
 
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">

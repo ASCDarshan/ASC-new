@@ -37,13 +37,11 @@ const industries = [
     name: "Healthcare",
     icon: "🏥",
     solutions: ["Hospital Management", "Patient Records", "Telemedicine"],
-    projects: 45,
   },
   {
     name: "Education",
     icon: "🎓",
     solutions: ["Learning Management", "Student Portal", "Assessment Systems"],
-    projects: 38,
   },
   {
     name: "Non-Profit",
@@ -53,13 +51,11 @@ const industries = [
       "Volunteer Tracking",
       "Event Management",
     ],
-    projects: 32,
   },
   {
     name: "Finance",
     icon: "💰",
     solutions: ["Payment Processing", "Financial Reporting", "Risk Management"],
-    projects: 41,
   },
 ];
 
@@ -136,7 +132,7 @@ const CustomDevelopment = () => {
               {/* Achievement Stats */}
               <div className="mt-12 grid grid-cols-3 gap-6">
                 {[
-                  { value: "200+", label: "Projects Delivered" },
+                  { value: "150+", label: "Projects Delivered" },
                   { value: "15+", label: "Industries Served" },
                   { value: "98%", label: "Client Satisfaction" },
                 ].map((stat) => (
@@ -299,11 +295,7 @@ const CustomDevelopment = () => {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-auto">
-                    <div className="text-sm text-gray-500">
-                      {industry.projects}+ Projects Delivered
-                    </div>
-                  </div>
+
                 </Card>
               </motion.div>
             ))}
@@ -358,9 +350,9 @@ const CustomDevelopment = () => {
       </section>
 
       {/* Development Process */}
-      <section className="py-10 bg-gradient-to-b from-gray-50 to-white">
-        <Container>
-          <motion.div
+      {/* <section className="py-10 bg-gradient-to-b from-gray-50 to-white">
+        <Container> */}
+      {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -370,17 +362,16 @@ const CustomDevelopment = () => {
             <p className="text-gray-600 max-w-2xl mx-auto">
               Our systematic approach to delivering custom solutions
             </p>
-          </motion.div>
+          </motion.div> */}
 
-          {/* Process Timeline */}
-          <div className="relative max-w-4xl mx-auto">
-            {/* Process steps continue... */}
-          </div>
-        </Container>
-      </section>
+      {/* Process Timeline */}
+      {/* <div className="relative max-w-4xl mx-auto">
+          </div> */}
+      {/* </Container>
+      </section> */}
 
       {/* Case Studies */}
-      <section className="py-20 bg-white">{/* Case studies content */}</section>
+      {/* <section className="py-20 bg-white"></section> */}
 
       {/* Enhanced CTA */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
@@ -552,7 +543,7 @@ const CustomDevelopment = () => {
       </section>
 
       {/* Case Studies */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      {/* <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -668,7 +659,7 @@ const CustomDevelopment = () => {
             ))}
           </div>
         </Container>
-      </section>
+      </section> */}
 
       <CTA />
     </motion.div>

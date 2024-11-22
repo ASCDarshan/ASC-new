@@ -374,9 +374,9 @@ const MobileAppService = () => {
       </section>
 
       {/* Featured Apps Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <Container>
-          <motion.div
+      {/* <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <Container> */}
+      {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -387,10 +387,10 @@ const MobileAppService = () => {
               Some of our successful mobile applications that demonstrate our
               expertise
             </p>
-          </motion.div>
+          </motion.div> */}
 
-          {/* Featured Apps Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Featured Apps Grid */}
+      {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 name: "HealthTrack Pro",
@@ -466,9 +466,9 @@ const MobileAppService = () => {
                 </Card>
               </motion.div>
             ))}
-          </div>
-        </Container>
-      </section>
+          </div> */}
+      {/* </Container>
+      </section> */}
 
       {/* App Development Timeline */}
       <section className="py-20 bg-white">

@@ -1,33 +1,16 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-  Search,
-  Calendar,
-  Bookmark,
-  ArrowUp,
-  Share2,
-} from "lucide-react";
+import { Search, Calendar, Bookmark, Share2, ArrowUp } from "lucide-react";
 import ajaxCall from "../../components/helpers/ajaxCall";
-import ProfileImg from "../../assets/images/profile.jpg"
+import ProfileImg from "../../assets/images/profile.jpg";
 import { useNavigate } from "react-router-dom";
 
-const categories = [
-  { name: "All Posts", slug: "all" },
-  { name: "Web Development", slug: "web-development" },
-  { name: "Tech Insights", slug: "tech-insights" },
-  { name: "Industry News", slug: "industry-news" },
-  { name: "Case Studies", slug: "case-studies" },
-  { name: "Tutorials", slug: "tutorials" },
-];
-
 const BlogPage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [categoriess, setCategories] = useState([]);
-  console.log(categoriess);
-
+  const [categories, setCategories] = useState([]);
   const [posts, setPosts] = useState([]);
 
   const fetchData = async (url, setData) => {
@@ -55,10 +38,11 @@ const BlogPage = () => {
 
   useEffect(() => {
     fetchData("blogs/posts/", setPosts);
-    fetchData("blogs/categories/", setCategories);
+    fetchData("blogs/categories/", (data) => {
+      setCategories([{ slug: "all", name: "All" }, ...data]);
+    });
   }, []);
 
-  // Scroll to top functionality
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
@@ -70,7 +54,13 @@ const BlogPage = () => {
 
   const handleBlog = (postId) => {
     navigate(`/blog/${postId}`);
-  }
+  };
+
+  // Filter posts based on selected category
+  const filteredPosts =
+    selectedCategory === "all"
+      ? posts
+      : posts.filter((post) => post.category?.slug === selectedCategory);
 
   return (
     <motion.div
@@ -152,93 +142,96 @@ const BlogPage = () => {
             </motion.div>
           </div>
 
-          {/* Featured Post */}
-          {posts.map((post) => (
-            <motion.div
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="mb-12"
-            >
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-                <div className="grid md:grid-cols-2 gap-8">
-                  {/* Thumbnail Section */}
-                  <div className="aspect-w-16 aspect-h-9 md:aspect-none md:h-full">
-                    <img
-                      src={post.featured_image}
-                      alt="img"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  {/* Content Section */}
-                  <div className="p-8 flex flex-col justify-center">
-                    <div className="flex items-center gap-4 mb-4">
-                      {/* Category Tag */}
-                      {post.category?.name && (
-                        <span className="px-3 py-1 bg-primary-100 text-primary-600 rounded-full text-sm">
-                          {post.category.name}
-                        </span>
-                      )}
-                      {/* Published Date */}
-                      <span className="text-gray-500 text-sm flex items-center gap-2">
-                        <Calendar className="w-4 h-4" />
-                        {new Intl.DateTimeFormat("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        }).format(new Date(post.published_at))}
-                      </span>
+          {/* Featured Posts */}
+          {filteredPosts.length > 0 ? (
+            filteredPosts.map((post) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="mb-12"
+              >
+                <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Thumbnail Section */}
+                    <div className="aspect-w-16 aspect-h-9 md:aspect-none md:h-full">
+                      <img
+                        src={post.featured_image}
+                        alt="img"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                    {/* Title */}
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                      <button onClick={() => handleBlog(post.id)}>
-                        {post.title}
-                      </button>
-                    </h2>
-                    {/* Excerpt */}
-                    <p className="text-gray-600 mb-6">{post.excerpt}</p>
-                    {/* Author and Actions */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <img
-                          src={ProfileImg}
-                          alt={post?.author?.user?.username || "Author"}
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <div>
-                          <div className="font-medium text-gray-900">
-                            {post?.author?.user?.username || "Anonymous"}
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            {post.author?.role || "Contributor"}
+                    {/* Content Section */}
+                    <div className="p-8 flex flex-col justify-center">
+                      <div className="flex items-center gap-4 mb-4">
+                        {/* Category Tag */}
+                        {post.category?.name && (
+                          <span className="px-3 py-1 bg-primary-100 text-primary-600 rounded-full text-sm">
+                            {post.category.name}
+                          </span>
+                        )}
+                        {/* Published Date */}
+                        <span className="text-gray-500 text-sm flex items-center gap-2">
+                          <Calendar className="w-4 h-4" />
+                          {new Intl.DateTimeFormat("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          }).format(new Date(post.published_at))}
+                        </span>
+                      </div>
+                      {/* Title */}
+                      <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                        <button onClick={() => handleBlog(post.id)}>
+                          {post.title}
+                        </button>
+                      </h2>
+                      {/* Excerpt */}
+                      <p className="text-gray-600 mb-6">{post.excerpt}</p>
+                      {/* Author and Actions */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={ProfileImg}
+                            alt={post?.author?.user?.username || "Author"}
+                            className="w-8 h-8 rounded-full"
+                          />
+                          <div>
+                            <div className="font-medium text-gray-900">
+                              {post?.author?.user?.username || "Anonymous"}
+                            </div>
+                            <div className="text-sm text-gray-500">
+                              {post.author?.role || "Contributor"}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      {/* Share and Bookmark Actions */}
-                      <div className="flex items-center gap-4">
-                        <button
-                          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                          aria-label="Share Post"
-                        >
-                          <Share2 className="w-5 h-5 text-gray-600" />
-                        </button>
-                        <button
-                          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                          aria-label="Bookmark Post"
-                        >
-                          <Bookmark className="w-5 h-5 text-gray-600" />
-                        </button>
+                        {/* Share and Bookmark Actions */}
+                        <div className="flex items-center gap-4">
+                          <button
+                            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                            aria-label="Share Post"
+                          >
+                            <Share2 className="w-5 h-5 text-gray-600" />
+                          </button>
+                          <button
+                            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                            aria-label="Bookmark Post"
+                          >
+                            <Bookmark className="w-5 h-5 text-gray-600" />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-
-
-
+              </motion.div>
+            ))
+          ) : (
+            <div className="text-center text-gray-600 text-lg">
+              No posts for this category.
+            </div>
+          )}
 
         </div>
       </section>
