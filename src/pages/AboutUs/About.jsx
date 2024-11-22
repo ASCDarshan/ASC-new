@@ -12,10 +12,10 @@ import ajaxCall from "../../components/helpers/ajaxCall";
 import { useEffect, useState } from "react";
 
 const stats = [
-  { value: "11+", label: "Years Experience" },
-  { value: "250+", label: "Projects Delivered" },
+  { value: "15+", label: "Years Experience" },
+  { value: "150+", label: "Projects Delivered" },
   { value: "95%", label: "Client Satisfaction" },
-  { value: "50+", label: "Team Members" },
+  { value: "25+", label: "Team Members" },
 ];
 
 const values = [

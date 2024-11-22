@@ -118,7 +118,7 @@ const SEOService = () => {
               {/* Key Metrics */}
               <div className="grid grid-cols-3 gap-6 mt-12">
                 {[
-                  { value: "200+", label: "SEO Projects" },
+                  { value: "150+", label: "SEO Projects" },
                   { value: "85%", label: "Avg. Traffic Increase" },
                   { value: "95%", label: "Client Satisfaction" },
                 ].map((metric) => (

@@ -1,25 +1,11 @@
 // src/components/sections/Stats.jsx
-import { useEffect, useRef, useState } from 'react';
-import { motion, useInView, useAnimation } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { Container } from '../common';
 import ajaxCall from '../helpers/ajaxCall';
 
 const Stats = () => {
 
-  const CounterAnimation = ({ value, suffix = '' }) => {
-    const counterRef = useRef(null);
-    const isInView = useInView(counterRef, { once: true });
-    const controls = useAnimation();
-
-    useEffect(() => {
-      if (isInView) {
-        controls.start({
-          opacity: 1,
-          transition: { duration: 0.5 }
-        });
-      }
-    }, [isInView, controls]);
-  };
   const [impacts, setImpacts] = useState([]);
   const fetchData = async (url, setData) => {
     try {

@@ -19,9 +19,9 @@ import { useNavigate } from "react-router-dom";
 import ajaxCall from "../../components/helpers/ajaxCall";
 const stats = [
   { number: "98%", label: "Client Satisfaction" },
-  { number: "200+", label: "Projects Completed" },
+  { number: "150+", label: "Projects Completed" },
   { number: "15+", label: "Years Experience" },
-  { number: "50+", label: "Expert Team Members" },
+  { number: "25+", label: "Expert Team Members" },
 ];
 
 const industries = [
@@ -33,6 +33,33 @@ const industries = [
   "Non-Profit",
   "Finance",
   "Retail",
+];
+
+const servicesIcons = [
+  {
+    icon: <FaSearch className="w-8 h-8" />,
+    gradient: "from-primary-400 to-primary-600",
+  },
+  {
+    icon: <FaDesktop className="w-8 h-8" />,
+    gradient: "from-secondary-400 to-secondary-600",
+  },
+  {
+    icon: <FaMobile className="w-8 h-8" />,
+    gradient: "from-accent-400 to-accent-600",
+  },
+  {
+    icon: <FaDatabase className="w-8 h-8" />,
+    gradient: "from-primary-400 to-primary-600",
+  },
+  {
+    icon: <FaCode className="w-8 h-8" />,
+    gradient: "from-secondary-400 to-secondary-600",
+  },
+  {
+    icon: <FaChartLine className="w-8 h-8" />,
+    gradient: "from-accent-400 to-accent-600",
+  }
 ];
 
 const Services = () => {
@@ -74,7 +101,6 @@ const Services = () => {
   const handlePortfolio = () => {
     navigate("/portfolio")
   }
-
 
   const transformServiceData = (service) => ({
     ...service,
@@ -195,17 +221,27 @@ const Services = () => {
               >
                 <Card
                   className="h-full cursor-pointer hover:-translate-y-2 transition-all duration-300
-                            hover:shadow-xl hover:shadow-primary-100/50"
+                   hover:shadow-xl hover:shadow-primary-100/50"
                   onClick={() => setSelectedService(transformServiceData(service))}
                 >
                   <div className="p-6">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
-                      {getIconComponent(service.icon)}
+                    <div
+                      className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6
+                        bg-gradient-to-br ${servicesIcons[index]?.gradient || "from-gray-400 to-gray-600"} 
+                        shadow-lg shadow-primary-200/20`}
+                    >
+                      {servicesIcons[index]?.icon || <span className="text-sm"></span>}
                     </div>
+
+                    {/* Title */}
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">
                       {service.title}
                     </h3>
+
+                    {/* Description */}
                     <p className="text-gray-600 mb-4">{service.description}</p>
+
+                    {/* Button */}
                     <Button
                       variant="primary"
                       size="sm"
@@ -221,6 +257,7 @@ const Services = () => {
               </motion.div>
             ))}
           </div>
+
         </Container>
       </section>
 
@@ -491,101 +528,114 @@ const Services = () => {
 
       {/* Service Details Modal */}
       {selectedService && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
           >
-            <div className="p-6">
-              <div className="flex justify-between items-start mb-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary-600/10 rounded-lg flex items-center justify-center text-primary-600">
-                    {getIconComponent(selectedService.icon)}
+            {/* Header Section */}
+            <div className="relative h-72 bg-gray-200">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-primary-600/10 rounded-lg flex items-center justify-center text-primary-600">
+                      {getIconComponent(selectedService.icon)}
+                    </div>
+                    <h2 className="text-3xl font-semibold text-white">
+                      {selectedService.title}
+                    </h2>
                   </div>
-                  <h3 className="text-2xl font-semibold text-gray-900">
-                    {selectedService.title}
-                  </h3>
                 </div>
-                <button
-                  onClick={() => setSelectedService(null)}
-                  className="text-gray-500 hover:text-gray-700 p-1"
-                  aria-label="Close modal"
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
               </div>
-
-              <p className="text-gray-600 mb-8">{selectedService.fullDesc || selectedService.description}</p>
-
-              {/* Key Features */}
-              {selectedService.features.length > 0 && (
-                <div className="mb-8">
-                  <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                    Key Features
-                  </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {selectedService?.features?.map((feature, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-2 text-gray-600"
-                      >
-                        <FaCheck className="text-primary-600 flex-shrink-0" />
-                        <span>{feature.title}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Benefits */}
-              {selectedService?.benefits?.length > 0 && (
-                <div className="mb-8">
-                  <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                    Key Benefits
-                  </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-1 gap-3">
-                    {selectedService.benefits.map((benefit, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-4 text-gray-600"
-                      >
-                        <FaCheck className="text-primary-600 flex-shrink-0" />
-                        <span>{benefit}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Call to Action */}
-              <div className="flex gap-4">
-                <Button
-                  variant="primary"
-                  className="flex-1 bg-gradient-to-r from-primary-500 to-primary-700 hover:from-primary-600 hover:to-primary-800"
-                  onClick={handleconsulting}
+              <button
+                onClick={() => setSelectedService(null)}
+                className="absolute top-4 right-4 text-white hover:bg-black/20 p-2 rounded-full"
+                aria-label="Close modal"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  Get Started
-                </Button>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
 
+            {/* Content Section */}
+            <div className="flex-1 overflow-y-auto px-6 py-8">
+              <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
+                {/* Left Section */}
+                <div className="md:col-span-2 space-y-6">
+                  <p className="text-gray-600 mb-8">
+                    {selectedService.fullDesc || selectedService.description}
+                  </p>
+
+                  {/* Key Features */}
+                  {selectedService.features.length > 0 && (
+                    <div className="mb-8">
+                      <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                        Key Features
+                      </h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {selectedService.features.map((feature, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center gap-2 text-gray-600"
+                          >
+                            <FaCheck className="text-primary-600 flex-shrink-0" />
+                            <span>{feature.title}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Key Benefits */}
+                  {selectedService.benefits.length > 0 && (
+                    <div className="mb-8">
+                      <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                        Key Benefits
+                      </h4>
+                      <div className="grid grid-cols-1 gap-3">
+                        {selectedService.benefits.map((benefit, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center gap-4 text-gray-600"
+                          >
+                            <FaCheck className="text-primary-600 flex-shrink-0" />
+                            <span>{benefit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
+            </div>
+
+            {/* Footer Section */}
+            <div className="p-6 border-t bg-gray-50 flex justify-end gap-4">
+              <Button
+                variant="primary"
+                className="bg-gradient-to-r from-primary-500 to-primary-700 hover:from-primary-600 hover:to-primary-800"
+                onClick={handleconsulting}
+              >
+                Get Started
+              </Button>
             </div>
           </motion.div>
         </div>
       )}
+
 
       <CTA />
     </motion.div>

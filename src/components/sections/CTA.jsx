@@ -140,11 +140,11 @@ const CTA = () => {
                   <div className="text-sm text-gray-600">Happy Clients</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">10+</div>
+                  <div className="text-2xl font-bold text-gray-900">15+</div>
                   <div className="text-sm text-gray-600">Years Experience</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">24/7</div>
+                  <div className="text-2xl font-bold text-gray-900">End to End </div>
                   <div className="text-sm text-gray-600">Support</div>
                 </div>
               </div>

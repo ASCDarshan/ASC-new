@@ -186,14 +186,14 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                                         <h3 className="text-lg font-semibold text-gray-900 mb-4">
                                             Technology Stack
                                         </h3>
-                                        <div className="space-y-3">
+                                        <div className="flex flex-wrap gap-3">
                                             {project.technologies.map((tech) => (
                                                 <div
                                                     key={tech.id}
-                                                    className="flex items-center justify-between p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+                                                    className="flex items-center p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
                                                 >
+                                                    <span className="w-2 h-2 mr-2 rounded-full bg-primary-500"></span>
                                                     <span className="text-gray-600">{tech.name}</span>
-                                                    <span className="w-2 h-2 rounded-full bg-primary-500"></span>
                                                 </div>
                                             ))}
                                         </div>

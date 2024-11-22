@@ -51,7 +51,6 @@ const categories = [
 const PortfolioSection = () => {
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [selectedProject, setSelectedProject] = useState(null);
-    console.log(selectedProject)
 
     const [project, setProject] = useState([]);
     useEffect(() => {

@@ -291,13 +291,15 @@ const BlogPostPage = () => {
                         <motion.article
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="max-w-3xl mx-auto"
+                            className="max-w-6xl mx-auto"
                         >
                             <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 mb-12">
-                                <div className="prose prose-lg prose-gray max-w-none">
-                                    {filteredPost.excerpt}
-                                </div>
+                                <div
+                                    className="prose prose-lg prose-gray max-w-none"
+                                    dangerouslySetInnerHTML={{ __html: filteredPost.content }}
+                                ></div>
                             </div>
+
                         </motion.article>
                     </div>
                 </div>
