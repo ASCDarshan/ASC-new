@@ -179,8 +179,7 @@ const PortfolioSection = () => {
                                         <div className="relative overflow-hidden">
                                             <img
                                                 src={
-                                                    project.images?.[0]?.image ||
-                                                    "/api/placeholder/400/320"
+                                                    project.images?.[0]?.image
                                                 }
                                                 alt={project.images?.[0]?.alt_text || project.title}
                                                 className="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-700"

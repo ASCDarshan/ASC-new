@@ -13,6 +13,7 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import ServicesBlog from "./ServicesBlog/ServicesBlog";
 
 const crmModules = [
   {
@@ -617,7 +618,7 @@ const CRMService = () => {
           </div>
         </Container>
       </section>
-
+      <ServicesBlog slug="crm" />
       <CTA />
     </motion.div>
   );

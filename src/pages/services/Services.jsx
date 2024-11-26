@@ -537,6 +537,10 @@ const Services = () => {
           >
             {/* Header Section */}
             <div className="relative h-72 bg-gray-200">
+              <img alt={selectedService.title} src={
+                selectedService.images?.[0]?.image
+              }
+                className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
                 <div className="absolute inset-0 p-6 flex flex-col justify-end">
                   <div className="flex items-center gap-4">

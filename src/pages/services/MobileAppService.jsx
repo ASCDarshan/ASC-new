@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import phoneImg from "../../assets/images/phone.png";
 import { useNavigate } from "react-router-dom";
+import ServicesBlog from "./ServicesBlog/ServicesBlog";
 
 const capabilities = [
   {
@@ -373,103 +374,6 @@ const MobileAppService = () => {
         </Container>
       </section>
 
-      {/* Featured Apps Section */}
-      {/* <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <Container> */}
-      {/* <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl font-bold mb-4">Featured Applications</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Some of our successful mobile applications that demonstrate our
-              expertise
-            </p>
-          </motion.div> */}
-
-      {/* Featured Apps Grid */}
-      {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "HealthTrack Pro",
-                category: "Healthcare",
-                image: "/api/placeholder/600/400",
-                downloads: "100K+",
-                rating: 4.8,
-                platforms: ["ios", "android"],
-                color: "from-blue-500 to-blue-600",
-              },
-              {
-                name: "EduLearn Plus",
-                category: "Education",
-                image: "/api/placeholder/600/400",
-                downloads: "50K+",
-                rating: 4.9,
-                platforms: ["ios", "android", "web"],
-                color: "from-green-500 to-green-600",
-              },
-              {
-                name: "FinanceFlow",
-                category: "Finance",
-                image: "/api/placeholder/600/400",
-                downloads: "200K+",
-                rating: 4.7,
-                platforms: ["ios", "android"],
-                color: "from-purple-500 to-purple-600",
-              },
-            ].map((app, index) => (
-              <motion.div
-                key={app.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="overflow-hidden group">
-                  <div className="relative">
-                    <img
-                      src={app.image}
-                      alt={app.name}
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-4 left-4">
-                        <div className="flex gap-2">
-                          {app.platforms.map((platform) => (
-                            <Badge
-                              key={platform}
-                              variant="primary"
-                              className={`bg-gradient-to-r ${app.color} text-white`}
-                            >
-                              {platform}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">{app.name}</h3>
-                    <p className="text-gray-600 mb-4">{app.category}</p>
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-1">
-                        <span className="text-yellow-400">★</span>
-                        <span className="font-medium">{app.rating}</span>
-                      </div>
-                      <div className="text-sm text-gray-600">
-                        {app.downloads} downloads
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div> */}
-      {/* </Container>
-      </section> */}
-
       {/* App Development Timeline */}
       <section className="py-20 bg-white">
         <Container>
@@ -563,8 +467,10 @@ const MobileAppService = () => {
 
       <Testimonials />
 
+      <ServicesBlog slug="mobile-apps" />
+
       {/* Enhanced CTA Section */}
-      <section className="py-20 bg-white">
+      <section className="py-8 bg-white">
         <Container>
           <Card className="p-12 bg-gradient-to-br from-primary-50 to-secondary-50">
             <div className="max-w-3xl mx-auto text-center">

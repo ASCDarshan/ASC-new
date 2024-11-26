@@ -4,6 +4,7 @@ import { CTA } from "../../components/sections";
 import { FaSearch, FaChartLine, FaTools, FaCogs } from "react-icons/fa";
 import growthImg from "../../assets/images/SEo.jpeg";
 import { useNavigate } from "react-router-dom";
+import ServicesBlog from "./ServicesBlog/ServicesBlog";
 
 const seoFeatures = [
   {
@@ -319,7 +320,7 @@ const SEOService = () => {
           </div>
         </Container>
       </section>
-
+      <ServicesBlog slug="seo" />
       <CTA />
     </motion.div>
   );

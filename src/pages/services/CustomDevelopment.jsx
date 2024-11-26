@@ -349,30 +349,6 @@ const CustomDevelopment = () => {
         </Container>
       </section>
 
-      {/* Development Process */}
-      {/* <section className="py-10 bg-gradient-to-b from-gray-50 to-white">
-        <Container> */}
-      {/* <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl font-bold mb-4">Development Process</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Our systematic approach to delivering custom solutions
-            </p>
-          </motion.div> */}
-
-      {/* Process Timeline */}
-      {/* <div className="relative max-w-4xl mx-auto">
-          </div> */}
-      {/* </Container>
-      </section> */}
-
-      {/* Case Studies */}
-      {/* <section className="py-20 bg-white"></section> */}
-
       {/* Enhanced CTA */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <Container>
