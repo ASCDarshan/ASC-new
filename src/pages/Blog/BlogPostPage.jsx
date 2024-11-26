@@ -123,11 +123,25 @@ const BlogPostPage = () => {
 
             {/* Header */}
             <header className="relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-radial from-primary-200/20 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-radial from-primary-200/20 via-transparent to-transparent mt-3" />
                 <div className="absolute top-0 right-0 w-96 h-96 bg-secondary-200/10 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2" />
                 <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-200/10 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2" />
+                <div className="container mx-auto px-4 pt-10 pb-16 mt-5">
+                    {/* Back to Articles Button - Added to the header */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="absolute top-8 left-4 z-10"
+                    >
+                        <button
+                            onClick={() => window.history.back()}
+                            className="group flex items-center gap-2 text-primary-600 hover:text-primary-700 transition-colors mt-6 pt-6 ml-6"
+                        >
+                            <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
+                            <span className="font-medium">Back to Articles</span>
+                        </button>
+                    </motion.div>
 
-                <div className="container mx-auto px-4 pt-8 pb-16">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -272,20 +286,7 @@ const BlogPostPage = () => {
 
             {/* Main Content */}
             <main className="relative">
-                <div className="container mx-auto px-4">
-                    <div className="flex gap-12">
-                        <motion.button
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            onClick={() => window.history.back()}
-                            className="group flex items-center gap-2 text-primary-600 hover:text-primary-700 transition-colors mb-12 mt-4"
-                        >
-                            <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
-                            <span className="font-medium">Back to Articles</span>
-                        </motion.button>
-                    </div>
-                </div>
-                <div className="container mx-auto px-4">
+                <div className="container mx-auto px-4 mt-5 pt-3">
                     <div className="flex gap-12">
                         {/* Article Content */}
                         <motion.article
@@ -337,71 +338,6 @@ const BlogPostPage = () => {
                     </motion.div>
                 </div>
             </section>
-
-            {/* Related Articles */}
-            <section className="py-20 bg-gradient-to-b from-white to-primary-50">
-                <div className="container mx-auto px-4">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="max-w-6xl mx-auto"
-                    >
-                        <h2 className="text-3xl font-bold text-dark mb-12 text-center">
-                            Related Articles
-                        </h2>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {[1, 2, 3].map((_, index) => (
-                                <motion.article
-                                    key={index}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group cursor-pointer"
-                                >
-                                    <div className="relative overflow-hidden aspect-[16/9]">
-                                        <img
-                                            src={`/api/placeholder/600/400`}
-                                            alt="Related article"
-                                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                    </div>
-                                    <div className="p-6">
-                                        <div className="flex gap-2 mb-3">
-                                            <span className="px-3 py-1 bg-primary-50 text-primary-600 rounded-full text-sm font-medium">
-                                                React
-                                            </span>
-                                        </div>
-                                        <h3 className="text-xl font-bold text-dark mb-2 group-hover:text-primary-600 transition-colors">
-                                            Understanding Modern Web Architecture
-                                        </h3>
-                                        <p className="text-dark-light mb-4 line-clamp-2">
-                                            Learn about the latest trends in web architecture and how to implement them effectively...
-                                        </p>
-                                        <div className="flex items-center justify-between text-sm text-dark-light">
-                                            <div className="flex items-center gap-4">
-                                                <span className="flex items-center gap-1">
-                                                    <Eye className="w-4 h-4" />
-                                                    1.2k
-                                                </span>
-                                                <span className="flex items-center gap-1">
-                                                    <MessageCircle className="w-4 h-4" />
-                                                    18
-                                                </span>
-                                            </div>
-                                            <span className="flex items-center gap-1">
-                                                <Clock className="w-4 h-4" />
-                                                6 min read
-                                            </span>
-                                        </div>
-                                    </div>
-                                </motion.article>
-                            ))}
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
-
             {/* Scroll to Top Button */}
             <AnimatePresence>
                 {showScrollTop && (
