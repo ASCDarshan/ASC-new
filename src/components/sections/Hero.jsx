@@ -87,7 +87,7 @@ const Hero = () => {
               { title: 'SEO', desc: 'Website Rankings' },
               { title: 'CRM / ERP', desc: 'Scalable Solutions' },
               { title: 'App Development', desc: 'Focused UI / UX' }
-            ].map((tech, index) => (
+            ].map((tech) => (
               <motion.div
                 key={tech.title}
                 whileHover={{ y: -5 }}

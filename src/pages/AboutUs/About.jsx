@@ -68,7 +68,7 @@ const teamMembers = [
   },
   {
     name: "Darshan Patel",
-    role: "Front End Developer (Intern)",
+    role: "Front End Developer",
     bio: "Creative problem solver focused on building dynamic and efficient web applications.",
   },
 ];
@@ -365,10 +365,8 @@ const AboutPage = () => {
         </Container>
       </section>
 
-      {/* Stats Section */}
       <Stats />
 
-      {/* CTA Section */}
       <CTA />
     </motion.div>
   );

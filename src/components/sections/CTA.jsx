@@ -12,7 +12,7 @@ const CTA = () => {
   };
 
   return (
-    <section className="py-8 relative overflow-hidden">
+    <section className="py-4 relative overflow-hidden">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-white to-secondary/10" />
 

@@ -24,7 +24,7 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                 <div className="h-full flex flex-col">
                     {/* Modal Header */}
                     <div className="relative h-72">
-                        <img alt={project.title} className="w-full h-full object-cover" />
+                        <img alt={project.title} src={project.images?.[0]?.image} className="w-full h-full object-cover" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
                             <Container className="h-full flex flex-col justify-end pb-6">
                                 <h2 className="text-3xl font-bold text-white mb-2">
