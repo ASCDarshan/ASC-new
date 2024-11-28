@@ -13,12 +13,14 @@ const BlogPage = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [categories, setCategories] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 4;
 
   const fetchData = async (url, setData) => {
+    setIsLoading(true);
+
     try {
       const response = await ajaxCall(
         url,
@@ -33,12 +35,15 @@ const BlogPage = () => {
       );
       if (response?.status === 200) {
         setData(response?.data || []);
+        setIsLoading(false);
+
       } else {
         console.error("Fetch error:", response);
       }
     } catch (error) {
       console.error("Network error:", error);
     }
+
   };
 
   useEffect(() => {
@@ -57,8 +62,8 @@ const BlogPage = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleBlog = (postId) => {
-    navigate(`/blog/${postId}`);
+  const handleBlog = (slug, id) => {
+    navigate(`/blog/${slug}`, { state: id });
   };
 
   const filteredPosts =
@@ -158,98 +163,106 @@ const BlogPage = () => {
           </div>
 
           {/* Featured Posts Grid */}
-          {currentPosts.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {currentPosts.map((post) => (
-                <motion.div
-                  key={post.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col"
-                >
-                  {/* Thumbnail Section */}
-                  <div className="aspect-w-16 aspect-h-9">
-                    <img
-                      src={post.featured_image}
-                      alt="img"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  {/* Content Section */}
-                  <div className="p-5 flex flex-col flex-grow">
-                    <div className="flex items-center gap-2 mb-3">
-                      {/* Category Tag */}
-                      {post.category?.name && (
-                        <span className="px-3 py-1 bg-primary-100 text-primary-600 rounded-full text-xs">
-                          {post.category.name}
-                        </span>
-                      )}
-                      {/* Published Date */}
-                      <span className="text-gray-500 text-xs flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
-                        {new Intl.DateTimeFormat("en-US", {
-                          year: "numeric",
-                          month: "short",
-                          day: "numeric",
-                        }).format(new Date(post.published_at))}
-                      </span>
+          {isLoading ? (
+            <div className="flex justify-center items-center w-full py-12">
+              <div className="flex flex-col items-center">
+                <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4 animate-spin"></div>
+                <p className="text-gray-600 text-lg">Loading posts...</p>
+              </div>
+            </div>
+          ) :
+            currentPosts.length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {currentPosts.map((post) => (
+                  <motion.div
+                    key={post.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col"
+                  >
+                    {/* Thumbnail Section */}
+                    <div className="aspect-w-16 aspect-h-9">
+                      <img
+                        src={post.featured_image}
+                        alt="img"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
 
-                    {/* Title */}
-                    <h2 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2">
-                      <button
-                        onClick={() => handleBlog(post.id)}
-                        className="hover:text-primary-600 transition-colors"
-                      >
-                        {post.title}
-                      </button>
-                    </h2>
+                    {/* Content Section */}
+                    <div className="p-5 flex flex-col flex-grow">
+                      <div className="flex items-center gap-2 mb-3">
+                        {/* Category Tag */}
+                        {post.category?.name && (
+                          <span className="px-3 py-1 bg-primary-100 text-primary-600 rounded-full text-xs">
+                            {post.category.name}
+                          </span>
+                        )}
+                        {/* Published Date */}
+                        <span className="text-gray-500 text-xs flex items-center gap-1">
+                          <Calendar className="w-3 h-3" />
+                          {new Intl.DateTimeFormat("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          }).format(new Date(post.published_at))}
+                        </span>
+                      </div>
 
-                    {/* Excerpt */}
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                      {post.excerpt}
-                    </p>
+                      {/* Title */}
+                      <h2 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2">
+                        <button
+                          onClick={() => handleBlog(post.slug, post.id)}
+                          className="hover:text-primary-600 transition-colors"
+                        >
+                          {post.title}
+                        </button>
+                      </h2>
 
-                    {/* Author and Actions */}
-                    <div className="mt-auto flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <img
-                          src={ProfileImg}
-                          alt={post?.author?.user?.username || "Author"}
-                          className="w-6 h-6 rounded-full"
-                        />
-                        <div>
-                          <div className="text-xs font-medium text-gray-900">
-                            {post?.author?.user?.username || "Anonymous"}
+                      {/* Excerpt */}
+                      <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                        {post.excerpt}
+                      </p>
+
+                      {/* Author and Actions */}
+                      <div className="mt-auto flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <img
+                            src={ProfileImg}
+                            alt={post?.author?.user?.username || "Author"}
+                            className="w-6 h-6 rounded-full"
+                          />
+                          <div>
+                            <div className="text-xs font-medium text-gray-900">
+                              {post?.author?.user?.username || "Anonymous"}
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      {/* Share and Bookmark Actions */}
-                      <div className="flex items-center gap-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleBlog(post.id)}
-                          className="group-hover:bg-primary-600 group-hover:text-white group-hover:border-primary-600"
-                        >
-                          Read More
-                        </Button>
-                      </div>
+                        {/* Share and Bookmark Actions */}
+                        <div className="flex items-center gap-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleBlog(post.slug, post.id)}
+                            className="group-hover:bg-primary-600 group-hover:text-white group-hover:border-primary-600"
+                          >
+                            Read More
+                          </Button>
+                        </div>
 
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center text-gray-600 text-lg">
-              No posts for this category.
-            </div>
-          )}
-
+                  </motion.div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center text-gray-600 text-lg">
+                No posts for this category.
+              </div>
+            )
+          }
           {/* Pagination Controls */}
           {filteredPosts.length > postsPerPage && (
             <div className="flex justify-center items-center space-x-4 mt-8">

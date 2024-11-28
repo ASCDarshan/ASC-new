@@ -4,7 +4,7 @@ import { Container, Button, Card, Badge } from "../../components/common";
 import {
   FaRegClock,
   FaMapMarkerAlt,
-  FaDollarSign,
+  FaRupeeSign,
   FaRegBuilding,
   FaRegHandshake,
   FaRegLightbulb,
@@ -43,6 +43,7 @@ const Careers = () => {
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
+  const [Loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchData("career/jobs/", setJobs);
@@ -64,6 +65,7 @@ const Careers = () => {
   }, [selectedDepartment, jobs]);
 
   const fetchData = async (url, setData) => {
+    setLoading(true);
     try {
       const response = await ajaxCall(
         url,
@@ -78,6 +80,7 @@ const Careers = () => {
       );
       if (response?.status === 200) {
         setData(response?.data || []);
+        setLoading(false);
       } else {
         console.error("Fetch error:", response);
       }
@@ -179,88 +182,97 @@ const Careers = () => {
       <section className="py-12 bg-gray-50">
         <Container>
           <div className="grid md:grid-cols-2 gap-6">
-            {filteredJobs.length > 0 ? (
-              filteredJobs.map((job) => (
-                <motion.div
-                  key={job.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                >
-                  <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                          {job.title}
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
-                          <Badge
-                            variant="primary"
-                            className="bg-primary-100 text-primary-600"
-                          >
-                            {job.department.name}
-                          </Badge>
-                          <Badge
-                            variant="secondary"
-                            className="bg-gray-100 text-gray-600"
-                          >
-                            {job.job_type.replace("_", " ").toUpperCase()}
-                          </Badge>
-                          {job.is_urgent && (
+            {/* Featured Posts Grid */}
+            {Loading ? (
+              <div className="flex justify-center items-center w-full py-12">
+                <div className="flex flex-col items-center">
+                  <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4 animate-spin"></div>
+                  <p className="text-gray-600 text-lg">Loading Jobs...</p>
+                </div>
+              </div>
+            ) :
+              filteredJobs.length > 0 ? (
+                filteredJobs.map((job) => (
+                  <motion.div
+                    key={job.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                  >
+                    <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                            {job.title}
+                          </h3>
+                          <div className="flex flex-wrap gap-2">
                             <Badge
-                              variant="accent"
-                              className="bg-red-100 text-red-600"
+                              variant="primary"
+                              className="bg-primary-100 text-primary-600"
                             >
-                              Urgent
+                              {job.department.name}
                             </Badge>
-                          )}
+                            <Badge
+                              variant="secondary"
+                              className="bg-gray-100 text-gray-600"
+                            >
+                              {job.job_type.replace("_", " ").toUpperCase()}
+                            </Badge>
+                            {job.is_urgent && (
+                              <Badge
+                                variant="accent"
+                                className="bg-red-100 text-red-600"
+                              >
+                                Urgent
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          {new Date(job.posting_date).toLocaleDateString()}
                         </div>
                       </div>
-                      <div className="text-sm text-gray-500">
-                        {new Date(job.posting_date).toLocaleDateString()}
-                      </div>
-                    </div>
 
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <FaMapMarkerAlt className="w-4 h-4" />
-                        <span>
-                          {job.location.city}, {job.location.state},{" "}
-                          {job.location.country}
-                          {job.location.is_remote && " (Remote)"}
-                        </span>
+                      <div className="space-y-3 mb-6">
+                        <div className="flex items-center gap-2 text-gray-600">
+                          <FaMapMarkerAlt className="w-4 h-4" />
+                          <span>
+                            {job.location.city}, {job.location.state},{" "}
+                            {job.location.country}
+                            {job.location.is_remote && " (Remote)"}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-600">
+                          <FaRegClock className="w-4 h-4" />
+                          <span>{job.experience_range}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-600">
+                          <FaRupeeSign className="w-4 h-4" />
+                          <span>{job.salary_range}</span>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <FaRegClock className="w-4 h-4" />
-                        <span>{job.experience_range}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <FaDollarSign className="w-4 h-4" />
-                        <span>{job.salary_range}</span>
-                      </div>
-                    </div>
 
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {job.required_skills.map((skill) => (
-                        <span
-                          key={skill.id}
-                          className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600"
-                        >
-                          {skill.name}
-                        </span>
-                      ))}
-                    </div>
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {job.required_skills.map((skill) => (
+                          <span
+                            key={skill.id}
+                            className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600"
+                          >
+                            {skill.name}
+                          </span>
+                        ))}
+                      </div>
 
-                    <Button variant="outline" className="w-full justify-center">
-                      Apply Now
-                    </Button>
-                  </Card>
-                </motion.div>
-              ))) : (
-              <div className="text-center text-gray-600 text-lg">
-                No Jobs for this category.
-              </div>
-            )}
+                      <Button variant="outline" className="w-full justify-center">
+                        Apply Now
+                      </Button>
+                    </Card>
+                  </motion.div>
+                ))) : (
+                <div className="text-center text-gray-600 text-lg">
+                  No Jobs for this category.
+                </div>
+              )}
           </div>
         </Container>
       </section>

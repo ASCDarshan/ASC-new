@@ -5,8 +5,6 @@ import {
     Clock,
     Share2,
     Bookmark,
-    MessageCircle,
-    Eye,
     Heart,
     Twitter,
     Linkedin,
@@ -18,18 +16,19 @@ import {
     ArrowLeft
 } from 'lucide-react';
 import ProfileImg from "../../assets/images/profile.jpg"
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import ajaxCall from '../../components/helpers/ajaxCall';
 
 const BlogPostPage = () => {
-    const { blogpostpage } = useParams();
+    const location = useLocation();
+    const blogpostpage = location.state;
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
     const [showShareTooltip, setShowShareTooltip] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
-    const [posts, setPosts] = useState([]);
     const [filteredPost, setFilteredPost] = useState(null);
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -45,7 +44,7 @@ const BlogPostPage = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const fetchData = async (url, setData) => {
+    const fetchData = async (url) => {
         try {
             const response = await ajaxCall(
                 url,
@@ -59,7 +58,6 @@ const BlogPostPage = () => {
                 8000
             );
             if (response?.status === 200) {
-                setData(response?.data || []);
                 filterPostsByBlogPageId(response?.data);
             } else {
                 console.error("Fetch error:", response);
@@ -67,10 +65,11 @@ const BlogPostPage = () => {
         } catch (error) {
             console.error("Network error:", error);
         }
+
     };
 
     useEffect(() => {
-        fetchData("blogs/posts/", setPosts);
+        fetchData("blogs/posts/");
     }, []);
 
     const filterPostsByBlogPageId = (posts) => {

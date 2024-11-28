@@ -10,6 +10,7 @@ import {
   Services
 } from '../../components/sections';
 import PortfolioSection from '../Portfolio/PortfolioSection';
+import MotionScroll from '../../components/common/MotionScroll';
 
 const Home = () => {
 
@@ -24,6 +25,7 @@ const Home = () => {
       exit={{ opacity: 0 }}
     >
       <Hero />
+      <MotionScroll />
       <Services />
       <Features />
       <PortfolioSection />
