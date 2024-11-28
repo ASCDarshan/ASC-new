@@ -112,14 +112,11 @@ const PortfolioSection = () => {
                                 onClick={() => setSelectedCategory(category.id)}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className={`
-                  px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300
-                  flex items-center gap-2 backdrop-blur-sm
-                  ${selectedCategory === category.id
-                                        ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/25"
-                                        : "bg-white/80 text-gray-600 hover:bg-primary-50 hover:text-primary-600 border border-gray-100"
-                                    }
-                `}
+                                className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2 backdrop-blur-sm ${selectedCategory === category.id
+                                    ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/25"
+                                    : "bg-primary-50 text-primary-600 border border-gray-100"
+                                    }`}
+
                             >
                                 <span className="text-lg">{category.icon}</span>
                                 {category.name}
