@@ -168,7 +168,7 @@ const Careers = () => {
                 onClick={() => setSelectedDepartment(dept.id)}
                 className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${selectedDepartment === dept.id
                   ? "bg-primary-600 text-white shadow-lg shadow-primary-200/50"
-                  : "bg-gray-50 text-gray-600 hover:bg-gray-100"
+                  : "bg-primary-50 text-primary-600"
                   }`}
               >
                 {dept.name}
