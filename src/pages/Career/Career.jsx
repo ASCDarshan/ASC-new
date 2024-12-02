@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 import ajaxCall from "../../components/helpers/ajaxCall";
 import { useNavigate } from "react-router-dom";
+import JobApplication from "./JobApplication";
 
 
 const benefits = [
@@ -96,6 +97,7 @@ const Careers = () => {
   const handlePosition = () => {
     navigate("/careers")
   };
+
 
   return (
     <motion.div
@@ -263,9 +265,6 @@ const Careers = () => {
                         ))}
                       </div>
 
-                      <Button variant="outline" className="w-full justify-center">
-                        Apply Now
-                      </Button>
                     </Card>
                   </motion.div>
                 ))) : (
@@ -276,6 +275,10 @@ const Careers = () => {
           </div>
         </Container>
       </section>
+
+      {/* job applications section */}
+
+      <JobApplication />
 
       {/* Benefits Section */}
       <section className="py-20 bg-white">
