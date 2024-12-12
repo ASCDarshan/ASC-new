@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Container, Card, Button } from "../../components/common";
+import { Container, Card, Button, Loader } from "../../components/common";
 import { CTA, Testimonials } from "../../components/sections";
 import {
   FaSearch,
@@ -145,14 +145,16 @@ const faqs = [
 
 const Services = () => {
   const navigate = useNavigate();
-  const [selectedService, setSelectedService] = useState(null);
   const [servicess, setServices] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
 
   useEffect(() => {
     fetchData("services/services/", setServices);
   }, []);
 
   const fetchData = async (url, setData) => {
+    setIsLoading(true);
     try {
       const response = await ajaxCall(
         url,
@@ -166,12 +168,14 @@ const Services = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data || []);
+        setData(response?.data);
       } else {
         console.error("Fetch error:", response);
       }
     } catch (error) {
       console.error("Network error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -210,11 +214,11 @@ const Services = () => {
   return (
     <div>
       <section className="relative min-h-[60vh] overflow-hidden bg-gradient-to-b from-primary-100 via-white to-secondary-100">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 -left-4 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
-        <div className="absolute -top-4 -right-4 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
-        <div className="absolute -bottom-8 left-20 w-96 h-96 bg-accent-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
-      </div>
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 -left-4 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
+          <div className="absolute -top-4 -right-4 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
+          <div className="absolute -bottom-8 left-20 w-96 h-96 bg-accent-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
+        </div>
         <Container className="relative pt-32 pb-16 text-center lg:pt-40">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -300,54 +304,60 @@ const Services = () => {
               tailored to your specific needs and industry requirements.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {servicess.map((service, index) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card
-                  className="h-full cursor-pointer hover:-translate-y-2 transition-all duration-300
-                   hover:shadow-xl hover:shadow-primary-100/50"
-                  onClick={() =>
-                    setSelectedService(transformServiceData(service))
-                  }
+          {isLoading ? (
+            <Loader size="lg" className="mx-auto" />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {servicess.map((service, index) => (
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
                 >
-                  <div className="p-6">
-                    <div
-                      className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6
+                  <Card
+                    className="h-full cursor-pointer hover:-translate-y-2 transition-all duration-300
+                   hover:shadow-xl hover:shadow-primary-100/50"
+                    onClick={() =>
+                      setSelectedService(transformServiceData(service))
+                    }
+                  >
+                    <div className="p-6">
+                      <div
+                        className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6
                         bg-gradient-to-br ${
                           servicesIcons[index]?.gradient ||
                           "from-gray-400 to-gray-600"
                         } 
                         shadow-lg shadow-primary-200/20`}
-                    >
-                      {servicesIcons[index]?.icon || (
-                        <span className="text-sm"></span>
-                      )}
+                      >
+                        {servicesIcons[index]?.icon || (
+                          <span className="text-sm"></span>
+                        )}
+                      </div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                        {service.title}
+                      </h3>
+                      <p className="text-gray-600 mb-4">
+                        {service.description}
+                      </p>
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedService(transformServiceData(service));
+                        }}
+                      >
+                        Learn More
+                      </Button>
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4">{service.description}</p>
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedService(transformServiceData(service));
-                      }}
-                    >
-                      Learn More
-                    </Button>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </Container>
       </section>
       <section className="py-20 bg-gray-50">

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { Container, Input, Button } from "../common";
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from "lucide-react";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from "lucide-react";
+import { Container, Input, Button } from "../common";
 import ajaxCall from "../../helpers/ajaxCall";
 
 const contactInfo = [
@@ -60,10 +60,10 @@ const INITIAL_FORM_STATE = {
 };
 
 const Contact = () => {
-  const [formState, setFormState] = useState(INITIAL_FORM_STATE);
+  const [errors, setErrors] = useState({});
   const [services, setServices] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [formState, setFormState] = useState(INITIAL_FORM_STATE);
 
   useEffect(() => {
     fetchData("contact/services/", setServices);
@@ -83,7 +83,7 @@ const Contact = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data || []);
+        setData(response?.data);
       } else {
         console.error("Fetch error:", response);
       }

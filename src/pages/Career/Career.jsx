@@ -11,7 +11,13 @@ import {
   FaRegSmile,
 } from "react-icons/fa";
 import ajaxCall from "../../helpers/ajaxCall";
-import { Container, Button, Card, Badge } from "../../components/common";
+import {
+  Container,
+  Button,
+  Card,
+  Badge,
+  Loader,
+} from "../../components/common";
 import JobApplication from "./JobApplication";
 
 const benefits = [
@@ -95,11 +101,11 @@ const recruitmentProcess = [
 
 const Careers = () => {
   const navigate = useNavigate();
-  const [departments, setDepartments] = useState([]);
-  const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [jobs, setJobs] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [departments, setDepartments] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
-  const [Loading, setLoading] = useState(false);
+  const [selectedDepartment, setSelectedDepartment] = useState("all");
 
   useEffect(() => {
     fetchData("career/jobs/", setJobs);
@@ -121,7 +127,7 @@ const Careers = () => {
   }, [selectedDepartment, jobs]);
 
   const fetchData = async (url, setData) => {
-    setLoading(true);
+    setIsLoading(true);
     try {
       const response = await ajaxCall(
         url,
@@ -135,13 +141,14 @@ const Careers = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data || []);
-        setLoading(false);
+        setData(response?.data);
       } else {
         console.error("Fetch error:", response);
       }
     } catch (error) {
       console.error("Network error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -168,7 +175,7 @@ const Careers = () => {
             transition={{ duration: 0.8 }}
             className="mx-auto max-w-4xl"
           >
-           <motion.h1
+            <motion.h1
               className="text-4xl font-bold tracking-tight text-dark sm:text-6xl md:text-7xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -228,85 +235,89 @@ const Careers = () => {
       </section>
       <section className="py-12 bg-gray-50">
         <Container>
-          <div className="grid md:grid-cols-2 gap-6">
-            {filteredJobs.length > 0 ? (
-              filteredJobs.map((job) => (
-                <motion.div
-                  key={job.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                >
-                  <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                          {job.title}
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
-                          <Badge
-                            variant="primary"
-                            className="bg-primary-100 text-primary-600"
-                          >
-                            {job.department.name}
-                          </Badge>
-                          <Badge
-                            variant="secondary"
-                            className="bg-gray-100 text-gray-600"
-                          >
-                            {job.job_type.replace("_", " ").toUpperCase()}
-                          </Badge>
-                          {job.is_urgent && (
+          {isLoading ? (
+            <Loader size="lg" className="mx-auto" />
+          ) : (
+            <div className="grid md:grid-cols-2 gap-6">
+              {filteredJobs.length > 0 ? (
+                filteredJobs.map((job) => (
+                  <motion.div
+                    key={job.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                  >
+                    <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                            {job.title}
+                          </h3>
+                          <div className="flex flex-wrap gap-2">
                             <Badge
-                              variant="accent"
-                              className="bg-red-100 text-red-600"
+                              variant="primary"
+                              className="bg-primary-100 text-primary-600"
                             >
-                              Urgent
+                              {job.department.name}
                             </Badge>
-                          )}
+                            <Badge
+                              variant="secondary"
+                              className="bg-gray-100 text-gray-600"
+                            >
+                              {job.job_type.replace("_", " ").toUpperCase()}
+                            </Badge>
+                            {job.is_urgent && (
+                              <Badge
+                                variant="accent"
+                                className="bg-red-100 text-red-600"
+                              >
+                                Urgent
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          {new Date(job.posting_date).toLocaleDateString()}
                         </div>
                       </div>
-                      <div className="text-sm text-gray-500">
-                        {new Date(job.posting_date).toLocaleDateString()}
+                      <div className="space-y-3 mb-6">
+                        <div className="flex items-center gap-2 text-gray-600">
+                          <FaMapMarkerAlt className="w-4 h-4" />
+                          <span>
+                            {job.location.city}, {job.location.state},{" "}
+                            {job.location.country}
+                            {job.location.is_remote && " (Remote)"}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-600">
+                          <FaRegClock className="w-4 h-4" />
+                          <span>{job.experience_range}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-600">
+                          <FaRupeeSign className="w-4 h-4" />
+                          <span>{job.salary_range}</span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <FaMapMarkerAlt className="w-4 h-4" />
-                        <span>
-                          {job.location.city}, {job.location.state},{" "}
-                          {job.location.country}
-                          {job.location.is_remote && " (Remote)"}
-                        </span>
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {job.required_skills.map((skill) => (
+                          <span
+                            key={skill.id}
+                            className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600"
+                          >
+                            {skill.name}
+                          </span>
+                        ))}
                       </div>
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <FaRegClock className="w-4 h-4" />
-                        <span>{job.experience_range}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <FaRupeeSign className="w-4 h-4" />
-                        <span>{job.salary_range}</span>
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {job.required_skills.map((skill) => (
-                        <span
-                          key={skill.id}
-                          className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600"
-                        >
-                          {skill.name}
-                        </span>
-                      ))}
-                    </div>
-                  </Card>
-                </motion.div>
-              ))
-            ) : (
-              <div className="text-center text-gray-600 text-lg">
-                No Jobs for this category.
-              </div>
-            )}
-          </div>
+                    </Card>
+                  </motion.div>
+                ))
+              ) : (
+                <div className="text-center text-gray-600 text-lg">
+                  No Jobs for this category.
+                </div>
+              )}
+            </div>
+          )}
         </Container>
       </section>
       <JobApplication />

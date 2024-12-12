@@ -9,24 +9,23 @@ import {
   ChevronRight,
 } from "lucide-react";
 import ajaxCall from "../../helpers/ajaxCall";
-import { Container, Button } from "../../components/common";
+import { Container, Button, Loader } from "../../components/common";
 import ProfileImg from "../../assets/images/profile.jpg";
 
 const BlogPage = () => {
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [posts, setPosts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 4;
 
   const fetchData = async (url, setData) => {
     setIsLoading(true);
-
     try {
       const response = await ajaxCall(
         url,
@@ -40,13 +39,14 @@ const BlogPage = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data || []);
-        setIsLoading(false);
+        setData(response?.data);
       } else {
         console.error("Fetch error:", response);
       }
     } catch (error) {
       console.error("Network error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -163,7 +163,9 @@ const BlogPage = () => {
               ))}
             </motion.div>
           </div>
-          {currentPosts.length > 0 ? (
+          {isLoading ? (
+            <Loader size="lg" className="mx-auto" />
+          ) : currentPosts.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {currentPosts.map((post) => (
                 <motion.div
