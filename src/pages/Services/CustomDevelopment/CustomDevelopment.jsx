@@ -1,8 +1,9 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Container, Button, Card, Badge } from "../../components/common";
-import { CTA } from "../../components/sections";
-import { FaServer, FaDatabase, FaCloud, FaLaptopCode } from "react-icons/fa";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { FaServer, FaDatabase, FaCloud, FaLaptopCode } from "react-icons/fa";
+import { CTA } from "../../../components/sections";
+import { Container, Button, Card, Badge } from "../../../components/common";
 
 const solutions = [
   {
@@ -66,18 +67,113 @@ const technologies = {
   cloud: ["AWS", "Azure", "Google Cloud", "Digital Ocean"],
 };
 
+const stats = [
+  { value: "150+", label: "Projects Delivered" },
+  { value: "15+", label: "Industries Served" },
+  { value: "98%", label: "Client Satisfaction" },
+];
+
+const code = [
+  { color: "text-blue-500", code: "// Custom Solutions" },
+  {
+    color: "text-purple-500",
+    code: "function initializeProject() {",
+  },
+  {
+    color: "text-green-500",
+    code: "const solution = new CustomSolution({",
+  },
+  {
+    color: "text-gray-600",
+    code: 'client:"YourBusiness",',
+  },
+  {
+    color: "text-gray-600",
+    code: 'technology: "Latest",',
+  },
+  {
+    color: "text-gray-600",
+    code: 'scalability: "Infinite"',
+  },
+  { color: "text-green-500", code: "" },
+  { color: "text-purple-500", code: "" },
+];
+
+const phases = [
+  {
+    phase: "Discovery",
+    duration: "Week 1-2",
+    description: "Understanding your requirements, challenges, and objectives",
+    details: [
+      "Business analysis",
+      "Technical requirements",
+      "Solution architecture",
+      "Project planning",
+    ],
+    icon: "🎯",
+  },
+  {
+    phase: "Design & Planning",
+    duration: "Week 2-3",
+    description: "Creating detailed technical specifications and architecture",
+    details: [
+      "System architecture",
+      "Database design",
+      "API specifications",
+      "Technology stack selection",
+    ],
+    icon: "📝",
+  },
+  {
+    phase: "Development",
+    duration: "Week 4-10",
+    description: "Agile development with regular updates and demonstrations",
+    details: [
+      "Sprint planning",
+      "Regular deployments",
+      "Code reviews",
+      "Quality assurance",
+    ],
+    icon: "💻",
+  },
+  {
+    phase: "Testing",
+    duration: "Week 11-12",
+    description: "Comprehensive testing and quality assurance",
+    details: [
+      "Unit testing",
+      "Integration testing",
+      "Performance testing",
+      "Security testing",
+    ],
+    icon: "🔍",
+  },
+  {
+    phase: "Deployment",
+    duration: "Week 13",
+    description: "Smooth deployment and system integration",
+    details: [
+      "Production deployment",
+      "System integration",
+      "Performance monitoring",
+      "Documentation",
+    ],
+    icon: "🚀",
+  },
+];
+
 const CustomDevelopment = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
 
   const handleconsulting = () => {
     navigate("/contact");
-  }
+  };
 
   const handleLearnmore = () => {
-    navigate("/services")
-  }
+    navigate("/services");
+  };
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -85,7 +181,6 @@ const CustomDevelopment = () => {
       exit={{ opacity: 0 }}
       className="pt-20"
     >
-      {/* Hero Section */}
       <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
         <motion.div
           style={{ y: backgroundY }}
@@ -96,7 +191,6 @@ const CustomDevelopment = () => {
             <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
           </div>
         </motion.div>
-
         <Container className="relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -126,16 +220,12 @@ const CustomDevelopment = () => {
                 >
                   Discuss Your Project
                 </Button>
-                <Button variant="outline" onClick={handleLearnmore}>Explore Solutions</Button>
+                <Button variant="outline" onClick={handleLearnmore}>
+                  Explore Solutions
+                </Button>
               </div>
-
-              {/* Achievement Stats */}
               <div className="mt-12 grid grid-cols-3 gap-6">
-                {[
-                  { value: "150+", label: "Projects Delivered" },
-                  { value: "15+", label: "Industries Served" },
-                  { value: "98%", label: "Client Satisfaction" },
-                ].map((stat) => (
+                {stats.map((stat) => (
                   <div key={stat.label} className="text-center">
                     <div className="text-2xl font-bold text-primary-600">
                       {stat.value}
@@ -145,43 +235,17 @@ const CustomDevelopment = () => {
                 ))}
               </div>
             </motion.div>
-
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              {/* Code Animation/Illustration */}
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-secondary-500/10 rounded-2xl transform rotate-3" />
                 <Card className="p-8 backdrop-blur-sm">
                   <div className="space-y-4 font-mono text-sm">
-                    {[
-                      { color: "text-blue-500", code: "// Custom Solutions" },
-                      {
-                        color: "text-purple-500",
-                        code: "function initializeProject() {",
-                      },
-                      {
-                        color: "text-green-500",
-                        code: "  const solution = new CustomSolution({",
-                      },
-                      {
-                        color: "text-gray-600",
-                        code: '    client: "YourBusiness",',
-                      },
-                      {
-                        color: "text-gray-600",
-                        code: '    technology: "Latest",',
-                      },
-                      {
-                        color: "text-gray-600",
-                        code: '    scalability: "Infinite"',
-                      },
-                      { color: "text-green-500", code: "  });" },
-                      { color: "text-purple-500", code: "}" },
-                    ].map((line, index) => (
+                    {code.map((line, index) => (
                       <motion.div
                         key={index}
                         initial={{ opacity: 0, x: 20 }}
@@ -199,8 +263,6 @@ const CustomDevelopment = () => {
           </div>
         </Container>
       </section>
-
-      {/* Solutions Grid */}
       <section className="py-20 bg-white">
         <Container>
           <motion.div
@@ -215,7 +277,6 @@ const CustomDevelopment = () => {
               specific needs
             </p>
           </motion.div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {solutions.map((solution, index) => (
               <motion.div
@@ -227,8 +288,7 @@ const CustomDevelopment = () => {
               >
                 <Card className="p-6 h-full hover:shadow-xl transition-all duration-300">
                   <div
-                    className={`w-16 h-16 mb-6 rounded-2xl bg-gradient-to-r ${solution.gradient}
-                                 flex items-center justify-center text-white shadow-lg`}
+                    className={`w-16 h-16 mb-6 rounded-2xl bg-gradient-to-r ${solution.gradient} flex items-center justify-center text-white shadow-lg`}
                   >
                     {solution.icon}
                   </div>
@@ -242,8 +302,6 @@ const CustomDevelopment = () => {
           </div>
         </Container>
       </section>
-
-      {/* Industry Solutions */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <Container>
           <motion.div
@@ -257,7 +315,6 @@ const CustomDevelopment = () => {
               Solutions tailored for various industries with proven success
             </p>
           </motion.div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {industries.map((industry, index) => (
               <motion.div
@@ -295,15 +352,12 @@ const CustomDevelopment = () => {
                       </li>
                     ))}
                   </ul>
-
                 </Card>
               </motion.div>
             ))}
           </div>
         </Container>
       </section>
-
-      {/* Technology Stack */}
       <section className="py-20 bg-white">
         <Container>
           <motion.div
@@ -318,7 +372,6 @@ const CustomDevelopment = () => {
               solutions
             </p>
           </motion.div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {Object.entries(technologies).map(([category, techs], index) => (
               <motion.div
@@ -348,8 +401,6 @@ const CustomDevelopment = () => {
           </div>
         </Container>
       </section>
-
-      {/* Enhanced CTA */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <Container>
           <Card className="p-12 bg-gradient-to-br from-primary-50 to-secondary-50">
@@ -377,8 +428,6 @@ const CustomDevelopment = () => {
           </Card>
         </Container>
       </section>
-
-      {/* Development Process Timeline */}
       <section className="py-20 bg-white">
         <Container>
           <motion.div
@@ -388,97 +437,35 @@ const CustomDevelopment = () => {
             className="max-w-5xl mx-auto"
           >
             <div className="relative">
-              {/* Timeline line */}
               <div className="absolute top-0 left-1/2 w-0.5 h-full bg-primary-100 transform -translate-x-1/2" />
-
-              {[
-                {
-                  phase: "Discovery",
-                  duration: "Week 1-2",
-                  description:
-                    "Understanding your requirements, challenges, and objectives",
-                  details: [
-                    "Business analysis",
-                    "Technical requirements",
-                    "Solution architecture",
-                    "Project planning",
-                  ],
-                  icon: "🎯",
-                },
-                {
-                  phase: "Design & Planning",
-                  duration: "Week 2-3",
-                  description:
-                    "Creating detailed technical specifications and architecture",
-                  details: [
-                    "System architecture",
-                    "Database design",
-                    "API specifications",
-                    "Technology stack selection",
-                  ],
-                  icon: "📝",
-                },
-                {
-                  phase: "Development",
-                  duration: "Week 4-10",
-                  description:
-                    "Agile development with regular updates and demonstrations",
-                  details: [
-                    "Sprint planning",
-                    "Regular deployments",
-                    "Code reviews",
-                    "Quality assurance",
-                  ],
-                  icon: "💻",
-                },
-                {
-                  phase: "Testing",
-                  duration: "Week 11-12",
-                  description: "Comprehensive testing and quality assurance",
-                  details: [
-                    "Unit testing",
-                    "Integration testing",
-                    "Performance testing",
-                    "Security testing",
-                  ],
-                  icon: "🔍",
-                },
-                {
-                  phase: "Deployment",
-                  duration: "Week 13",
-                  description: "Smooth deployment and system integration",
-                  details: [
-                    "Production deployment",
-                    "System integration",
-                    "Performance monitoring",
-                    "Documentation",
-                  ],
-                  icon: "🚀",
-                },
-              ].map((phase, index) => (
+              {phases.map((phase, index) => (
                 <motion.div
                   key={phase.phase}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className={`relative mb-12 ${index % 2 === 0
-                    ? "ml-[50%] pl-8"
-                    : "mr-[50%] pr-8 text-right"
-                    }`}
+                  className={`relative mb-12 ${
+                    index % 2 === 0
+                      ? "ml-[50%] pl-8"
+                      : "mr-[50%] pr-8 text-right"
+                  }`}
                 >
                   <div
-                    className={`absolute top-0 ${index % 2 === 0 ? "left-0" : "right-0"
-                      } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${index % 2 === 0 ? "-translate-x-1/2" : "translate-x-1/2"
-                      }`}
+                    className={`absolute top-0 ${
+                      index % 2 === 0 ? "left-0" : "right-0"
+                    } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${
+                      index % 2 === 0 ? "-translate-x-1/2" : "translate-x-1/2"
+                    }`}
                   >
                     <span className="absolute inset-0 flex items-center justify-center text-lg">
                       {phase.icon}
                     </span>
                   </div>
                   <Card
-                    className={`p-6 hover:shadow-lg transition-shadow duration-300 ${index % 2 === 0 ? "" : "flex flex-col items-end"
-                      }`}
+                    className={`p-6 hover:shadow-lg transition-shadow duration-300 ${
+                      index % 2 === 0 ? "" : "flex flex-col items-end"
+                    }`}
                   >
                     <Badge variant="primary" className="mb-2">
                       {phase.duration}
@@ -488,8 +475,9 @@ const CustomDevelopment = () => {
                     </h3>
                     <p className="text-gray-600 mb-4">{phase.description}</p>
                     <ul
-                      className={`space-y-2 text-sm ${index % 2 === 0 ? "" : "text-right"
-                        }`}
+                      className={`space-y-2 text-sm ${
+                        index % 2 === 0 ? "" : "text-right"
+                      }`}
                     >
                       {phase.details.map((detail) => (
                         <li key={detail} className="flex items-center gap-2">
@@ -517,126 +505,6 @@ const CustomDevelopment = () => {
           </motion.div>
         </Container>
       </section>
-
-      {/* Case Studies */}
-      {/* <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl font-bold mb-4">Success Stories</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Real examples of custom solutions we&apos;ve delivered
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Healthcare Management System",
-                client: "City Hospital Network",
-                image: "/api/placeholder/600/400",
-                category: "Healthcare",
-                results: [
-                  "40% reduction in admin time",
-                  "60% faster patient processing",
-                  "99.9% system uptime",
-                ],
-              },
-              {
-                title: "Education Platform",
-                client: "Global Learning Institute",
-                image: "/api/placeholder/600/400",
-                category: "Education",
-                results: [
-                  "100,000+ active students",
-                  "95% student satisfaction",
-                  "50% increase in enrollment",
-                ],
-              },
-              {
-                title: "Donation Management System",
-                client: "International NGO",
-                image: "/api/placeholder/600/400",
-                category: "Non-Profit",
-                results: [
-                  "200% increase in donations",
-                  "85% process automation",
-                  "45% cost reduction",
-                ],
-              },
-            ].map((study, index) => (
-              <motion.div
-                key={study.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="overflow-hidden group">
-                  <div className="relative">
-                    <img
-                      src={study.image}
-                      alt={study.title}
-                      className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-4 left-4">
-                        <Badge
-                          variant="primary"
-                          className="bg-white/90 backdrop-blur-sm"
-                        >
-                          {study.category}
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">
-                      {study.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4">{study.client}</p>
-                    <div className="space-y-2">
-                      {study.results.map((result) => (
-                        <div
-                          key={result}
-                          className="flex items-center gap-2 text-sm"
-                        >
-                          <svg
-                            className="w-4 h-4 text-primary-500"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M5 13l4 4L19 7"
-                            />
-                          </svg>
-                          <span className="text-gray-600">{result}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="mt-6 w-full justify-center"
-                    >
-                      Read Case Study
-                    </Button>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </Container>
-      </section> */}
-
       <CTA />
     </motion.div>
   );

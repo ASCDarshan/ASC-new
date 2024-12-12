@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Container, Button, Card } from "../common";
 import {
   FaSearch,
@@ -7,10 +8,9 @@ import {
   FaMobile,
   FaDatabase,
   FaChartLine,
-  FaCode
+  FaCode,
 } from "react-icons/fa";
-import { useEffect, useState } from "react";
-import ajaxCall from "../helpers/ajaxCall";
+import ajaxCall from "../../helpers/ajaxCall";
 
 const servicesIcons = [
   {
@@ -36,7 +36,7 @@ const servicesIcons = [
   {
     icon: <FaChartLine className="w-8 h-8" />,
     gradient: "from-accent-400 to-accent-600",
-  }
+  },
 ];
 
 const Services = () => {
@@ -81,12 +81,10 @@ const Services = () => {
 
   return (
     <section className="py-20 relative bg-gradient-to-b from-secondary-50 via-white to-primary-50">
-      {/* Background Decorations */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 -left-64 w-96 h-96 bg-primary-200/20 rounded-full mix-blend-multiply filter blur-3xl" />
         <div className="absolute bottom-1/4 -right-64 w-96 h-96 bg-secondary-200/20 rounded-full mix-blend-multiply filter blur-3xl" />
       </div>
-
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -105,7 +103,6 @@ const Services = () => {
             transform, innovate, and stay ahead in the digital age.
           </p>
         </motion.div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicess.map((service, index) => (
             <motion.div
@@ -115,19 +112,19 @@ const Services = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card
-                className="p-8 h-full bg-white/70 backdrop-blur-sm hover:bg-white/90 transition-all duration-300
-                          border border-gray-100 hover:border-primary-200
-                          hover:shadow-xl hover:shadow-primary-200/20"
-              >
+              <Card className="p-8 h-full bg-white/70 backdrop-blur-sm hover:bg-white/90 transition-all duration-300 border border-gray-100 hover:border-primary-200 hover:shadow-xl hover:shadow-primary-200/20">
                 <div
                   className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6
-                        bg-gradient-to-br ${servicesIcons[index]?.gradient || "from-gray-400 to-gray-600"} 
+                        bg-gradient-to-br ${
+                          servicesIcons[index]?.gradient ||
+                          "from-gray-400 to-gray-600"
+                        } 
                         shadow-lg shadow-primary-200/20`}
                 >
-                  {servicesIcons[index]?.icon || <span className="text-sm"></span>}
+                  {servicesIcons[index]?.icon || (
+                    <span className="text-sm"></span>
+                  )}
                 </div>
-
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">
                   {service.title}
                 </h3>
@@ -136,8 +133,7 @@ const Services = () => {
                   variant="outline"
                   size="sm"
                   onClick={handleServiceClick}
-                  className="w-full justify-center hover:bg-gradient-to-r hover:from-primary-400 hover:to-primary-600 hover:text-white
-                            transition-all duration-300"
+                  className="w-full justify-center hover:bg-gradient-to-r hover:from-primary-400 hover:to-primary-600 hover:text-white transition-all duration-300"
                 >
                   Learn More
                 </Button>
@@ -145,7 +141,6 @@ const Services = () => {
             </motion.div>
           ))}
         </div>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -157,14 +152,11 @@ const Services = () => {
             variant="primary"
             size="lg"
             onClick={handleExploreAll}
-            className="bg-gradient-to-r from-primary-500 to-primary-700 hover:from-primary-600 hover:to-primary-800
-                      shadow-xl shadow-primary-200/30 px-12"
+            className="bg-gradient-to-r from-primary-500 to-primary-700 hover:from-primary-600 hover:to-primary-800 shadow-xl shadow-primary-200/30 px-12"
           >
             Explore All Services
           </Button>
         </motion.div>
-
-        {/* Decorative Elements */}
         <div className="absolute -bottom-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-200 to-transparent opacity-50" />
       </Container>
     </section>

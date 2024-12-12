@@ -1,10 +1,11 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Container, Button, Card, Badge } from "../../components/common";
-import { CTA } from "../../components/sections";
-import { FaSearch, FaChartLine, FaTools, FaCogs } from "react-icons/fa";
-import growthImg from "../../assets/images/SEo.jpeg";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import ServicesBlog from "./ServicesBlog/ServicesBlog";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { FaSearch, FaChartLine, FaTools, FaCogs } from "react-icons/fa";
+import { Container, Button, Card, Badge } from "../../../components/common";
+import { CTA } from "../../../components/sections";
+import growthImg from "../../../assets/images/SEO.jpeg";
+import ServicesBlog from "../ServicesBlog/ServicesBlog";
 
 const seoFeatures = [
   {
@@ -55,18 +56,49 @@ const processSteps = [
     description: "Continuous monitoring and strategy refinement",
   },
 ];
+
+const stats = [
+  { value: "150+", label: "SEO Projects" },
+  { value: "85%", label: "Avg. Traffic Increase" },
+  { value: "95%", label: "Client Satisfaction" },
+];
+
+const stats2 = [
+  {
+    label: "Keyword Rankings",
+    value: 85,
+    color: "bg-primary-500",
+  },
+  {
+    label: "Organic Traffic",
+    value: 92,
+    color: "bg-secondary-500",
+  },
+  {
+    label: "Domain Authority",
+    value: 78,
+    color: "bg-accent-500",
+  },
+];
+
+const stats3 = [
+  { metric: "Organic Traffic", increase: "+150%" },
+  { metric: "Keyword Rankings", increase: "+200%" },
+  { metric: "Conversion Rate", increase: "+85%" },
+];
+
 const SEOService = () => {
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleconsulting = () => {
     navigate("/contact");
-  }
+  };
 
   const handleLearnmore = () => {
-    navigate("/services")
-  }
+    navigate("/services");
+  };
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -74,16 +106,13 @@ const SEOService = () => {
       exit={{ opacity: 0 }}
       className="pt-20"
     >
-      {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-primary-50 via-white to-secondary-50">
-        {/* Animated Background */}
         <motion.div style={{ y: backgroundY }} className="absolute inset-0 z-0">
           <div className="absolute inset-0">
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
           </div>
         </motion.div>
-
         <Container className="relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -113,16 +142,12 @@ const SEOService = () => {
                 >
                   Get Started
                 </Button>
-                <Button variant="outline" onClick={handleLearnmore}>Learn More</Button>
+                <Button variant="outline" onClick={handleLearnmore}>
+                  Learn More
+                </Button>
               </div>
-
-              {/* Key Metrics */}
               <div className="grid grid-cols-3 gap-6 mt-12">
-                {[
-                  { value: "150+", label: "SEO Projects" },
-                  { value: "85%", label: "Avg. Traffic Increase" },
-                  { value: "95%", label: "Client Satisfaction" },
-                ].map((metric) => (
+                {stats.map((metric) => (
                   <div key={metric.label} className="text-center">
                     <div className="text-2xl font-bold text-primary-600">
                       {metric.value}
@@ -132,35 +157,17 @@ const SEOService = () => {
                 ))}
               </div>
             </motion.div>
-
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              {/* SEO Visualization */}
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-secondary-500/10 rounded-2xl transform rotate-3" />
                 <Card className="p-8 backdrop-blur-sm">
                   <div className="space-y-6">
-                    {[
-                      {
-                        label: "Keyword Rankings",
-                        value: 85,
-                        color: "bg-primary-500",
-                      },
-                      {
-                        label: "Organic Traffic",
-                        value: 92,
-                        color: "bg-secondary-500",
-                      },
-                      {
-                        label: "Domain Authority",
-                        value: 78,
-                        color: "bg-accent-500",
-                      },
-                    ].map((metric) => (
+                    {stats2.map((metric) => (
                       <div key={metric.label}>
                         <div className="flex justify-between mb-2">
                           <span className="text-gray-600">{metric.label}</span>
@@ -183,8 +190,6 @@ const SEOService = () => {
           </div>
         </Container>
       </section>
-
-      {/* Features Section */}
       <section className="py-20 bg-white">
         <Container>
           <motion.div
@@ -201,7 +206,6 @@ const SEOService = () => {
               growth through improved search engine visibility.
             </p>
           </motion.div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {seoFeatures.map((feature, index) => (
               <motion.div
@@ -225,8 +229,6 @@ const SEOService = () => {
           </div>
         </Container>
       </section>
-
-      {/* Process Section */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <Container>
           <motion.div
@@ -240,7 +242,6 @@ const SEOService = () => {
               A systematic approach to improving your search engine rankings
             </p>
           </motion.div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {processSteps.map((step, index) => (
               <motion.div
@@ -266,8 +267,6 @@ const SEOService = () => {
           </div>
         </Container>
       </section>
-
-      {/* Results Section */}
       <section className="py-20 bg-white">
         <Container>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -285,11 +284,7 @@ const SEOService = () => {
                 improvements in their online visibility and organic traffic.
               </p>
               <div className="space-y-4">
-                {[
-                  { metric: "Organic Traffic", increase: "+150%" },
-                  { metric: "Keyword Rankings", increase: "+200%" },
-                  { metric: "Conversion Rate", increase: "+85%" },
-                ].map((stat) => (
+                {stats3.map((stat) => (
                   <div key={stat.metric} className="flex items-center gap-4">
                     <div className="w-16 h-16 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600">
                       <span className="text-xl font-bold">{stat.increase}</span>
@@ -304,14 +299,12 @@ const SEOService = () => {
                 ))}
               </div>
             </motion.div>
-
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
               <Card className="p-8">
-                {/* Add a graph or chart component here */}
                 <div className="h-80 bg-gray-100 rounded-lg flex items-center justify-center">
                   <img src={growthImg} alt="growth" />
                 </div>

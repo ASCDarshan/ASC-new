@@ -13,10 +13,11 @@ import {
   FaHandshake,
   FaDatabase,
   FaChartLine,
-  FaCode
+  FaCode,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import ajaxCall from "../../components/helpers/ajaxCall";
+import ajaxCall from "../../helpers/ajaxCall";
+
 const stats = [
   { number: "98%", label: "Client Satisfaction" },
   { number: "150+", label: "Projects Completed" },
@@ -59,11 +60,91 @@ const servicesIcons = [
   {
     icon: <FaChartLine className="w-8 h-8" />,
     gradient: "from-accent-400 to-accent-600",
-  }
+  },
+];
+
+const chooseUs = [
+  {
+    icon: <FaLightbulb />,
+    title: "Innovative Solutions",
+    desc: "Cutting-edge technology combined with creative problem-solving",
+  },
+  {
+    icon: <FaCogs />,
+    title: "Proven Process",
+    desc: "Streamlined development methodology ensuring project success",
+  },
+  {
+    icon: <FaUsers />,
+    title: "Expert Team",
+    desc: "Highly skilled professionals with diverse industry experience",
+  },
+  {
+    icon: <FaHandshake />,
+    title: "Client-Focused",
+    desc: "Dedicated support and collaboration throughout the project",
+  },
+];
+
+const technologies = [
+  "ReactJs",
+  "NodeJs",
+  "Python",
+  "AWS",
+  "Flutter",
+  "MongoDB",
+  "PostgreSQL",
+  "Docker",
+  "Firebase",
+  "Redux",
+  "Django",
+  "GraphQL",
+];
+
+const developmentProcess = [
+  {
+    step: "01",
+    title: "Discovery",
+    desc: "Understanding your requirements and project goals",
+  },
+  {
+    step: "02",
+    title: "Planning",
+    desc: "Designing the solution and creating project roadmap",
+  },
+  {
+    step: "03",
+    title: "Development",
+    desc: "Building your solution with regular updates",
+  },
+  {
+    step: "04",
+    title: "Delivery",
+    desc: "Testing, deployment and ongoing support",
+  },
+];
+
+const faqs = [
+  {
+    q: "What is your typical project timeline?",
+    a: "Project timelines vary based on complexity and scope. Typically, small projects take 4-8 weeks, while larger projects can take 3-6 months. We'll provide a detailed timeline during the initial consultation.",
+  },
+  {
+    q: "Do you provide ongoing support?",
+    a: "Yes, we offer comprehensive maintenance and support packages for all our services. This includes regular updates, bug fixes, and technical support to ensure your solution continues to perform optimally.",
+  },
+  {
+    q: "What is your development process?",
+    a: "We follow an agile development methodology with regular client check-ins and iterations. This ensures transparency and allows for feedback throughout the development process.",
+  },
+  {
+    q: "How do you ensure project quality?",
+    a: "We implement rigorous quality assurance processes, including automated testing, code reviews, and thorough QA testing before delivery. We also maintain open communication channels for feedback and improvements.",
+  },
 ];
 
 const Services = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [selectedService, setSelectedService] = useState(null);
   const [servicess, setServices] = useState([]);
 
@@ -95,18 +176,21 @@ const Services = () => {
   };
 
   const handleconsulting = () => {
-    navigate("/contact")
-  }
+    navigate("/contact");
+  };
 
   const handlePortfolio = () => {
-    navigate("/portfolio")
-  }
+    navigate("/portfolio");
+  };
 
   const transformServiceData = (service) => ({
     ...service,
     fullDesc: service.detailed_description || service.description,
-    features: service.feature_list || service.features?.split(',').filter(Boolean) || [],
-    benefits: (service.benefits || '').split(',').filter(Boolean),
+    features:
+      service.feature_list ||
+      service.features?.split(",").filter(Boolean) ||
+      [],
+    benefits: (service.benefits || "").split(",").filter(Boolean),
     technologies: [],
   });
 
@@ -117,7 +201,7 @@ const Services = () => {
       FaMobile: FaMobile,
       FaChartLine: FaChartLine,
       FaDatabase: FaDatabase,
-      FaCode: FaCode
+      FaCode: FaCode,
     };
     const IconComponent = icons[iconName];
     return IconComponent ? <IconComponent /> : null;
@@ -129,13 +213,11 @@ const Services = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {/* Hero Section with Video Background */}
       <section className="relative min-h-[60vh] flex items-center bg-gradient-to-b from-primary/5 to-white">
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-0 -left-4 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl" />
           <div className="absolute bottom-0 -right-4 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl" />
         </div>
-
         <Container className="py-20">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h1
@@ -173,8 +255,6 @@ const Services = () => {
           </div>
         </Container>
       </section>
-
-      {/* Stats Section */}
       <section className="py-16 bg-gray-50">
         <Container>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -196,8 +276,6 @@ const Services = () => {
           </div>
         </Container>
       </section>
-
-      {/* Services Grid */}
       <section className="py-20">
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -209,7 +287,6 @@ const Services = () => {
               tailored to your specific needs and industry requirements.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {servicess.map((service, index) => (
               <motion.div
@@ -222,26 +299,27 @@ const Services = () => {
                 <Card
                   className="h-full cursor-pointer hover:-translate-y-2 transition-all duration-300
                    hover:shadow-xl hover:shadow-primary-100/50"
-                  onClick={() => setSelectedService(transformServiceData(service))}
+                  onClick={() =>
+                    setSelectedService(transformServiceData(service))
+                  }
                 >
                   <div className="p-6">
                     <div
                       className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6
-                        bg-gradient-to-br ${servicesIcons[index]?.gradient || "from-gray-400 to-gray-600"} 
+                        bg-gradient-to-br ${
+                          servicesIcons[index]?.gradient ||
+                          "from-gray-400 to-gray-600"
+                        } 
                         shadow-lg shadow-primary-200/20`}
                     >
-                      {servicesIcons[index]?.icon || <span className="text-sm"></span>}
+                      {servicesIcons[index]?.icon || (
+                        <span className="text-sm"></span>
+                      )}
                     </div>
-
-                    {/* Title */}
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">
                       {service.title}
                     </h3>
-
-                    {/* Description */}
                     <p className="text-gray-600 mb-4">{service.description}</p>
-
-                    {/* Button */}
                     <Button
                       variant="primary"
                       size="sm"
@@ -257,11 +335,8 @@ const Services = () => {
               </motion.div>
             ))}
           </div>
-
         </Container>
       </section>
-
-      {/* Why Choose Us Section */}
       <section className="py-20 bg-gray-50">
         <Container>
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -274,28 +349,7 @@ const Services = () => {
                 Why Choose Our Services?
               </h2>
               <div className="space-y-6">
-                {[
-                  {
-                    icon: <FaLightbulb />,
-                    title: "Innovative Solutions",
-                    desc: "Cutting-edge technology combined with creative problem-solving",
-                  },
-                  {
-                    icon: <FaCogs />,
-                    title: "Proven Process",
-                    desc: "Streamlined development methodology ensuring project success",
-                  },
-                  {
-                    icon: <FaUsers />,
-                    title: "Expert Team",
-                    desc: "Highly skilled professionals with diverse industry experience",
-                  },
-                  {
-                    icon: <FaHandshake />,
-                    title: "Client-Focused",
-                    desc: "Dedicated support and collaboration throughout the project",
-                  },
-                ].map((item, index) => (
+                {chooseUs.map((item, index) => (
                   <motion.div
                     key={item.title}
                     initial={{ opacity: 0, y: 20 }}
@@ -315,7 +369,6 @@ const Services = () => {
                 ))}
               </div>
             </motion.div>
-
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -344,8 +397,6 @@ const Services = () => {
           </div>
         </Container>
       </section>
-
-      {/* Process Section */}
       <section className="py-20">
         <Container>
           <div className="max-w-3xl mx-auto text-center mb-16">
@@ -359,28 +410,7 @@ const Services = () => {
           </div>
 
           <div className="grid md:grid-cols-4 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Discovery",
-                desc: "Understanding your requirements and project goals",
-              },
-              {
-                step: "02",
-                title: "Planning",
-                desc: "Designing the solution and creating project roadmap",
-              },
-              {
-                step: "03",
-                title: "Development",
-                desc: "Building your solution with regular updates",
-              },
-              {
-                step: "04",
-                title: "Delivery",
-                desc: "Testing, deployment and ongoing support",
-              },
-            ].map((phase, index) => (
+            {developmentProcess.map((phase, index) => (
               <motion.div
                 key={phase.step}
                 initial={{ opacity: 0, y: 20 }}
@@ -406,8 +436,6 @@ const Services = () => {
           </div>
         </Container>
       </section>
-
-      {/* Technologies Section */}
       <section className="py-20 bg-gray-50">
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -419,22 +447,8 @@ const Services = () => {
               solutions
             </p>
           </div>
-
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              "React",
-              "Node.js",
-              "Python",
-              "AWS",
-              "Flutter",
-              "MongoDB",
-              "PostgreSQL",
-              "Docker",
-              "Firebase",
-              "Redux",
-              "Django",
-              "GraphQL",
-            ].map((tech, index) => (
+            {technologies.map((tech, index) => (
               <motion.div
                 key={tech}
                 initial={{ opacity: 0, y: 20 }}
@@ -450,10 +464,7 @@ const Services = () => {
           </div>
         </Container>
       </section>
-
       <Testimonials />
-
-      {/* FAQ Section */}
       <section className="py-20 bg-gray-50">
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -464,26 +475,8 @@ const Services = () => {
               Get answers to common questions about our services
             </p>
           </div>
-
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {[
-              {
-                q: "What is your typical project timeline?",
-                a: "Project timelines vary based on complexity and scope. Typically, small projects take 4-8 weeks, while larger projects can take 3-6 months. We'll provide a detailed timeline during the initial consultation.",
-              },
-              {
-                q: "Do you provide ongoing support?",
-                a: "Yes, we offer comprehensive maintenance and support packages for all our services. This includes regular updates, bug fixes, and technical support to ensure your solution continues to perform optimally.",
-              },
-              {
-                q: "What is your development process?",
-                a: "We follow an agile development methodology with regular client check-ins and iterations. This ensures transparency and allows for feedback throughout the development process.",
-              },
-              {
-                q: "How do you ensure project quality?",
-                a: "We implement rigorous quality assurance processes, including automated testing, code reviews, and thorough QA testing before delivery. We also maintain open communication channels for feedback and improvements.",
-              },
-            ].map((faq, index) => (
+            {faqs.map((faq, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -502,8 +495,6 @@ const Services = () => {
           </div>
         </Container>
       </section>
-
-      {/* Contact Section */}
       <section className="py-20 bg-gradient-to-b from-primary-50 to-white">
         <Container>
           <div className="text-center max-w-3xl mx-auto">
@@ -525,8 +516,6 @@ const Services = () => {
           </div>
         </Container>
       </section>
-
-      {/* Service Details Modal */}
       {selectedService && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
           <motion.div
@@ -535,12 +524,12 @@ const Services = () => {
             exit={{ opacity: 0, scale: 0.9 }}
             className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
           >
-            {/* Header Section */}
             <div className="relative h-72 bg-gray-200">
-              <img alt={selectedService.title} src={
-                selectedService.images?.[0]?.image
-              }
-                className="w-full h-full object-cover" />
+              <img
+                alt={selectedService.title}
+                src={selectedService.images?.[0]?.image}
+                className="w-full h-full object-cover"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
                 <div className="absolute inset-0 p-6 flex flex-col justify-end">
                   <div className="flex items-center gap-4">
@@ -573,17 +562,12 @@ const Services = () => {
                 </svg>
               </button>
             </div>
-
-            {/* Content Section */}
             <div className="flex-1 overflow-y-auto px-6 py-8">
               <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
-                {/* Left Section */}
                 <div className="md:col-span-2 space-y-6">
                   <p className="text-gray-600 mb-8">
                     {selectedService.fullDesc || selectedService.description}
                   </p>
-
-                  {/* Key Features */}
                   {selectedService.features.length > 0 && (
                     <div className="mb-8">
                       <h4 className="text-lg font-semibold text-gray-900 mb-4">
@@ -602,8 +586,6 @@ const Services = () => {
                       </div>
                     </div>
                   )}
-
-                  {/* Key Benefits */}
                   {selectedService.benefits.length > 0 && (
                     <div className="mb-8">
                       <h4 className="text-lg font-semibold text-gray-900 mb-4">
@@ -625,8 +607,6 @@ const Services = () => {
                 </div>
               </div>
             </div>
-
-            {/* Footer Section */}
             <div className="p-6 border-t bg-gray-50 flex justify-end gap-4">
               <Button
                 variant="primary"
@@ -639,8 +619,6 @@ const Services = () => {
           </motion.div>
         </div>
       )}
-
-
       <CTA />
     </motion.div>
   );

@@ -1,11 +1,9 @@
-// src/components/sections/Stats.jsx
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Container } from '../common';
-import ajaxCall from '../helpers/ajaxCall';
+import ajaxCall from '../../helpers/ajaxCall';
 
 const Stats = () => {
-
   const [impacts, setImpacts] = useState([]);
   const fetchData = async (url, setData) => {
     try {
@@ -49,7 +47,6 @@ const Stats = () => {
             </span>
           </h2>
         </motion.div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {impacts.map((impact, index) => (
             <motion.div
@@ -75,8 +72,6 @@ const Stats = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Achievement Highlights */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

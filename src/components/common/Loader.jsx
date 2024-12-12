@@ -1,16 +1,14 @@
-// src/components/common/Loader.jsx
-const Loader = ({ size = 'md', className = '' }) => {
+const Loader = ({ size = "md", className = "" }) => {
   const sizes = {
-    sm: 'w-5 h-5',
-    md: 'w-8 h-8',
-    lg: 'w-12 h-12'
+    sm: "w-5 h-5",
+    md: "w-8 h-8",
+    lg: "w-12 h-12",
   };
 
   return (
     <div className={`flex items-center justify-center ${className}`}>
       <div className="relative">
-        {/* Outer circle */}
-        <div 
+        <div
           className={`
             ${sizes[size]}
             border-2 
@@ -22,9 +20,7 @@ const Loader = ({ size = 'md', className = '' }) => {
             animate-spin
           `}
         />
-        
-        {/* Inner gradient overlay */}
-        <div 
+        <div
           className={`
             absolute inset-0
             ${sizes[size]}

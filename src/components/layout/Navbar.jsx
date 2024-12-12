@@ -1,45 +1,44 @@
-// src/components/layout/Navbar.jsx
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Container } from '../common';
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Container } from "../common";
 
 const navItems = [
   {
-    name: 'Home',
-    path: '/'
+    name: "Home",
+    path: "/",
   },
   {
-    name: 'About',
-    path: '/about'
+    name: "About",
+    path: "/about",
   },
   {
-    name: 'Services',
-    path: '/services',
+    name: "Services",
+    path: "/services",
     dropdown: [
-      { name: 'SEO Optimization', path: '/services/seo' },
-      { name: 'CRM Development', path: '/services/crm' },
-      { name: 'Mobile Apps', path: '/services/mobile' },
-      { name: 'Custom Solutions', path: '/services/custom' },
-    ]
+      { name: "SEO Optimization", path: "/services/seo" },
+      { name: "CRM Development", path: "/services/crm" },
+      { name: "Mobile Apps", path: "/services/mobile" },
+      { name: "Custom Solutions", path: "/services/custom" },
+    ],
   },
   {
-    name: 'Portfolio',
-    path: '/portfolio'
+    name: "Portfolio",
+    path: "/portfolio",
   },
   {
-    name: 'Blog',
-    path: '/blog',
-    badge: 'New'
+    name: "Blog",
+    path: "/blog",
+    badge: "New",
   },
   {
-    name: 'Careers',
-    path: '/careers',
-    badge: 'Hiring'
+    name: "Careers",
+    path: "/careers",
+    badge: "Hiring",
   },
   {
-    name: 'Contact',
-    path: '/contact'
+    name: "Contact",
+    path: "/contact",
   },
 ];
 
@@ -53,8 +52,8 @@ const Navbar = () => {
       setScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const NavLink = ({ item }) => {
@@ -73,7 +72,7 @@ const Navbar = () => {
             px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300
             hover:text-primary-600 hover:bg-primary-50
             flex items-center gap-2
-            ${isActive ? 'text-primary-600 bg-primary-50' : 'text-gray-600'}
+            ${isActive ? "text-primary-600 bg-primary-50" : "text-gray-600"}
           `}
         >
           {item.name}
@@ -84,17 +83,23 @@ const Navbar = () => {
           )}
           {item.dropdown && (
             <svg
-              className={`w-4 h-4 transition-transform duration-200 ${showDropdown ? 'rotate-180' : ''}`}
+              className={`w-4 h-4 transition-transform duration-200 ${
+                showDropdown ? "rotate-180" : ""
+              }`}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
             </svg>
           )}
         </Link>
 
-        {/* Dropdown Menu */}
         {item.dropdown && (
           <AnimatePresence>
             {showDropdown && (
@@ -128,14 +133,15 @@ const Navbar = () => {
     <nav
       className={`
         fixed w-full z-50 transition-all duration-300
-        ${scrolled
-          ? 'bg-white/80 backdrop-blur-lg shadow-lg shadow-gray-200/20'
-          : 'bg-transparent'}
+        ${
+          scrolled
+            ? "bg-white/80 backdrop-blur-lg shadow-lg shadow-gray-200/20"
+            : "bg-transparent"
+        }
       `}
     >
       <Container className="relative">
         <div className="flex justify-between items-center h-20">
-          {/* Logo */}
           <Link to="/" className="flex-shrink-0 flex items-center gap-2">
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -148,14 +154,12 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => (
               <NavLink key={item.path} item={item} />
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)}
@@ -168,20 +172,29 @@ const Navbar = () => {
               stroke="currentColor"
             >
               {isOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               )}
             </svg>
           </motion.button>
         </div>
 
-        {/* Mobile Navigation Menu */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
+              animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
               className="md:hidden bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-gray-100 mt-4 overflow-hidden"
@@ -195,9 +208,10 @@ const Navbar = () => {
                     className={`
                       block px-4 py-2 rounded-lg text-base font-medium 
                       transition-all duration-300
-                      ${location.pathname === item.path
-                        ? 'bg-primary-50 text-primary-600'
-                        : 'text-gray-600 hover:bg-primary-50 hover:text-primary-600'
+                      ${
+                        location.pathname === item.path
+                          ? "bg-primary-50 text-primary-600"
+                          : "text-gray-600 hover:bg-primary-50 hover:text-primary-600"
                       }
                     `}
                   >

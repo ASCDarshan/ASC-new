@@ -1,69 +1,62 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Container, Input, Button } from '../common';
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Clock,
-  Facebook,
-  Instagram,
-} from 'lucide-react';
-import { toast } from 'react-toastify';
-import ajaxCall from '../helpers/ajaxCall';
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Container, Input, Button } from "../common";
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from "lucide-react";
+import { toast } from "react-toastify";
+import ajaxCall from "../../helpers/ajaxCall";
 
 const contactInfo = [
   {
     icon: <MapPin className="w-5 h-5" />,
-    title: 'Visit Us',
+    title: "Visit Us",
     details: [
-      '1C, Satyam Apartment',
-      'Aradhana Society, Vishwas Colony, Alkapuri',
-      'Vadodara, Gujarat 390005'
-    ]
+      "1C, Satyam Apartment",
+      "Aradhana Society, Vishwas Colony, Alkapuri",
+      "Vadodara, Gujarat 390005",
+    ],
   },
   {
     icon: <Phone className="w-5 h-5" />,
-    title: 'Call Us',
-    details: ['+91 9638544455']
+    title: "Call Us",
+    details: ["+91 9638544455"],
   },
   {
     icon: <Mail className="w-5 h-5" />,
-    title: 'Email Us',
-    details: ['support@anantsoftcomputing.com']
+    title: "Email Us",
+    details: ["support@anantsoftcomputing.com"],
   },
   {
     icon: <Clock className="w-5 h-5" />,
-    title: 'Working Hours',
-    details: ['Monday - Friday : 9:00 AM - 6:00 PM']
-  }
+    title: "Working Hours",
+    details: ["Monday - Friday: 9:00 AM - 6:00 PM"],
+  },
 ];
 
 const socialLinks = [
   {
     icon: <Facebook className="w-5 h-5" />,
-    href: 'https://www.facebook.com/anantsoftcomputing/',
-    label: 'Facebook'
+    href: "https://www.facebook.com/anantsoftcomputing/",
+    label: "Facebook",
   },
   {
     icon: <Instagram className="w-5 h-5" />,
-    href: 'https://www.instagram.com/anantsoftcomputing/',
-    label: 'Instagram'
+    href: "https://www.instagram.com/anantsoftcomputing/",
+    label: "Instagram",
   },
   {
     icon: <MapPin className="w-5 h-5" />,
-    href: 'https://www.google.com/maps/place/Anant+Soft+Computing',
-    label: 'Google Maps'
-  }
+    href: "https://www.google.com/maps/place/Anant+Soft+Computing",
+    label: "Google Maps",
+  },
 ];
 
 const INITIAL_FORM_STATE = {
-  name: '',
-  email: '',
-  phone: '',
-  company: '',
-  message: '',
-  service: ''
+  name: "",
+  email: "",
+  phone: "",
+  company: "",
+  message: "",
+  service: "",
 };
 
 const Contact = () => {
@@ -102,24 +95,27 @@ const Contact = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formState.name.trim()) newErrors.name = 'Name is required';
+    if (!formState.name.trim()) newErrors.name = "Name is required";
 
     if (!formState.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formState.email)) {
-      newErrors.email = 'Invalid email format';
+      newErrors.email = "Invalid email format";
     }
 
-    if (!formState.service) newErrors.service = 'Please select a service';
+    if (!formState.service) newErrors.service = "Please select a service";
 
-    if (!formState.message.trim()) newErrors.message = 'Message is required';
+    if (!formState.message.trim()) newErrors.message = "Message is required";
 
     if (!formState.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
+      newErrors.phone = "Phone number is required";
     } else if (
-      !/^(\+91[-\s]?)?[0]?[6789]\d{9}$/.test(formState.phone.replace(/[^0-9+]/g, ''))
+      !/^(\+91[-\s]?)?[0]?[6789]\d{9}$/.test(
+        formState.phone.replace(/[^0-9+]/g, "")
+      )
     ) {
-      newErrors.phone = 'Please enter a valid 10-digit phone number with or without +91';
+      newErrors.phone =
+        "Please enter a valid 10-digit phone number with or without +91";
     }
 
     setErrors(newErrors);
@@ -130,18 +126,18 @@ const Contact = () => {
     event.preventDefault();
 
     if (!validateForm()) {
-      toast.error('Please fill in all required fields correctly');
+      toast.error("Please fill in all required fields correctly");
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      const response = await ajaxCall('contact/enquiries/', {
-        method: 'POST',
+      const response = await ajaxCall("contact/enquiries/", {
+        method: "POST",
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: formState.name,
@@ -149,7 +145,7 @@ const Contact = () => {
           phone: formState.phone,
           company: formState.company,
           service: parseInt(formState.service),
-          message: formState.message
+          message: formState.message,
         }),
       });
 
@@ -161,15 +157,15 @@ const Contact = () => {
         toast.error("Some Problem Occurred. Please try again.");
       }
     } catch (error) {
-      toast.error(error.message || 'Failed to send message. Please try again.');
+      toast.error(error.message || "Failed to send message. Please try again.");
     }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormState(prev => ({ ...prev, [name]: value }));
+    setFormState((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
@@ -215,9 +211,13 @@ const Contact = () => {
                     {info.icon}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">{info.title}</h3>
+                    <h3 className="font-semibold text-gray-900">
+                      {info.title}
+                    </h3>
                     {info.details.map((detail, i) => (
-                      <p key={i} className="text-gray-600 text-sm">{detail}</p>
+                      <p key={i} className="text-gray-600 text-sm">
+                        {detail}
+                      </p>
                     ))}
                   </div>
                 </div>
@@ -225,7 +225,9 @@ const Contact = () => {
             ))}
 
             <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="font-semibold text-gray-900 mb-4">Connect With Us</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">
+                Connect With Us
+              </h3>
               <div className="flex gap-4">
                 {socialLinks.map((social) => (
                   <a
@@ -276,7 +278,9 @@ const Contact = () => {
                       placeholder="john@example.com"
                     />
                     {errors.email && (
-                      <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.email}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -292,7 +296,9 @@ const Contact = () => {
                       placeholder="98765 43210"
                     />
                     {errors.phone && (
-                      <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.phone}
+                      </p>
                     )}
                   </div>
                   <div>
@@ -314,19 +320,22 @@ const Contact = () => {
                     name="service"
                     value={formState.service}
                     onChange={handleChange}
-                    className={`block w-full rounded-lg border-2 ${errors.service ? 'border-red-500' : 'border-gray-200'
-                      } px-4 py-3 focus:border-primary focus:ring-primary`}
+                    className={`block w-full rounded-lg border-2 ${
+                      errors.service ? "border-red-500" : "border-gray-200"
+                    } px-4 py-3 focus:border-primary focus:ring-primary`}
                     required
                   >
                     <option value="">Select a Service</option>
-                    {services.map(service => (
+                    {services.map((service) => (
                       <option key={service.id} value={service.id}>
                         {service.name}
                       </option>
                     ))}
                   </select>
                   {errors.service && (
-                    <p className="mt-1 text-sm text-red-600">{errors.service}</p>
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.service}
+                    </p>
                   )}
                 </div>
 
@@ -339,13 +348,16 @@ const Contact = () => {
                     value={formState.message}
                     onChange={handleChange}
                     rows={4}
-                    className={`block w-full rounded-lg border-2 ${errors.message ? 'border-red-500' : 'border-gray-200'
-                      } px-4 py-3 focus:border-primary focus:ring-primary`}
+                    className={`block w-full rounded-lg border-2 ${
+                      errors.message ? "border-red-500" : "border-gray-200"
+                    } px-4 py-3 focus:border-primary focus:ring-primary`}
                     placeholder="Tell us about your project..."
                     required
                   />
                   {errors.message && (
-                    <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.message}
+                    </p>
                   )}
                 </div>
 
@@ -355,7 +367,7 @@ const Contact = () => {
                   className="w-full"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </div>

@@ -1,16 +1,15 @@
-// src/components/common/Container.jsx
 const Container = ({
   children,
-  className = '',
-  size = 'default',
+  className = "",
+  size = "default",
   padding = true,
   ...props
 }) => {
   const sizes = {
-    sm: 'max-w-4xl',
-    default: 'max-w-7xl',
-    lg: 'max-w-8xl',
-    full: 'max-w-full'
+    sm: "max-w-4xl",
+    default: "max-w-7xl",
+    lg: "max-w-8xl",
+    full: "max-w-full",
   };
 
   return (
@@ -18,7 +17,7 @@ const Container = ({
       className={`
         mx-auto w-full
         ${sizes[size]}
-        ${padding ? 'px-4 sm:px-6 lg:px-8' : ''}
+        ${padding ? "px-4 sm:px-6 lg:px-8" : ""}
         ${className}
       `}
       {...props}
