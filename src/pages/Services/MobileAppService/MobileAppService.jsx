@@ -1,6 +1,8 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Container, Button, Card, Badge } from "../../components/common";
-import { Testimonials } from "../../components/sections";
+import { Container, Button, Card, Badge } from "../../../components/common";
+import { Testimonials } from "../../../components/sections";
 import {
   FaAndroid,
   FaApple,
@@ -11,9 +13,8 @@ import {
   FaCloud,
   FaBolt,
 } from "react-icons/fa";
-import phoneImg from "../../assets/images/phone.png";
-import { useNavigate } from "react-router-dom";
-import ServicesBlog from "./ServicesBlog/ServicesBlog";
+import phoneImg from "../../../assets/images/phone.png";
+import ServicesBlog from "../ServicesBlog/ServicesBlog";
 
 const capabilities = [
   {
@@ -73,18 +74,90 @@ const techStack = [
   { name: "Firebase", level: 92 },
 ];
 
+const stats = [
+  { value: "100+", label: "Apps Delivered" },
+  { value: "4.8★", label: "App Rating" },
+  { value: "1M+", label: "Downloads" },
+];
+
+const developmentProcess = [
+  {
+    phase: "Discovery",
+    description: "Understanding your requirements and planning the solution",
+    duration: "1-2 Weeks",
+    icon: "🎯",
+  },
+  {
+    phase: "Design",
+    description: "Creating intuitive user interfaces and experiences",
+    duration: "2-3 Weeks",
+    icon: "🎨",
+  },
+  {
+    phase: "Development",
+    description: "Building your application with clean, efficient code",
+    duration: "8-12 Weeks",
+    icon: "⚙️",
+  },
+  {
+    phase: "Testing",
+    description: "Rigorous testing across devices and platforms",
+    duration: "2-3 Weeks",
+    icon: "🔍",
+  },
+  {
+    phase: "Deployment",
+    description: "Launching your app to the stores and monitoring performance",
+    duration: "1-2 Weeks",
+    icon: "🚀",
+  },
+];
+
+const developmentPhases = [
+  {
+    title: "Project Kickoff",
+    duration: "Week 1",
+    description: "Requirements gathering and project planning",
+    icon: "🚀",
+  },
+  {
+    title: "UI/UX Design",
+    duration: "Weeks 2-3",
+    description: "Creating wireframes and visual designs",
+    icon: "🎨",
+  },
+  {
+    title: "Core Development",
+    duration: "Weeks 4-9",
+    description: "Building the main features and functionality",
+    icon: "💻",
+  },
+  {
+    title: "Testing & QA",
+    duration: "Weeks 10-11",
+    description: "Thorough testing and bug fixing",
+    icon: "🔍",
+  },
+  {
+    title: "Launch Preparation",
+    duration: "Week 12",
+    description: "Store submission and deployment",
+    icon: "🎯",
+  },
+];
+
 const MobileAppService = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
 
   const handleconsulting = () => {
     navigate("/contact");
-  }
+  };
 
   const handleLearnmore = () => {
-    navigate("/portfolio")
-  }
+    navigate("/portfolio");
+  };
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -92,19 +165,16 @@ const MobileAppService = () => {
       exit={{ opacity: 0 }}
       className="pt-20"
     >
-      {/* Hero Section */}
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
         <motion.div
           style={{ y: backgroundY }}
           className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-secondary-50"
         >
-          {/* Animated patterns */}
           <div className="absolute inset-0">
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
           </div>
         </motion.div>
-
         <Container className="relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -133,16 +203,12 @@ const MobileAppService = () => {
                 >
                   Start Your Project
                 </Button>
-                <Button variant="outline" onClick={handleLearnmore}>View Portfolio</Button>
+                <Button variant="outline" onClick={handleLearnmore}>
+                  View Portfolio
+                </Button>
               </div>
-
-              {/* Key Stats */}
               <div className="mt-12 grid grid-cols-3 gap-6">
-                {[
-                  { value: "100+", label: "Apps Delivered" },
-                  { value: "4.8★", label: "App Rating" },
-                  { value: "1M+", label: "Downloads" },
-                ].map((stat) => (
+                {stats.map((stat) => (
                   <div key={stat.label} className="text-center">
                     <div className="text-2xl font-bold text-primary-600">
                       {stat.value}
@@ -152,22 +218,17 @@ const MobileAppService = () => {
                 ))}
               </div>
             </motion.div>
-
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="relative max-w-md mx-auto"
             >
-              {/* Phone Mockup */}
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-3xl transform rotate-6" />
                 <Card className="p-8 backdrop-blur-sm">
                   <div className="relative mx-auto w-[280px] h-[580px] bg-gray-900 rounded-[3rem] ring-1 ring-gray-900/10">
-                    {/* Notch */}
                     <div className="absolute top-[0.8rem] left-1/2 transform -translate-x-1/2 w-16 h-4 bg-gray-800 rounded-full" />
-
-                    {/* Screen Content */}
                     <div className="absolute top-[2rem] bottom-[2rem] left-[0.8rem] right-[0.8rem] bg-white rounded-[2.25rem] overflow-hidden">
                       <img
                         src={phoneImg}
@@ -175,8 +236,6 @@ const MobileAppService = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-
-                    {/* Home Button */}
                     <div className="absolute bottom-[0.8rem] left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gray-800 rounded-full" />
                   </div>
                 </Card>
@@ -185,8 +244,6 @@ const MobileAppService = () => {
           </div>
         </Container>
       </section>
-
-      {/* Capabilities Section */}
       <section className="py-20 bg-white">
         <Container>
           <motion.div
@@ -203,7 +260,6 @@ const MobileAppService = () => {
               platforms
             </p>
           </motion.div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {capabilities.map((capability, index) => (
               <motion.div
@@ -231,8 +287,6 @@ const MobileAppService = () => {
           </div>
         </Container>
       </section>
-
-      {/* Development Process */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <Container>
           <motion.div
@@ -246,44 +300,8 @@ const MobileAppService = () => {
               A systematic approach to turning your app idea into reality
             </p>
           </motion.div>
-
           <div className="relative max-w-4xl mx-auto">
-            {[
-              {
-                phase: "Discovery",
-                description:
-                  "Understanding your requirements and planning the solution",
-                duration: "1-2 Weeks",
-                icon: "🎯",
-              },
-              {
-                phase: "Design",
-                description:
-                  "Creating intuitive user interfaces and experiences",
-                duration: "2-3 Weeks",
-                icon: "🎨",
-              },
-              {
-                phase: "Development",
-                description:
-                  "Building your application with clean, efficient code",
-                duration: "8-12 Weeks",
-                icon: "⚙️",
-              },
-              {
-                phase: "Testing",
-                description: "Rigorous testing across devices and platforms",
-                duration: "2-3 Weeks",
-                icon: "🔍",
-              },
-              {
-                phase: "Deployment",
-                description:
-                  "Launching your app to the stores and monitoring performance",
-                duration: "1-2 Weeks",
-                icon: "🚀",
-              },
-            ].map((phase, index) => (
+            {developmentProcess.map((phase, index) => (
               <motion.div
                 key={phase.phase}
                 initial={{ opacity: 0, y: 20 }}
@@ -318,8 +336,6 @@ const MobileAppService = () => {
           </div>
         </Container>
       </section>
-
-      {/* Technology Stack */}
       <section className="py-20 bg-white">
         <Container>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -353,7 +369,6 @@ const MobileAppService = () => {
                 ))}
               </div>
             </motion.div>
-
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -373,8 +388,6 @@ const MobileAppService = () => {
           </div>
         </Container>
       </section>
-
-      {/* App Development Timeline */}
       <section className="py-20 bg-white">
         <Container>
           <motion.div
@@ -388,67 +401,37 @@ const MobileAppService = () => {
               A transparent view of your app development journey
             </p>
           </motion.div>
-
           <div className="max-w-5xl mx-auto">
             <div className="relative">
-              {/* Timeline line */}
               <div className="absolute top-0 left-1/2 w-0.5 h-full bg-primary-100 transform -translate-x-1/2" />
-
-              {[
-                {
-                  title: "Project Kickoff",
-                  duration: "Week 1",
-                  description: "Requirements gathering and project planning",
-                  icon: "🚀",
-                },
-                {
-                  title: "UI/UX Design",
-                  duration: "Weeks 2-3",
-                  description: "Creating wireframes and visual designs",
-                  icon: "🎨",
-                },
-                {
-                  title: "Core Development",
-                  duration: "Weeks 4-9",
-                  description: "Building the main features and functionality",
-                  icon: "💻",
-                },
-                {
-                  title: "Testing & QA",
-                  duration: "Weeks 10-11",
-                  description: "Thorough testing and bug fixing",
-                  icon: "🔍",
-                },
-                {
-                  title: "Launch Preparation",
-                  duration: "Week 12",
-                  description: "Store submission and deployment",
-                  icon: "🎯",
-                },
-              ].map((phase, index) => (
+              {developmentPhases.map((phase, index) => (
                 <motion.div
                   key={phase.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className={`relative mb-12 ${index % 2 === 0
-                    ? "ml-[50%] pl-8"
-                    : "mr-[50%] pr-8 text-right"
-                    }`}
+                  className={`relative mb-12 ${
+                    index % 2 === 0
+                      ? "ml-[50%] pl-8"
+                      : "mr-[50%] pr-8 text-right"
+                  }`}
                 >
                   <div
-                    className={`absolute top-0 ${index % 2 === 0 ? "left-0" : "right-0"
-                      } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${index % 2 === 0 ? "-translate-x-1/2" : "translate-x-1/2"
-                      }`}
+                    className={`absolute top-0 ${
+                      index % 2 === 0 ? "left-0" : "right-0"
+                    } w-8 h-8 bg-white border-4 border-primary-500 rounded-full transform -translate-y-1/2 ${
+                      index % 2 === 0 ? "-translate-x-1/2" : "translate-x-1/2"
+                    }`}
                   >
                     <span className="absolute inset-0 flex items-center justify-center text-lg">
                       {phase.icon}
                     </span>
                   </div>
                   <Card
-                    className={`p-6 ${index % 2 === 0 ? "" : "flex flex-col items-end"
-                      }`}
+                    className={`p-6 ${
+                      index % 2 === 0 ? "" : "flex flex-col items-end"
+                    }`}
                   >
                     <Badge variant="primary" className="mb-2">
                       {phase.duration}
@@ -464,12 +447,8 @@ const MobileAppService = () => {
           </div>
         </Container>
       </section>
-
       <Testimonials />
-
       <ServicesBlog slug="mobile-apps" />
-
-      {/* Enhanced CTA Section */}
       <section className="py-8 bg-white">
         <Container>
           <Card className="p-12 bg-gradient-to-br from-primary-50 to-secondary-50">

@@ -1,6 +1,5 @@
-// src/components/sections/Features.jsx
-import { motion } from 'framer-motion';
-import { Container } from '../common';
+import { motion } from "framer-motion";
+import { Container } from "../common";
 import {
   FaCode,
   FaRocket,
@@ -9,54 +8,67 @@ import {
   FaMobile,
   FaUsers,
   FaCogs,
-  FaChartLine
-} from 'react-icons/fa';
+  FaChartLine,
+} from "react-icons/fa";
 
 const features = [
   {
     icon: <FaCode />,
-    title: 'Clean Code',
-    description: 'Well-structured, maintainable code following best practices and design patterns.'
+    title: "Clean Code",
+    description:
+      "Well-structured, maintainable code following best practices and design patterns.",
   },
   {
     icon: <FaRocket />,
-    title: 'Fast Performance',
-    description: 'Optimized applications that deliver exceptional speed and responsiveness.'
+    title: "Fast Performance",
+    description:
+      "Optimized applications that deliver exceptional speed and responsiveness.",
   },
   {
     icon: <FaShieldAlt />,
-    title: 'Secure Solutions',
-    description: 'Built-in security measures to protect your data and users.'
+    title: "Secure Solutions",
+    description: "Built-in security measures to protect your data and users.",
   },
   {
     icon: <FaCloud />,
-    title: 'Cloud Ready',
-    description: 'Applications designed for seamless cloud deployment and scaling.'
+    title: "Cloud Ready",
+    description:
+      "Applications designed for seamless cloud deployment and scaling.",
   },
   {
     icon: <FaMobile />,
-    title: 'Mobile First',
-    description: 'Responsive designs that work perfectly on all devices.'
+    title: "Mobile First",
+    description: "Responsive designs that work perfectly on all devices.",
   },
   {
     icon: <FaUsers />,
-    title: 'User Focused',
-    description: 'Intuitive interfaces designed for the best user experience.'
+    title: "User Focused",
+    description: "Intuitive interfaces designed for the best user experience.",
   },
   {
     icon: <FaCogs />,
-    title: 'Easy Integration',
-    description: 'Systems that integrate smoothly with your existing infrastructure.'
+    title: "Easy Integration",
+    description:
+      "Systems that integrate smoothly with your existing infrastructure.",
   },
   {
     icon: <FaChartLine />,
-    title: 'Scalable Architecture',
-    description: 'Solutions that grow with your business needs.'
-  }
+    title: "Scalable Architecture",
+    description: "Solutions that grow with your business needs.",
+  },
+];
+
+const technologies = [
+  "Python",
+  "Django",
+  "React",
+  "NodeJs",
+  "PostgreSQL",
+  "MongoDB",
+  "AWS",
 ];
 
 const Features = () => {
-
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50">
       <Container>
@@ -77,7 +89,6 @@ const Features = () => {
             solutions that drive your business forward.
           </p>
         </motion.div>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -100,14 +111,10 @@ const Features = () => {
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 {feature.title}
               </h3>
-              <p className="text-gray-600">
-                {feature.description}
-              </p>
+              <p className="text-gray-600">{feature.description}</p>
             </motion.div>
           ))}
         </motion.div>
-
-        {/* Technology Stack */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -118,7 +125,7 @@ const Features = () => {
             Our Technology Stack
           </h3>
           <div className="flex flex-wrap justify-center gap-6">
-            {['Python', 'Django', 'React', 'Node.js', 'PostgreSQL', 'MongoDB', 'AWS'].map((tech) => (
+            {technologies.map((tech) => (
               <div
                 key={tech}
                 className="px-6 py-3 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow duration-300"

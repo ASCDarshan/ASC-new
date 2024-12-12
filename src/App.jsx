@@ -1,22 +1,21 @@
-// src/App.jsx
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Navbar, Footer } from './components/layout';
-import Home from './pages/Home/Home';
-import About from './pages/AboutUs/About';
-import Services from './pages/services/Services';
-import Portfolio from './pages/Portfolio/Portfolio';
-import Contact from './pages/Contact/Contact';
-import SEOService from './pages/services/SEOService';
-import CRMService from './pages/services/CRMService';
-import MobileAppService from './pages/services/MobileAppService';
-import CustomDevelopment from './pages/services/CustomDevelopment';
-import Careers from './pages/Career/Career';
-import BlogPage from './pages/Blog/Blog';
-import ScrollToTop from './components/common/ScrollToTop';
-import BlogPostPage from './pages/Blog/BlogPostPage';
-import Privacypolicy from './pages/Privacy/Privacypolicy';
+import Home from "./pages/Home/Home";
+import BlogPage from "./pages/Blog/Blog";
+import About from "./pages/AboutUs/About";
+import Careers from "./pages/Career/Career";
+import Contact from "./pages/Contact/Contact";
+import Services from "./pages/Services/Services";
+import { ScrollToTop } from "./components/common";
+import Portfolio from "./pages/Portfolio/Portfolio";
+import { Navbar, Footer } from "./components/layout";
+import BlogPostPage from "./pages/Blog/BlogPostPage";
+import Privacypolicy from "./pages/Privacy/Privacypolicy";
+import SEOService from "./pages/Services/SEOService/SEOService";
+import CRMService from "./pages/Services/CRMService/CRMService";
+import MobileAppService from "./pages/Services/MobileAppService/MobileAppService";
+import CustomDevelopment from "./pages/Services/CustomDevelopment/CustomDevelopment";
 
 function App() {
   return (

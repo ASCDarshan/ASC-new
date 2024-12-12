@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from '../common';
 import { FaQuoteLeft } from 'react-icons/fa';
 import profileImg from "../../assets/images/profile.jpg";
-import ajaxCall from '../helpers/ajaxCall';
+import ajaxCall from '../../helpers/ajaxCall';
 
 const Testimonials = () => {
-  const [currentIndex, setCurrentIndex] = useState(0); // Initialize with 0
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [testimonials, setTestimonials] = useState([]);
 
   const fetchData = async (url, setData) => {
@@ -67,22 +67,18 @@ const Testimonials = () => {
             their experience working with us.
           </p>
         </motion.div>
-
         <div className="relative max-w-4xl mx-auto px-4">
-          {/* Background Elements */}
           <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2">
             <div className="w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
           </div>
           <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2">
             <div className="w-64 h-64 bg-secondary/5 rounded-full blur-3xl" />
           </div>
-
-          {/* Testimonials Slider */}
           <div className="relative">
             <AnimatePresence mode="wait">
               {testimonials.length > 0 && (
                 <motion.div
-                  key={currentIndex} // Key based on the current index
+                  key={currentIndex}
                   initial={{ opacity: 0, x: 100 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -100 }}
@@ -97,7 +93,7 @@ const Testimonials = () => {
                   </p>
                   <div className="flex items-center gap-4">
                     <img
-                      src={profileImg} // Replace with testimonial-specific image if available
+                      src={profileImg}
                       alt={testimonials[currentIndex].name}
                       className="w-12 h-12 rounded-full object-cover"
                     />
@@ -110,8 +106,6 @@ const Testimonials = () => {
                 </motion.div>
               )}
             </AnimatePresence>
-
-            {/* Navigation Dots */}
             <div className="flex justify-center gap-2 mt-8">
               {testimonials.map((_, index) => (
                 <button

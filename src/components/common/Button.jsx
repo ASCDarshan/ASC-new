@@ -1,4 +1,3 @@
-// src/components/common/Button.jsx
 import { motion } from "framer-motion";
 
 const Button = ({

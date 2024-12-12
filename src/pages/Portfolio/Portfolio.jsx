@@ -1,12 +1,14 @@
-import {
-  motion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
-import { Container, Button } from "../../components/common";
 import { useNavigate } from "react-router-dom";
-
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Container, Button } from "../../components/common";
 import PortfolioSection from "./PortfolioSection";
+
+const stats = [
+  { label: "Projects Completed", value: "150+", icon: "🚀" },
+  { label: "Happy Clients", value: "50+", icon: "😊" },
+  { label: "Team Members", value: "25+", icon: "👥" },
+  { label: "Years Experience", value: "10+", icon: "⭐" },
+];
 
 const Portfolio = () => {
   const navigate = useNavigate();
@@ -28,17 +30,14 @@ const Portfolio = () => {
       exit={{ opacity: 0 }}
       className="min-h-screen"
     >
-      {/* Hero Section with Parallax */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: backgroundY }} className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-primary-100 via-white to-secondary-100 opacity-90" />
           <div className="absolute inset-0">
-            {/* Animated background patterns */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
           </div>
         </motion.div>
-
         <Container className="relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -56,10 +55,7 @@ const Portfolio = () => {
           </motion.div>
         </Container>
       </section>
-
       <PortfolioSection />
-
-      {/* Stats Section */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <Container>
           <motion.div
@@ -68,12 +64,7 @@ const Portfolio = () => {
             viewport={{ once: true }}
             className="grid grid-cols-2 md:grid-cols-4 gap-8"
           >
-            {[
-              { label: "Projects Completed", value: "150+", icon: "🚀" },
-              { label: "Happy Clients", value: "50+", icon: "😊" },
-              { label: "Team Members", value: "25+", icon: "👥" },
-              { label: "Years Experience", value: "10+", icon: "⭐" },
-            ].map((stat, index) => (
+            {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
@@ -92,8 +83,6 @@ const Portfolio = () => {
           </motion.div>
         </Container>
       </section>
-
-      {/* Enhanced CTA Section */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-secondary-50" />
         <Container className="relative">
@@ -130,7 +119,7 @@ const Portfolio = () => {
           </motion.div>
         </Container>
       </section>
-    </motion.div >
+    </motion.div>
   );
 };
 
