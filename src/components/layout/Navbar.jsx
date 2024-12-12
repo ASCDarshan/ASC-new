@@ -153,13 +153,11 @@ const Navbar = () => {
               Soft Computing
             </span>
           </Link>
-
           <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => (
               <NavLink key={item.path} item={item} />
             ))}
           </div>
-
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)}
@@ -189,7 +187,6 @@ const Navbar = () => {
             </svg>
           </motion.button>
         </div>
-
         <AnimatePresence>
           {isOpen && (
             <motion.div

@@ -24,34 +24,37 @@ const Portfolio = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="min-h-screen"
-    >
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <motion.div style={{ y: backgroundY }} className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-100 via-white to-secondary-100 opacity-90" />
-          <div className="absolute inset-0">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
-          </div>
-        </motion.div>
-        <Container className="relative z-10">
+    <div>
+      <section className="relative min-h-[40vh] overflow-hidden bg-gradient-to-b from-primary-100 via-white to-secondary-100">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 -left-4 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
+          <div className="absolute -top-4 -right-4 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
+          <div className="absolute -bottom-8 left-20 w-96 h-96 bg-accent-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
+        </div>
+        <Container className="relative pt-32 pb-16 text-center lg:pt-40">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center"
+            className="mx-auto max-w-4xl"
           >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-800">
+            <motion.h1
+              className="text-4xl font-bold tracking-tight text-dark sm:text-6xl md:text-7xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               Our Portfolio
-            </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            </motion.h1>
+            <motion.p
+              className="mt-6 text-lg leading-8 text-gray-600 sm:text-xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
               Explore our diverse portfolio of successful projects across
               various industries.
-            </p>
+            </motion.p>
           </motion.div>
         </Container>
       </section>
@@ -119,7 +122,7 @@ const Portfolio = () => {
           </motion.div>
         </Container>
       </section>
-    </motion.div>
+    </div>
   );
 };
 

@@ -360,7 +360,6 @@ const CRMService = () => {
               your business operations and enhance customer relationships.
             </p>
           </motion.div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {crmModules.map((module, index) => (
               <motion.div
