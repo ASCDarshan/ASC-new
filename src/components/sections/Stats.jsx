@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Container } from '../common';
-import ajaxCall from '../../helpers/ajaxCall';
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Container, Loader } from "../common";
+import ajaxCall from "../../helpers/ajaxCall";
 
 const Stats = () => {
   const [impacts, setImpacts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const fetchData = async (url, setData) => {
+    setIsLoading(true);
     try {
       const response = await ajaxCall(
         url,
@@ -19,14 +22,17 @@ const Stats = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data || []);
+        setData(response?.data);
       } else {
         console.error("Fetch error:", response);
       }
     } catch (error) {
       console.error("Network error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
   useEffect(() => {
     fetchData("master/impacts/", setImpacts);
   }, []);
@@ -47,31 +53,33 @@ const Stats = () => {
             </span>
           </h2>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {impacts.map((impact, index) => (
-            <motion.div
-              key={impact.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="relative group"
-            >
-              <div className="absolute inset-0 bg-white rounded-2xl shadow-lg transform group-hover:-translate-y-2 transition-all duration-300" />
-              <div className="relative p-8 text-center">
-                <div className="mb-4">
-                  <b>{impact.metrics} +</b>
+        {isLoading ? (
+          <Loader size="lg" className="mx-auto" />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {impacts.map((impact, index) => (
+              <motion.div
+                key={impact.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="relative group"
+              >
+                <div className="absolute inset-0 bg-white rounded-2xl shadow-lg transform group-hover:-translate-y-2 transition-all duration-300" />
+                <div className="relative p-8 text-center">
+                  <div className="mb-4">
+                    <b>{impact.metrics} +</b>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    {impact.title}
+                  </h3>
+                  <p className="text-gray-600">{impact.description}</p>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {impact.title}
-                </h3>
-                <p className="text-gray-600">
-                  {impact.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

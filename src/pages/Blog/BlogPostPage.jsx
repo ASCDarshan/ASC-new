@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import ajaxCall from "../../helpers/ajaxCall";
 import ProfileImg from "../../assets/images/profile.jpg";
+import { Loader } from "../../components/common";
 
 const shareIcons = [
   {
@@ -48,13 +49,13 @@ const shareIcons = [
 
 const BlogPostPage = () => {
   const { blogpostpage } = useParams();
-  const [isBookmarked, setIsBookmarked] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
-  const [showShareTooltip, setShowShareTooltip] = useState(false);
-  const [showScrollTop, setShowScrollTop] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [posts, setPosts] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
   const [filteredPost, setFilteredPost] = useState(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [showShareTooltip, setShowShareTooltip] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,7 +86,7 @@ const BlogPostPage = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data || []);
+        setData(response?.data);
         filterPostsByBlogPageId(response?.data);
       } else {
         console.error("Fetch error:", response);
@@ -142,9 +143,7 @@ const BlogPostPage = () => {
 
   if (!filteredPost) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        Loading...
-      </div>
+      <Loader size="lg" className="min-h-screen flex items-center justify-center" />
     );
   }
 

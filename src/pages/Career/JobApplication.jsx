@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { Container, Input, Button } from "../../components/common";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 import ajaxCall from "../../helpers/ajaxCall";
+import { Container, Input, Button } from "../../components/common";
 
 const INITIAL_FORM_STATE = {
   name: "",
@@ -15,10 +15,10 @@ const INITIAL_FORM_STATE = {
 };
 
 const JobApplication = () => {
-  const [formState, setFormState] = useState(INITIAL_FORM_STATE);
-  const [jobs, setJobs] = useState([]);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({});
+    const [jobs, setJobs] = useState([]);
+    const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [formState, setFormState] = useState(INITIAL_FORM_STATE);
 
   useEffect(() => {
     fetchData("career/jobs/", setJobs);
@@ -38,7 +38,7 @@ const JobApplication = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data || []);
+        setData(response?.data);
       } else {
         console.error("Fetch error:", response);
       }

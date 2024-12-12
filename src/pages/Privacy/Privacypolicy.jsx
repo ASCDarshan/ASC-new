@@ -1,34 +1,41 @@
 import { motion } from "framer-motion";
+import { FaCheck } from "react-icons/fa";
 import { Container } from "../../components/common";
 
 const privacyContent = [
   {
     title: "Information We Collect",
-    content: `We collect information that you provide directly to us, including:
-      • Personal information (name, email address, phone number)
-      • Business information (company name, job title)
-      • Payment information (processed through secure third-party providers)
-      • Usage data and analytics
-      • Device and browser information`,
+    content: [
+      "We collect information that you provide directly to us, including",
+      "Personal information (name, email address, phone number",
+      "Business information (company name, job title",
+      "Payment information (processed through secure third-party providers",
+      "Usage data and analytics",
+      "Device and browser information",
+    ],
   },
   {
     title: "How We Use Your Information",
-    content: `We use the collected information for:
-      • Providing and maintaining our services
-      • Processing your transactions
-      • Sending you important service updates
-      • Improving our products and services
-      • Analyzing usage patterns and trends
-      • Protecting against fraud and abuse`,
+    content: [
+      "We use the collected information for",
+      "Providing and maintaining our services",
+      "Processing your transactions",
+      "Sending you important service updates",
+      "Improving our products and services",
+      "Analyzing usage patterns and trends",
+      "Protecting against fraud and abuse",
+    ],
   },
   {
     title: "Data Security",
-    content: `We implement industry-standard security measures to protect your data:
-      • Encryption of data in transit and at rest
-      • Regular security assessments and audits
-      • Access controls and authentication
-      • Secure data centers and cloud infrastructure
-      • Employee training on data protection`,
+    content: [
+      "We implement industry-standard security measures to protect your data",
+      "Encryption of data in transit and at rest",
+      "Regular security assessments and audits",
+      "Access controls and authentication",
+      "Secure data centers and cloud infrastructure",
+      "Employee training on data protection",
+    ],
   },
 ];
 
@@ -40,7 +47,7 @@ const Privacypolicy = () => {
       exit={{ opacity: 0 }}
       className="min-h-screen bg-gradient-to-b from-primary-50 via-white to-secondary-50"
     >
-      <section className="relative min-h-[60vh] overflow-hidden bg-gradient-to-b from-primary-100 via-white to-secondary-100">
+      <section className="relative min-h-[40vh] overflow-hidden bg-gradient-to-b from-primary-100 via-white to-secondary-100">
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-0 -left-4 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
           <div className="absolute -top-4 -right-4 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
@@ -75,8 +82,9 @@ const Privacypolicy = () => {
           </motion.div>
         </Container>
       </section>
-      <section className="py-20 bg-white ">
-        <Container>
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-secondary-50" />
+        <Container className="relative">
           <div className="gap-12">
             <motion.article
               initial={{ opacity: 0, y: 20 }}
@@ -89,13 +97,21 @@ const Privacypolicy = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 mb-8"
+                  className="bg-white rounded-2xl shadow-xl p-8 mb-8"
                 >
                   <h2 className="text-2xl font-bold text-primary-600 mb-4">
                     {section.title}
                   </h2>
                   <div className="prose prose-lg prose-gray max-w-none">
-                    <p className="whitespace-pre-line">{section.content}</p>
+                    {section.content.map((feature, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center gap-2 text-gray-600"
+                      >
+                        <FaCheck className="text-primary-600 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
               ))}

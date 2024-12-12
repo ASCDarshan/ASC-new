@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Container, Button, Card } from "../common";
 import {
   FaSearch,
   FaDesktop,
@@ -10,6 +9,7 @@ import {
   FaChartLine,
   FaCode,
 } from "react-icons/fa";
+import { Container, Button, Card, Loader } from "../common";
 import ajaxCall from "../../helpers/ajaxCall";
 
 const servicesIcons = [
@@ -41,6 +41,8 @@ const servicesIcons = [
 
 const Services = () => {
   const navigate = useNavigate();
+  const [servicess, setServices] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleServiceClick = () => {
     navigate("/services");
@@ -50,13 +52,8 @@ const Services = () => {
     navigate("/services");
   };
 
-  const [servicess, setServices] = useState([]);
-
-  useEffect(() => {
-    fetchData("services/services/", setServices);
-  }, []);
-
   const fetchData = async (url, setData) => {
+    setIsLoading(true);
     try {
       const response = await ajaxCall(
         url,
@@ -70,14 +67,20 @@ const Services = () => {
         8000
       );
       if (response?.status === 200) {
-        setData(response?.data || []);
+        setData(response?.data);
       } else {
         console.error("Fetch error:", response);
       }
     } catch (error) {
       console.error("Network error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchData("services/services/", setServices);
+  }, []);
 
   return (
     <section className="py-20 relative bg-gradient-to-b from-secondary-50 via-white to-primary-50">
@@ -103,44 +106,48 @@ const Services = () => {
             transform, innovate, and stay ahead in the digital age.
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {servicess.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <Card className="p-8 h-full bg-white/70 backdrop-blur-sm hover:bg-white/90 transition-all duration-300 border border-gray-100 hover:border-primary-200 hover:shadow-xl hover:shadow-primary-200/20">
-                <div
-                  className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6
+        {isLoading ? (
+          <Loader size="lg" className="mx-auto" />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {servicess.map((service, index) => (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Card className="p-8 h-full bg-white/70 backdrop-blur-sm hover:bg-white/90 transition-all duration-300 border border-gray-100 hover:border-primary-200 hover:shadow-xl hover:shadow-primary-200/20">
+                  <div
+                    className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6
                         bg-gradient-to-br ${
                           servicesIcons[index]?.gradient ||
                           "from-gray-400 to-gray-600"
                         } 
                         shadow-lg shadow-primary-200/20`}
-                >
-                  {servicesIcons[index]?.icon || (
-                    <span className="text-sm"></span>
-                  )}
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 mb-6">{service.description}</p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleServiceClick}
-                  className="w-full justify-center hover:bg-gradient-to-r hover:from-primary-400 hover:to-primary-600 hover:text-white transition-all duration-300"
-                >
-                  Learn More
-                </Button>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+                  >
+                    {servicesIcons[index]?.icon || (
+                      <span className="text-sm"></span>
+                    )}
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 mb-6">{service.description}</p>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleServiceClick}
+                    className="w-full justify-center hover:bg-gradient-to-r hover:from-primary-400 hover:to-primary-600 hover:text-white transition-all duration-300"
+                  >
+                    Learn More
+                  </Button>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        )}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -7,29 +7,18 @@ const Loader = ({ size = "md", className = "" }) => {
 
   return (
     <div className={`flex items-center justify-center ${className}`}>
-      <div className="relative">
-        <div
-          className={`
-            ${sizes[size]}
-            border-2 
-            border-t-primary
-            border-r-primary/30
-            border-b-primary/10
-            border-l-primary/50
-            rounded-full
+      <div
+        className={`
+            ${sizes[size]} 
+            border-4 
+            border-t-transparent 
+            border-r-primary/40 
+            border-b-primary/10 
+            border-l-primary/70 
+            rounded-full 
             animate-spin
           `}
-        />
-        <div
-          className={`
-            absolute inset-0
-            ${sizes[size]}
-            bg-gradient-to-tr from-transparent via-white/80 to-white
-            rounded-full
-            mix-blend-overlay
-          `}
-        />
-      </div>
+      />
     </div>
   );
 };
