@@ -1,22 +1,17 @@
-// src/components/sections/CTA.jsx
-import { motion } from 'framer-motion';
-import { Container, Button } from '../common';
-import { useNavigate } from 'react-router-dom';
-import { FaRocket, FaArrowRight, FaComments } from 'react-icons/fa';
+import { motion } from "framer-motion";
+import { Container, Button } from "../common";
+import { useNavigate } from "react-router-dom";
+import { FaRocket, FaArrowRight, FaComments } from "react-icons/fa";
 
 const CTA = () => {
-
   const navigate = useNavigate();
   const handleGetStarted = () => {
-    navigate('/contact');
+    navigate("/contact");
   };
 
   return (
     <section className="py-4 relative overflow-hidden">
-      {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-white to-secondary/10" />
-
-      {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <motion.div
           animate={{
@@ -43,10 +38,8 @@ const CTA = () => {
           className="absolute bottom-1/4 -right-20 w-80 h-80 bg-secondary/20 rounded-full blur-3xl"
         />
       </div>
-
       <Container className="relative">
         <div className="max-w-4xl mx-auto">
-          {/* Main CTA Content */}
           <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl p-8 md:p-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -71,14 +64,12 @@ const CTA = () => {
                 </span>
               </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
-                Whether you need a custom CRM, mobile app, or enterprise solution,
-                our team of experts is ready to bring your vision to life.
+                Whether you need a custom CRM, mobile app, or enterprise
+                solution, our team of experts is ready to bring your vision to
+                life.
               </p>
             </motion.div>
-
-            {/* CTA Cards */}
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              {/* Get Started Card */}
               <motion.div
                 whileHover={{ y: -5 }}
                 className="bg-gradient-to-br from-primary/5 to-primary/10 p-6 rounded-xl"
@@ -88,7 +79,8 @@ const CTA = () => {
                   Start a Project
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  Ready to begin? Let&apos;s discuss your project and create a roadmap for success.
+                  Ready to begin? Let&apos;s discuss your project and create a
+                  roadmap for success.
                 </p>
                 <Button
                   variant="primary"
@@ -99,8 +91,6 @@ const CTA = () => {
                   Get Started
                 </Button>
               </motion.div>
-
-              {/* Contact Card */}
               <motion.div
                 whileHover={{ y: -5 }}
                 className="bg-gradient-to-br from-secondary/5 to-secondary/10 p-6 rounded-xl"
@@ -122,8 +112,6 @@ const CTA = () => {
                 </Button>
               </motion.div>
             </div>
-
-            {/* Trust Indicators */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -133,7 +121,9 @@ const CTA = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 <div>
                   <div className="text-2xl font-bold text-gray-900">150+</div>
-                  <div className="text-sm text-gray-600">Projects Delivered</div>
+                  <div className="text-sm text-gray-600">
+                    Projects Delivered
+                  </div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-gray-900">50+</div>
@@ -144,14 +134,14 @@ const CTA = () => {
                   <div className="text-sm text-gray-600">Years Experience</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">End to End </div>
+                  <div className="text-2xl font-bold text-gray-900">
+                    End to End{" "}
+                  </div>
                   <div className="text-sm text-gray-600">Support</div>
                 </div>
               </div>
             </motion.div>
           </div>
-
-          {/* Additional Benefits */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -160,15 +150,21 @@ const CTA = () => {
           >
             <div>
               <h4 className="font-semibold text-gray-900">Quick Response</h4>
-              <p className="text-gray-600 text-sm">Get a response within 24 hours</p>
+              <p className="text-gray-600 text-sm">
+                Get a response within 24 hours
+              </p>
             </div>
             <div>
               <h4 className="font-semibold text-gray-900">Free Consultation</h4>
               <p className="text-gray-600 text-sm">Expert advice at no cost</p>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-900">Flexible Engagement</h4>
-              <p className="text-gray-600 text-sm">Choose the best model for you</p>
+              <h4 className="font-semibold text-gray-900">
+                Flexible Engagement
+              </h4>
+              <p className="text-gray-600 text-sm">
+                Choose the best model for you
+              </p>
             </div>
           </motion.div>
         </div>

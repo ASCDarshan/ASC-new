@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Search, Calendar, ArrowUp, ChevronLeft, ChevronRight } from "lucide-react";
-import ajaxCall from "../../components/helpers/ajaxCall";
-import ProfileImg from "../../assets/images/profile.jpg";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  Search,
+  Calendar,
+  ArrowUp,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import ajaxCall from "../../helpers/ajaxCall";
 import { Button } from "../../components/common";
+import ProfileImg from "../../assets/images/profile.jpg";
 
 const BlogPage = () => {
   const navigate = useNavigate();
@@ -86,13 +92,11 @@ const BlogPage = () => {
       exit={{ opacity: 0 }}
       className="min-h-screen bg-gradient-to-b from-primary-50/50 via-white to-secondary-50/50"
     >
-      {/* Hero Section */}
       <section className="relative py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-0 -left-4 w-72 h-72 bg-primary-200/20 rounded-full mix-blend-multiply filter blur-3xl" />
           <div className="absolute bottom-0 -right-4 w-72 h-72 bg-secondary-200/20 rounded-full mix-blend-multiply filter blur-3xl" />
         </div>
-
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <motion.h1
@@ -112,8 +116,6 @@ const BlogPage = () => {
               Explore the latest in technology, development insights, and
               industry trends
             </motion.p>
-
-            {/* Search Bar */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -132,11 +134,8 @@ const BlogPage = () => {
           </div>
         </div>
       </section>
-
-      {/* Main Content */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          {/* Category Navigation */}
           <div className="mb-12">
             <motion.div
               className="flex flex-wrap gap-3 justify-center"
@@ -151,120 +150,95 @@ const BlogPage = () => {
                     setSelectedCategory(category.slug);
                     setCurrentPage(1);
                   }}
-                  className={`px-6 py-2 rounded-full transition-all duration-300 ${selectedCategory === category.slug
-                    ? "bg-primary-600 text-white shadow-lg shadow-primary-600/20"
-                    : "bg-primary-50 text-primary-600"
-                    }`}
-
+                  className={`px-6 py-2 rounded-full transition-all duration-300 ${
+                    selectedCategory === category.slug
+                      ? "bg-primary-600 text-white shadow-lg shadow-primary-600/20"
+                      : "bg-white text-gray-600 hover:bg-primary-50"
+                  }`}
                 >
                   {category.name}
                 </button>
               ))}
             </motion.div>
           </div>
-
-          {/* Featured Posts Grid */}
-          {isLoading ? (
-            <div className="flex justify-center items-center w-full py-12">
-              <div className="flex flex-col items-center">
-                <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4 animate-spin"></div>
-                <p className="text-gray-600 text-lg">Loading posts...</p>
-              </div>
-            </div>
-          ) :
-            currentPosts.length > 0 ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {currentPosts.map((post) => (
-                  <motion.div
-                    key={post.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col"
-                  >
-                    {/* Thumbnail Section */}
-                    <div className="aspect-w-16 aspect-h-9">
-                      <img
-                        src={post.featured_image}
-                        alt="img"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-
-                    {/* Content Section */}
-                    <div className="p-5 flex flex-col flex-grow">
-                      <div className="flex items-center gap-2 mb-3">
-                        {/* Category Tag */}
-                        {post.category?.name && (
-                          <span className="px-3 py-1 bg-primary-100 text-primary-600 rounded-full text-xs">
-                            {post.category.name}
-                          </span>
-                        )}
-                        {/* Published Date */}
-                        <span className="text-gray-500 text-xs flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          {new Intl.DateTimeFormat("en-US", {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                          }).format(new Date(post.published_at))}
+          {currentPosts.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {currentPosts.map((post) => (
+                <motion.div
+                  key={post.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col"
+                >
+                  <div className="aspect-w-16 aspect-h-9">
+                    <img
+                      src={post.featured_image}
+                      alt="img"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-5 flex flex-col flex-grow">
+                    <div className="flex items-center gap-2 mb-3">
+                      {post.category?.name && (
+                        <span className="px-3 py-1 bg-primary-100 text-primary-600 rounded-full text-xs">
+                          {post.category.name}
                         </span>
-                      </div>
-
-                      {/* Title */}
-                      <h2 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2">
-                        <button
-                          onClick={() => handleBlog(post.slug, post.id)}
-                          className="hover:text-primary-600 transition-colors"
-                        >
-                          {post.title}
-                        </button>
-                      </h2>
-
-                      {/* Excerpt */}
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                        {post.excerpt}
-                      </p>
-
-                      {/* Author and Actions */}
-                      <div className="mt-auto flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <img
-                            src={ProfileImg}
-                            alt={post?.author?.user?.username || "Author"}
-                            className="w-6 h-6 rounded-full"
-                          />
-                          <div>
-                            <div className="text-xs font-medium text-gray-900">
-                              {post?.author?.user?.username || "Anonymous"}
-                            </div>
+                      )}
+                      <span className="text-gray-500 text-xs flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {new Intl.DateTimeFormat("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        }).format(new Date(post.published_at))}
+                      </span>
+                    </div>
+                    <h2 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2">
+                      <button
+                        onClick={() => handleBlog(post.id)}
+                        className="hover:text-primary-600 transition-colors"
+                      >
+                        {post.title}
+                      </button>
+                    </h2>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+                    <div className="mt-auto flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <img
+                          src={ProfileImg}
+                          alt={post?.author?.user?.username || "Author"}
+                          className="w-6 h-6 rounded-full"
+                        />
+                        <div>
+                          <div className="text-xs font-medium text-gray-900">
+                            {post?.author?.user?.username || "Anonymous"}
                           </div>
                         </div>
+                      </div>
 
-                        {/* Share and Bookmark Actions */}
-                        <div className="flex items-center gap-2">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleBlog(post.slug, post.id)}
-                            className="group-hover:bg-primary-600 group-hover:text-white group-hover:border-primary-600"
-                          >
-                            Read More
-                          </Button>
-                        </div>
-
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleBlog(post.id)}
+                          className="group-hover:bg-primary-600 group-hover:text-white group-hover:border-primary-600"
+                        >
+                          Read More
+                        </Button>
                       </div>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center text-gray-600 text-lg">
-                No posts for this category.
-              </div>
-            )
-          }
-          {/* Pagination Controls */}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-gray-600 text-lg">
+              No posts for this category.
+            </div>
+          )}
           {filteredPosts.length > postsPerPage && (
             <div className="flex justify-center items-center space-x-4 mt-8">
               <button
@@ -274,22 +248,21 @@ const BlogPage = () => {
               >
                 <ChevronLeft className="w-6 h-6 text-gray-600" />
               </button>
-
               <div className="flex space-x-2">
                 {[...Array(totalPages)].map((_, index) => (
                   <button
                     key={index}
                     onClick={() => paginate(index + 1)}
-                    className={`w-10 h-10 rounded-full ${currentPage === index + 1
-                      ? "bg-primary-600 text-white"
-                      : "bg-white text-gray-600 hover:bg-primary-50"
-                      } shadow-md`}
+                    className={`w-10 h-10 rounded-full ${
+                      currentPage === index + 1
+                        ? "bg-primary-600 text-white"
+                        : "bg-white text-gray-600 hover:bg-primary-50"
+                    } shadow-md`}
                   >
                     {index + 1}
                   </button>
                 ))}
               </div>
-
               <button
                 onClick={() => paginate(currentPage + 1)}
                 disabled={currentPage === totalPages}
@@ -301,7 +274,6 @@ const BlogPage = () => {
           )}
         </div>
       </section>
-      {/* Newsletter Section */}
       <section className="py-20 bg-gradient-to-r from-primary-500 to-primary-600 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
@@ -325,8 +297,6 @@ const BlogPage = () => {
           </div>
         </div>
       </section>
-
-      {/* Scroll to Top Button */}
       {showScrollTop && (
         <motion.button
           initial={{ opacity: 0 }}

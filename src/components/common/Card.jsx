@@ -1,22 +1,21 @@
-// src/components/common/Card.jsx
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 const Card = ({
   children,
-  className = '',
+  className = "",
   hover = true,
-  variant = 'default',
+  variant = "default",
   ...props
 }) => {
   const variants = {
-    default: 'bg-white',
-    gradient: 'bg-gradient-to-br from-white to-gray-50',
-    transparent: 'bg-white/60 backdrop-blur-md'
+    default: "bg-white",
+    gradient: "bg-gradient-to-br from-white to-gray-50",
+    transparent: "bg-white/60 backdrop-blur-md",
   };
 
   const hoverEffects = hover
-    ? 'hover:shadow-xl hover:shadow-gray-200/50 transform hover:-translate-y-1 transition-all duration-300'
-    : '';
+    ? "hover:shadow-xl hover:shadow-gray-200/50 transform hover:-translate-y-1 transition-all duration-300"
+    : "";
 
   return (
     <motion.div

@@ -1,6 +1,5 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Container, Badge, Card } from "../../components/common";
-import { Stats, CTA } from "../../components/sections";
 import {
   FaUsers,
   FaLightbulb,
@@ -8,8 +7,9 @@ import {
   FaBullseye,
   FaHandshake,
 } from "react-icons/fa";
-import ajaxCall from "../../components/helpers/ajaxCall";
-import { useEffect, useState } from "react";
+import ajaxCall from "../../helpers/ajaxCall";
+import { Stats, CTA } from "../../components/sections";
+import { Container, Badge, Card } from "../../components/common";
 
 const stats = [
   { value: "15+", label: "Years Experience" },
@@ -114,9 +114,7 @@ const AboutPage = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {/* Hero Section */}
       <section className="relative min-h-[80vh] overflow-hidden bg-gradient-to-b from-primary-100 via-white to-secondary-100">
-        {/* Animated background elements */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-0 -left-4 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
           <div className="absolute -top-4 -right-4 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
@@ -137,7 +135,7 @@ const AboutPage = () => {
                 About Our Company
               </Badge>
               <h1 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-800">
-                {(data[0]?.aboutus_title)}
+                {data[0]?.aboutus_title}
 
                 <span className="block text-2xl mt-2 font-normal text-gray-600">
                   Since 2013
@@ -151,7 +149,6 @@ const AboutPage = () => {
                 to excellence.
               </motion.p>
 
-              {/* Stats Grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
                 {stats.map((stat, index) => (
                   <motion.div
@@ -229,7 +226,6 @@ const AboutPage = () => {
         </Container>
       </section>
 
-      {/* Vision & Mission Section */}
       <section className="py-20 bg-white">
         <Container>
           <div className="grid md:grid-cols-2 gap-12">
@@ -284,7 +280,6 @@ const AboutPage = () => {
         </Container>
       </section>
 
-      {/* Values Section */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <Container>
           <motion.div {...fadeIn} className="text-center mb-16">
@@ -325,7 +320,6 @@ const AboutPage = () => {
         </Container>
       </section>
 
-      {/* Team Section */}
       <section className="py-20 bg-white">
         <Container>
           <motion.div {...fadeIn} className="text-center mb-16">

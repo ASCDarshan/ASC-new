@@ -1,15 +1,31 @@
 import { motion } from "framer-motion";
 import { Container } from "../../components/common";
-import Contacts from "../../components/sections/Contact"
+import Contacts from "../../components/sections/Contact";
+
+const faqs = [
+  {
+    q: "What information should I prepare before contacting?",
+    a: "Having a clear project overview, timeline, budget range, and specific requirements will help us understand your needs better.",
+  },
+  {
+    q: "How quickly can you start on my project?",
+    a: "Our typical response time is within 24 hours, and we can usually begin project planning within a week of agreement.",
+  },
+  {
+    q: "Do you provide post-development support?",
+    a: "Yes, we offer comprehensive post-development support and maintenance packages tailored to your needs.",
+  },
+  {
+    q: "Can we have face-to-face meetings?",
+    a: "Absolutely! We welcome both in-person meetings at our office and virtual meetings via your preferred platform.",
+  },
+];
 
 const Contact = () => {
-
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50">
       <Container>
         <Contacts />
-
-        {/* Map Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -28,8 +44,6 @@ const Contact = () => {
             />
           </div>
         </motion.div>
-
-        {/* FAQ Section */}
         <section className="py-20">
           <Container>
             <div className="max-w-3xl mx-auto">
@@ -43,24 +57,7 @@ const Contact = () => {
               </motion.h2>
 
               <div className="space-y-6">
-                {[
-                  {
-                    q: "What information should I prepare before contacting?",
-                    a: "Having a clear project overview, timeline, budget range, and specific requirements will help us understand your needs better.",
-                  },
-                  {
-                    q: "How quickly can you start on my project?",
-                    a: "Our typical response time is within 24 hours, and we can usually begin project planning within a week of agreement.",
-                  },
-                  {
-                    q: "Do you provide post-development support?",
-                    a: "Yes, we offer comprehensive post-development support and maintenance packages tailored to your needs.",
-                  },
-                  {
-                    q: "Can we have face-to-face meetings?",
-                    a: "Absolutely! We welcome both in-person meetings at our office and virtual meetings via your preferred platform.",
-                  },
-                ].map((faq, index) => (
+                {faqs.map((faq, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
@@ -79,8 +76,6 @@ const Contact = () => {
             </div>
           </Container>
         </section>
-
-        {/* Quick Response Promise */}
         <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
           <Container>
             <motion.div

@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   Hero,
   Features,
@@ -7,13 +7,11 @@ import {
   Stats,
   CTA,
   Contact,
-  Services
-} from '../../components/sections';
-import PortfolioSection from '../Portfolio/PortfolioSection';
-import MotionScroll from '../../components/common/MotionScroll';
+  Services,
+} from "../../components/sections";
+import PortfolioSection from "../Portfolio/PortfolioSection";
 
 const Home = () => {
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

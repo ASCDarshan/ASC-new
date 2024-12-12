@@ -1,12 +1,11 @@
-// src/components/common/Input.jsx
-import { useState } from 'react';
+import { useState } from "react";
 
 const Input = ({
   label,
   error,
   icon,
-  type = 'text',
-  className = '',
+  type = "text",
+  className = "",
   required = false,
   helper,
   ...props
@@ -31,16 +30,17 @@ const Input = ({
           type={type}
           className={`
             block w-full rounded-lg
-            ${icon ? 'pl-10' : 'pl-4'} pr-4 py-3
+            ${icon ? "pl-10" : "pl-4"} pr-4 py-3
             border-2 
-            ${error 
-              ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
-              : 'border-gray-200 focus:border-primary focus:ring-primary'
+            ${
+              error
+                ? "border-red-300 focus:border-red-500 focus:ring-red-500"
+                : "border-gray-200 focus:border-primary focus:ring-primary"
             }
             focus:ring-2 focus:ring-opacity-20
             transition-all duration-200
             placeholder-gray-400
-            ${focused ? 'bg-white' : 'bg-gray-50'}
+            ${focused ? "bg-white" : "bg-gray-50"}
             ${className}
           `}
           onFocus={() => setFocused(true)}
@@ -66,9 +66,7 @@ const Input = ({
       {helper && !error && (
         <p className="mt-1 text-sm text-gray-500">{helper}</p>
       )}
-      {error && (
-        <p className="mt-1 text-sm text-red-500">{error}</p>
-      )}
+      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
     </div>
   );
 };
