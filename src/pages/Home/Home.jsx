@@ -10,6 +10,7 @@ import {
   Services,
 } from "../../components/sections";
 import PortfolioSection from "../Portfolio/PortfolioSection";
+import MotionScroll from "../../components/common/MotionScroll";
 
 const Home = () => {
   useEffect(() => {

@@ -120,7 +120,6 @@ const AboutPage = () => {
           <div className="absolute -top-4 -right-4 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
           <div className="absolute -bottom-8 left-20 w-96 h-96 bg-accent-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
         </div>
-
         <Container className="relative pt-32 pb-16 lg:pt-40">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -148,7 +147,6 @@ const AboutPage = () => {
                 been marked by continuous innovation and unwavering commitment
                 to excellence.
               </motion.p>
-
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
                 {stats.map((stat, index) => (
                   <motion.div
@@ -171,7 +169,6 @@ const AboutPage = () => {
                 ))}
               </div>
             </motion.div>
-
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -225,7 +222,6 @@ const AboutPage = () => {
           </div>
         </Container>
       </section>
-
       <section className="py-20 bg-white">
         <Container>
           <div className="grid md:grid-cols-2 gap-12">
@@ -252,7 +248,6 @@ const AboutPage = () => {
                 />
               </Card>
             </motion.div>
-
             <motion.div {...fadeIn} className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-secondary-500/10 to-secondary-600/10 rounded-2xl transform -rotate-1 group-hover:-rotate-2 transition-transform" />
               <Card className="p-8 backdrop-blur-sm relative hover:shadow-xl transition-shadow">
@@ -279,7 +274,6 @@ const AboutPage = () => {
           </div>
         </Container>
       </section>
-
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <Container>
           <motion.div {...fadeIn} className="text-center mb-16">
@@ -297,7 +291,6 @@ const AboutPage = () => {
               deliver, ensuring consistent excellence in everything we do.
             </p>
           </motion.div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <motion.div
@@ -319,7 +312,6 @@ const AboutPage = () => {
           </div>
         </Container>
       </section>
-
       <section className="py-20 bg-white">
         <Container>
           <motion.div {...fadeIn} className="text-center mb-16">
@@ -335,7 +327,6 @@ const AboutPage = () => {
               forward.
             </p>
           </motion.div>
-
           <div className="grid md:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
               <motion.div
@@ -358,9 +349,7 @@ const AboutPage = () => {
           </div>
         </Container>
       </section>
-
       <Stats />
-
       <CTA />
     </motion.div>
   );

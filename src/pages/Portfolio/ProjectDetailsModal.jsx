@@ -170,7 +170,6 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                       )}
                     </div>
                   </Card>
-
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">
                       Technology Stack

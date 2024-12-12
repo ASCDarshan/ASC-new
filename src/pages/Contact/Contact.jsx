@@ -55,7 +55,6 @@ const Contact = () => {
               >
                 Frequently Asked Questions
               </motion.h2>
-
               <div className="space-y-6">
                 {faqs.map((faq, index) => (
                   <motion.div
@@ -76,7 +75,7 @@ const Contact = () => {
             </div>
           </Container>
         </section>
-        <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <section className="py-20 bg-gray-50">
           <Container>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

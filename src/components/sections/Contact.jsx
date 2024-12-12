@@ -189,7 +189,6 @@ const Contact = () => {
             We&apos;d love to hear from you!
           </p>
         </motion.div>
-
         <div className="grid lg:grid-cols-3 gap-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -223,7 +222,6 @@ const Contact = () => {
                 </div>
               </motion.div>
             ))}
-
             <div className="bg-white p-6 rounded-xl shadow-lg">
               <h3 className="font-semibold text-gray-900 mb-4">
                 Connect With Us
@@ -244,7 +242,6 @@ const Contact = () => {
               </div>
             </div>
           </motion.div>
-
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -284,7 +281,6 @@ const Contact = () => {
                     )}
                   </div>
                 </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <Input
@@ -311,7 +307,6 @@ const Contact = () => {
                     />
                   </div>
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Service Interested In
@@ -338,7 +333,6 @@ const Contact = () => {
                     </p>
                   )}
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Message
@@ -360,7 +354,6 @@ const Contact = () => {
                     </p>
                   )}
                 </div>
-
                 <Button
                   type="submit"
                   variant="primary"

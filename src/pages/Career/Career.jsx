@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 import ajaxCall from "../../helpers/ajaxCall";
 import { Container, Button, Card, Badge } from "../../components/common";
+import JobApplication from "./JobApplication";
 
 const benefits = [
   {
@@ -152,36 +153,37 @@ const Careers = () => {
     navigate("/careers");
   };
 
-
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="pt-20"
-    >
-      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
+    <div>
+      <section className="relative min-h-[80vh] overflow-hidden bg-gradient-to-b from-primary-100 via-white to-secondary-100">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 -left-4 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
+          <div className="absolute -top-4 -right-4 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
+          <div className="absolute -bottom-8 left-20 w-96 h-96 bg-accent-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
         </div>
-        <Container className="relative z-10">
-          <div className="text-center max-w-3xl mx-auto">
-            <motion.h1
+        <Container className="relative pt-32 pb-16 text-center lg:pt-40">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mx-auto max-w-4xl"
+          >
+           <motion.h1
+              className="text-4xl font-bold tracking-tight text-dark sm:text-6xl md:text-7xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
               Join Our Team of Innovators
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-800 mt-2">
+              <span className="block bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
                 Shape the Future of Technology
               </span>
             </motion.h1>
             <motion.p
+              className="mt-6 text-lg leading-8 text-gray-600 sm:text-xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-lg text-gray-600 mb-8"
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
               Work with talented individuals who share your passion for
               innovation and excellence. Discover exciting opportunities to grow
@@ -202,7 +204,7 @@ const Careers = () => {
                 </div>
               ))}
             </motion.div>
-          </div>
+          </motion.div>
         </Container>
       </section>
       <section className="py-12 bg-white">
@@ -282,7 +284,7 @@ const Careers = () => {
                         <span>{job.experience_range}</span>
                       </div>
                       <div className="flex items-center gap-2 text-gray-600">
-                        <FaDollarSign className="w-4 h-4" />
+                        <FaRupeeSign className="w-4 h-4" />
                         <span>{job.salary_range}</span>
                       </div>
                     </div>
@@ -296,9 +298,6 @@ const Careers = () => {
                         </span>
                       ))}
                     </div>
-                    <Button variant="outline" className="w-full justify-center">
-                      Apply Now
-                    </Button>
                   </Card>
                 </motion.div>
               ))
@@ -310,6 +309,7 @@ const Careers = () => {
           </div>
         </Container>
       </section>
+      <JobApplication />
       <section className="py-20 bg-white">
         <Container>
           <div className="text-center mb-12">
@@ -387,7 +387,6 @@ const Careers = () => {
               talent
             </p>
           </div>
-
           <div className="max-w-5xl mx-auto">
             <div className="relative">
               <div className="absolute top-0 left-1/2 w-0.5 h-full bg-primary-100 transform -translate-x-1/2" />
@@ -463,7 +462,7 @@ const Careers = () => {
           </Card>
         </Container>
       </section>
-    </motion.div>
+    </div>
   );
 };
 
