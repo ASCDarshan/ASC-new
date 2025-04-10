@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import MobileBottomNav from "./MobileBottomNav";
 
 const navItems = [
   {
@@ -128,102 +129,106 @@ const Navbar = () => {
   };
 
   return (
-    <nav
-      className={`
-        fixed w-full z-50 transition-all duration-300
-        ${scrolled
-          ? "bg-white/80 backdrop-blur-lg shadow-lg shadow-gray-200/20"
-          : "bg-transparent"
-        }
-      `}
-    >
-      <div className="max-w-full mx-auto px-4 sm:px-6 lg:container lg:px-8">
-        <div className="flex justify-between items-center h-20 relative">
-          <Link to="/" className="flex-shrink-0 flex items-center gap-2">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-r from-primary-400 to-primary-600 text-white px-4 py-2 rounded-xl"
+    <>
+      <nav
+        className={`
+          fixed w-full top-0 z-50 transition-all duration-300
+          ${scrolled
+            ? "bg-white/80 backdrop-blur-lg shadow-lg shadow-gray-200/20"
+            : "bg-transparent"
+          }
+        `}
+      >
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:container lg:px-8">
+          <div className="flex justify-between items-center h-20 relative">
+            <Link to="/" className="flex-shrink-0 flex items-center gap-2">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="bg-gradient-to-r from-primary-400 to-primary-600 text-white px-4 py-2 rounded-xl"
+              >
+                <span className="text-xl font-bold">Anant</span>
+              </motion.div>
+              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-600 to-gray-900">
+                Soft Computing
+              </span>
+            </Link>
+            <div className="hidden md:flex items-center space-x-2">
+              {navItems.map((item) => (
+                <NavLink key={item.path} item={item} />
+              ))}
+            </div>
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden p-2 rounded-lg text-gray-600 hover:text-primary-600 hover:bg-primary-50 z-10"
             >
-              <span className="text-2xl font-bold">Anant</span>
-            </motion.div>
-            <span className="text-2xl font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-600 to-gray-900">
-              Soft Computing
-            </span>
-          </Link>
-          <div className="hidden md:flex items-center space-x-2">
-            {navItems.map((item) => (
-              <NavLink key={item.path} item={item} />
-            ))}
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </motion.button>
           </div>
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-600 hover:text-primary-600 hover:bg-primary-50 z-10"
-          >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </motion.button>
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="md:hidden bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-gray-100 mt-4 overflow-hidden"
+              >
+                <div className="p-4 space-y-2">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={() => setIsOpen(false)}
+                      className={`
+                        block px-4 py-2 rounded-lg text-base font-medium 
+                        transition-all duration-300
+                        ${location.pathname === item.path
+                          ? "bg-primary-50 text-primary-600"
+                          : "text-gray-600 hover:bg-primary-50 hover:text-primary-600"
+                        }
+                      `}
+                    >
+                      <div className="flex items-center justify-between">
+                        {item.name}
+                        {item.badge && (
+                          <span className="px-2 py-0.5 text-xs font-semibold bg-gradient-to-r from-primary-400 to-primary-600 text-white rounded-full">
+                            {item.badge}
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-gray-100 mt-4 overflow-hidden"
-            >
-              <div className="p-4 space-y-2">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`
-                      block px-4 py-2 rounded-lg text-base font-medium 
-                      transition-all duration-300
-                      ${location.pathname === item.path
-                        ? "bg-primary-50 text-primary-600"
-                        : "text-gray-600 hover:bg-primary-50 hover:text-primary-600"
-                      }
-                    `}
-                  >
-                    <div className="flex items-center justify-between">
-                      {item.name}
-                      {item.badge && (
-                        <span className="px-2 py-0.5 text-xs font-semibold bg-gradient-to-r from-primary-400 to-primary-600 text-white rounded-full">
-                          {item.badge}
-                        </span>
-                      )}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </nav>
+      </nav>
+
+      <MobileBottomNav />
+    </>
   );
 };
 

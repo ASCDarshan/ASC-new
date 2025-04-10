@@ -50,7 +50,7 @@ const navigation = {
 const Footer = () => {
   return (
     <footer
-      className="bg-white border-t border-gray-200"
+      className="bg-white border-t border-gray-200 pb-5"
       aria-labelledby="footer-heading"
     >
       <Container>

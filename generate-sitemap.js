@@ -1,8 +1,10 @@
 const { SitemapStream, streamToPromise } = require("sitemap");
 const { createWriteStream, writeFileSync } = require("fs");
 const { resolve } = require("path");
+const { default: ajaxCall } = require("./src/helpers/ajaxCall");
 
 const BASE_URL = "https://anantsoftcomputing.com/";
+const API_BASE_URL = "";
 
 async function generateSitemap() {
   try {
@@ -31,13 +33,82 @@ async function generateSitemap() {
 
     staticLinks.forEach((link) => sitemap.write(link));
 
+    const fetchData = async (url) => {
+      try {
+        const response = await ajaxCall(
+          url,
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            method: "GET",
+          },
+          8000
+        );
+        if (response?.status === 200) {
+          return response.data;
+        } else {
+          console.error("Fetch error:", response);
+          return null;
+        }
+      } catch (error) {
+        console.error("Network error:", error);
+        return null;
+      }
+    };
+
+    try {
+      console.log("Fetching blog posts...");
+      const blogPosts = await fetchData("blogs/posts/");
+
+      if (blogPosts && blogPosts.length > 0) {
+        console.log(`Found ${blogPosts.length} blog posts`);
+
+        blogPosts.forEach((post) => {
+          sitemap.write({
+            url: `/blog/${post.slug}`,
+            changefreq: "weekly",
+            priority: 0.7,
+            lastmod: post.updated_at || post.published_at,
+          });
+        });
+      }
+    } catch (error) {
+      console.error("Error processing blog posts:", error.message);
+      console.log("Continuing with sitemap generation without blog posts...");
+    }
+
+    try {
+      console.log("Fetching blog categories...");
+      const categories = await fetchData("blogs/categories/");
+
+      if (categories && categories.length > 0) {
+        console.log(`Found ${categories.length} blog categories`);
+
+        categories.forEach((category) => {
+          if (category.slug && category.slug !== "all") {
+            sitemap.write({
+              url: `/blog/category/${category.slug}`,
+              changefreq: "weekly",
+              priority: 0.6,
+            });
+          }
+        });
+      }
+    } catch (error) {
+      console.error("Error processing blog categories:", error.message);
+      console.log(
+        "Continuing with sitemap generation without blog categories..."
+      );
+    }
+
     sitemap.end();
 
     const data = await streamToPromise(sitemap);
     writeStream.write(data);
     writeStream.end();
 
-    // Generate robots.txt
     const robotsTxtContent = `User-agent: *
 Disallow:
 
