@@ -66,14 +66,16 @@ const BlogPage = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleBlog = (slug, id) => {
+  const handleBlog = (id, slug) => {
     navigate(`/blog/${slug}`, { state: id });
   };
 
-  const filteredPosts =
-    selectedCategory === "all"
-      ? posts
-      : posts.filter((post) => post.category?.slug === selectedCategory);
+  const filteredPosts = posts.filter((post) => {
+    const matchesCategory = selectedCategory === "all" || post.category?.slug === selectedCategory;
+    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -152,11 +154,10 @@ const BlogPage = () => {
                     setSelectedCategory(category.slug);
                     setCurrentPage(1);
                   }}
-                  className={`px-6 py-2 rounded-full transition-all duration-300 ${
-                    selectedCategory === category.slug
-                      ? "bg-primary-600 text-white shadow-lg shadow-primary-600/20"
-                      : "bg-white text-gray-600 hover:bg-primary-50"
-                  }`}
+                  className={`px-6 py-2 rounded-full transition-all duration-300 ${selectedCategory === category.slug
+                    ? "bg-primary-600 text-white shadow-lg shadow-primary-600/20"
+                    : "bg-white text-gray-600 hover:bg-primary-50"
+                    }`}
                 >
                   {category.name}
                 </button>
@@ -177,8 +178,8 @@ const BlogPage = () => {
                 >
                   <div className="aspect-w-16 aspect-h-9">
                     <img
-                      src={post.featured_image}
-                      alt="img"
+                      src={post.featured_image || "/path/to/placeholder.jpg"}
+                      alt="Blog Cover"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -200,7 +201,7 @@ const BlogPage = () => {
                     </div>
                     <h2 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2">
                       <button
-                        onClick={() => handleBlog(post.id)}
+                        onClick={() => handleBlog(post.id, post.slug)}
                         className="hover:text-primary-600 transition-colors"
                       >
                         {post.title}
@@ -226,7 +227,7 @@ const BlogPage = () => {
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => handleBlog(post.id)}
+                          onClick={() => handleBlog(post.id, post.slug)}
                           className="group-hover:bg-primary-600 group-hover:text-white group-hover:border-primary-600"
                         >
                           Read More
@@ -256,11 +257,10 @@ const BlogPage = () => {
                   <button
                     key={index}
                     onClick={() => paginate(index + 1)}
-                    className={`w-10 h-10 rounded-full ${
-                      currentPage === index + 1
-                        ? "bg-primary-600 text-white"
-                        : "bg-white text-gray-600 hover:bg-primary-50"
-                    } shadow-md`}
+                    className={`w-10 h-10 rounded-full ${currentPage === index + 1
+                      ? "bg-primary-600 text-white"
+                      : "bg-white text-gray-600 hover:bg-primary-50"
+                      } shadow-md`}
                   >
                     {index + 1}
                   </button>
@@ -273,6 +273,7 @@ const BlogPage = () => {
               >
                 <ChevronRight className="w-6 h-6 text-gray-600" />
               </button>
+
             </div>
           )}
         </div>
@@ -301,15 +302,12 @@ const BlogPage = () => {
         </div>
       </section>
       {showScrollTop && (
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+        <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-8 right-8 p-3 bg-primary-600 text-white rounded-full shadow-lg hover:bg-primary-700 transition-colors"
+          className="fixed bottom-6 right-6 z-50 bg-primary-600 text-white p-3 rounded-full shadow-lg hover:bg-primary-700 transition"
         >
-          <ArrowUp className="w-6 h-6" />
-        </motion.button>
+          <ArrowUp className="w-5 h-5" />
+        </button>
       )}
     </div>
   );

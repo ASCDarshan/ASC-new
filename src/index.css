@@ -23,3 +23,10 @@
     animation-delay: 4s;
   }
 }
+
+body,
+html {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
