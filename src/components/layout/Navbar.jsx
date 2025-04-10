@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Container } from "../common";
 
 const navItems = [
   {
@@ -83,9 +82,8 @@ const Navbar = () => {
           )}
           {item.dropdown && (
             <svg
-              className={`w-4 h-4 transition-transform duration-200 ${
-                showDropdown ? "rotate-180" : ""
-              }`}
+              className={`w-4 h-4 transition-transform duration-200 ${showDropdown ? "rotate-180" : ""
+                }`}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -133,15 +131,14 @@ const Navbar = () => {
     <nav
       className={`
         fixed w-full z-50 transition-all duration-300
-        ${
-          scrolled
-            ? "bg-white/80 backdrop-blur-lg shadow-lg shadow-gray-200/20"
-            : "bg-transparent"
+        ${scrolled
+          ? "bg-white/80 backdrop-blur-lg shadow-lg shadow-gray-200/20"
+          : "bg-transparent"
         }
       `}
     >
-      <Container className="relative">
-        <div className="flex justify-between items-center h-20">
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:container lg:px-8">
+        <div className="flex justify-between items-center h-20 relative">
           <Link to="/" className="flex-shrink-0 flex items-center gap-2">
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -161,7 +158,7 @@ const Navbar = () => {
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-600 hover:text-primary-600 hover:bg-primary-50"
+            className="md:hidden p-2 rounded-lg text-gray-600 hover:text-primary-600 hover:bg-primary-50 z-10"
           >
             <svg
               className="h-6 w-6"
@@ -205,10 +202,9 @@ const Navbar = () => {
                     className={`
                       block px-4 py-2 rounded-lg text-base font-medium 
                       transition-all duration-300
-                      ${
-                        location.pathname === item.path
-                          ? "bg-primary-50 text-primary-600"
-                          : "text-gray-600 hover:bg-primary-50 hover:text-primary-600"
+                      ${location.pathname === item.path
+                        ? "bg-primary-50 text-primary-600"
+                        : "text-gray-600 hover:bg-primary-50 hover:text-primary-600"
                       }
                     `}
                   >
@@ -226,7 +222,7 @@ const Navbar = () => {
             </motion.div>
           )}
         </AnimatePresence>
-      </Container>
+      </div>
     </nav>
   );
 };

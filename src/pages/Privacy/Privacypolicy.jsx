@@ -58,7 +58,7 @@ const Privacypolicy = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mx-auto max-w-4xl"
+            className="mx-auto max-w-4xl mb-12"
           >
             <motion.h1
               className="text-4xl font-bold tracking-tight text-dark sm:text-6xl md:text-7xl"
