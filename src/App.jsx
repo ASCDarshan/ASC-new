@@ -37,7 +37,7 @@ function App() {
             <Route path="/services/custom" element={<CustomDevelopment />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:blogpostpage" element={<BlogPostPage />} />
+            <Route path="/blog/:blogId" element={<BlogPostPage />} />
             <Route path="/privacy-policy" element={<Privacypolicy />} />
           </Routes>
         </main>
