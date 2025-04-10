@@ -48,7 +48,7 @@ const shareIcons = [
 ];
 
 const BlogPostPage = () => {
-  const { blogpostpage } = useParams();
+  const { blogId } = useParams();
   const [posts, setPosts] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
   const [filteredPost, setFilteredPost] = useState(null);
@@ -101,7 +101,7 @@ const BlogPostPage = () => {
   }, []);
 
   const filterPostsByBlogPageId = (posts) => {
-    const filtered = posts.find((post) => post.id === parseInt(blogpostpage));
+    const filtered = posts.find((post) => post.id === parseInt(blogId));
     setFilteredPost(filtered);
   };
 
