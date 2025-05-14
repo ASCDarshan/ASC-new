@@ -101,7 +101,7 @@ const BlogPostPage = () => {
   }, []);
 
   const filterPostsByBlogPageId = (posts) => {
-    const filtered = posts.find((post) => post.id === parseInt(blogId));
+    const filtered = posts.find((post) => post?.slug == blogId);
     setFilteredPost(filtered);
   };
 
@@ -143,7 +143,10 @@ const BlogPostPage = () => {
 
   if (!filteredPost) {
     return (
-      <Loader size="lg" className="min-h-screen flex items-center justify-center" />
+      <Loader
+        size="lg"
+        className="min-h-screen flex items-center justify-center"
+      />
     );
   }
 
@@ -184,7 +187,7 @@ const BlogPostPage = () => {
             className="max-w-4xl mx-auto"
           >
             <div className="flex flex-wrap gap-3 mb-6 mt-10">
-              {filteredPost.tags.map((tag) => (
+              {filteredPost?.tags?.map((tag) => (
                 <span
                   key={tag.id}
                   className="px-4 py-1.5 bg-primary-100/80 text-primary-600 rounded-full text-sm font-medium flex items-center gap-2 hover:bg-primary-200/80 transition-colors cursor-pointer"
@@ -195,17 +198,17 @@ const BlogPostPage = () => {
               ))}
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-dark mb-4 leading-tight">
-              {filteredPost.title}
+              {filteredPost?.title}
             </h1>
             <p className="text-xl text-dark-light mb-8">
-              {filteredPost.excerpt}
+              {filteredPost?.excerpt}
             </p>
             <div className="flex flex-wrap items-center gap-8 mb-12">
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <img
                     src={ProfileImg}
-                    alt={filteredPost.author.user.username}
+                    alt={filteredPost?.author?.user?.username}
                     className="w-12 h-12 rounded-full ring-2 ring-white"
                   />
                   <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-primary-200 rounded-full flex items-center justify-center ring-2 ring-white">
@@ -214,21 +217,21 @@ const BlogPostPage = () => {
                 </div>
                 <div>
                   <div className="font-semibold text-dark">
-                    {filteredPost.author.user.username}
+                    {filteredPost?.author?.user?.username}
                   </div>
                   <div className="text-sm text-dark-light">
-                    {filteredPost.author.role}
+                    {filteredPost?.author?.role}
                   </div>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-6 text-sm text-dark-light">
                 <span className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  {new Date(filteredPost.published_at).toLocaleDateString()}
+                  {new Date(filteredPost?.published_at).toLocaleDateString()}
                 </span>
                 <span className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
-                  {filteredPost.read_time} min read
+                  {filteredPost?.read_time} min read
                 </span>
               </div>
             </div>
@@ -305,7 +308,7 @@ const BlogPostPage = () => {
             <motion.img
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              src={filteredPost.featured_image}
+              src={filteredPost?.featured_image}
               alt="img"
               className="w-full aspect-[15/7] object-cover rounded-2xl shadow-xl"
             />
@@ -323,7 +326,7 @@ const BlogPostPage = () => {
               <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 mb-12">
                 <div
                   className="prose prose-lg prose-gray max-w-none"
-                  dangerouslySetInnerHTML={{ __html: filteredPost.content }}
+                  dangerouslySetInnerHTML={{ __html: filteredPost?.content }}
                 ></div>
               </div>
             </motion.article>
