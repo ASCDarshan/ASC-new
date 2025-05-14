@@ -47,8 +47,8 @@ const ServicesBlog = ({ slug }) => {
     fetchData("blogs/posts/", setPosts);
   }, []);
 
-  const handleBlog = (postId) => {
-    navigate(`/blog/${postId}`);
+  const handleBlog = (postSlug) => {
+    navigate(`/blog/${postSlug}`);
   };
 
   const currentPosts = posts.filter((post) => post.category.slug === slug);
@@ -122,7 +122,7 @@ const ServicesBlog = ({ slug }) => {
                         </div>
                         <h2 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2">
                           <button
-                            onClick={() => handleBlog(post.id)}
+                            onClick={() => handleBlog(post.slug)}
                             className="hover:text-primary-600 transition-colors"
                           >
                             {post.title}
@@ -147,7 +147,7 @@ const ServicesBlog = ({ slug }) => {
                           </div>
                           <div className="flex items-center gap-2">
                             <Button
-                              onClick={() => handleBlog(post.id)}
+                              onClick={() => handleBlog(post.slug)}
                               className="bg-primary-600 text-white px-4 py-2 rounded-full text-sm hover:bg-primary-700 transition-all"
                               size="small"
                             >
