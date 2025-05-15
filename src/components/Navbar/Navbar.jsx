@@ -83,8 +83,9 @@ const Navbar = () => {
           )}
           {item.dropdown && (
             <svg
-              className={`w-4 h-4 transition-transform duration-200 ${showDropdown ? "rotate-180" : ""
-                }`}
+              className={`w-4 h-4 transition-transform duration-200 ${
+                showDropdown ? "rotate-180" : ""
+              }`}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -133,9 +134,10 @@ const Navbar = () => {
       <nav
         className={`
           fixed w-full top-0 z-50 transition-all duration-300
-          ${scrolled
-            ? "bg-white/80 backdrop-blur-lg shadow-lg shadow-gray-200/20"
-            : "bg-transparent"
+          ${
+            scrolled
+              ? "bg-white/80 backdrop-blur-lg shadow-lg shadow-gray-200/20"
+              : "bg-transparent"
           }
         `}
       >
@@ -204,9 +206,10 @@ const Navbar = () => {
                       className={`
                         block px-4 py-2 rounded-lg text-base font-medium 
                         transition-all duration-300
-                        ${location.pathname === item.path
-                          ? "bg-primary-50 text-primary-600"
-                          : "text-gray-600 hover:bg-primary-50 hover:text-primary-600"
+                        ${
+                          location.pathname === item.path
+                            ? "bg-primary-50 text-primary-600"
+                            : "text-gray-600 hover:bg-primary-50 hover:text-primary-600"
                         }
                       `}
                     >

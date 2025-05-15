@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Container from "./Container";
+import Container from "../layout/Container";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 

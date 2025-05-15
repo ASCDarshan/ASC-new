@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Container, Button } from "../common";
+import { Container, Button } from ".";
 import { useNavigate } from "react-router-dom";
 import { FaRocket, FaArrowRight, FaComments } from "react-icons/fa";
 
@@ -10,7 +10,7 @@ const CTA = () => {
   };
 
   return (
-    <section className="py-4 relative overflow-hidden">
+    <section className="py-4 relative overflow-hidden mt-2">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-white to-secondary/10" />
       <div className="absolute inset-0">
         <motion.div

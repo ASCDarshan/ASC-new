@@ -4,12 +4,11 @@ import {
   Hero,
   Features,
   Testimonials,
-  Stats,
-  CTA,
   Contact,
   Services,
-} from "../../components/sections";
-import PortfolioSection from "../Portfolio/PortfolioSection";
+} from "../../components/Home";
+import { CTA, Stats } from "../../components/common";
+import PortfolioSection from "../../components/Portfolio/PortfolioSection";
 import MotionScroll from "../../components/common/MotionScroll";
 
 const Home = () => {
