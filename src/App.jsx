@@ -9,13 +9,16 @@ import Contact from "./pages/Contact/Contact";
 import Services from "./pages/Services/Services";
 import { ScrollToTop } from "./components/common";
 import Portfolio from "./pages/Portfolio/Portfolio";
-import { Navbar, Footer } from "./components/layout";
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import BlogPostPage from "./pages/Blog/BlogPostPage";
 import Privacypolicy from "./pages/Privacy/Privacypolicy";
 import SEOService from "./pages/Services/SEOService/SEOService";
 import CRMService from "./pages/Services/CRMService/CRMService";
 import MobileAppService from "./pages/Services/MobileAppService/MobileAppService";
 import CustomDevelopment from "./pages/Services/CustomDevelopment/CustomDevelopment";
+import MitraPrivacy from "./pages/Privacy/MitraPrivacy";
+import MitraTerms from "./pages/Privacy/MitraTerm";
 
 function App() {
   return (
@@ -39,6 +42,8 @@ function App() {
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogPostPage />} />
             <Route path="/privacy-policy" element={<Privacypolicy />} />
+            <Route path="/mitra-privacy" element={<MitraPrivacy />} />
+            <Route path="/mitra-terms" element={<MitraTerms />} />
           </Routes>
         </main>
         <Footer />

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Container, Card, Button, Loader } from "../../components/common";
-import { CTA, Testimonials } from "../../components/sections";
+import { Button } from "../../components/common";
+import { CTA } from "../../components/common";
+import { Testimonials } from "../../components/Home";
 import {
   FaSearch,
   FaDesktop,
@@ -17,6 +18,13 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import ajaxCall from "../../helpers/ajaxCall";
+import ServiceBanner from "../../components/Services/ServiceBanner";
+import Stats from "../../components/Services/Stats";
+import OurService from "../../components/Services/OurService";
+import WhyChoose from "../../components/Services/WhyChoose";
+import OurDevelopment from "../../components/Services/OurDevelopment";
+import Technologies from "../../components/Services/Technologies";
+import Faq from "../../components/Services/Faq";
 
 const stats = [
   { number: "98%", label: "Client Satisfaction" },
@@ -213,332 +221,24 @@ const Services = () => {
 
   return (
     <div>
-      <section className="relative min-h-[60vh] overflow-hidden bg-gradient-to-b from-primary-100 via-white to-secondary-100">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-0 -left-4 w-96 h-96 bg-primary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
-          <div className="absolute -top-4 -right-4 w-96 h-96 bg-secondary-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
-          <div className="absolute -bottom-8 left-20 w-96 h-96 bg-accent-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
-        </div>
-        <Container className="relative pt-32 pb-16 text-center lg:pt-40">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mx-auto max-w-4xl"
-          >
-            <motion.h1
-              className="text-4xl font-bold tracking-tight text-dark sm:text-6xl md:text-7xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Transform Your Business
-              <span className="block bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
-                With Our Digital Solutions
-              </span>
-            </motion.h1>
-            <motion.p
-              className="mt-6 text-lg leading-8 text-gray-600 sm:text-xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              We deliver cutting-edge technology solutions that drive growth,
-              enhance efficiency, and create lasting competitive advantages.
-            </motion.p>
-            <motion.div
-              className="mt-10 flex items-center justify-center gap-x-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              <Button
-                size="lg"
-                variant="primary"
-                onClick={handleconsulting}
-                className="bg-gradient-to-r from-primary-400 to-primary-600 hover:from-primary-500 hover:to-primary-700 shadow-xl shadow-primary-200/30"
-              >
-                Schedule Consultation
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                onClick={handlePortfolio}
-                className="border-primary-400 text-primary-600 hover:bg-primary-50"
-              >
-                View Portfolio
-              </Button>
-            </motion.div>
-          </motion.div>
-        </Container>
-      </section>
-      <section className="py-16 bg-gray-50">
-        <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-4xl font-bold text-primary-600 mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-gray-600">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </Container>
-      </section>
-      <section className="py-20">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Our Comprehensive Services
-            </h2>
-            <p className="text-gray-600">
-              From concept to execution, we provide end-to-end solutions
-              tailored to your specific needs and industry requirements.
-            </p>
-          </div>
-          {isLoading ? (
-            <Loader size="lg" className="mx-auto" />
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {servicess.map((service, index) => (
-                <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card
-                    className="h-full cursor-pointer hover:-translate-y-2 transition-all duration-300
-                   hover:shadow-xl hover:shadow-primary-100/50"
-                    onClick={() =>
-                      setSelectedService(transformServiceData(service))
-                    }
-                  >
-                    <div className="p-6">
-                      <div
-                        className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6
-                        bg-gradient-to-br ${
-                          servicesIcons[index]?.gradient ||
-                          "from-gray-400 to-gray-600"
-                        } 
-                        shadow-lg shadow-primary-200/20`}
-                      >
-                        {servicesIcons[index]?.icon || (
-                          <span className="text-sm"></span>
-                        )}
-                      </div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                        {service.title}
-                      </h3>
-                      <p className="text-gray-600 mb-4">
-                        {service.description}
-                      </p>
-                      <Button
-                        variant="primary"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedService(transformServiceData(service));
-                        }}
-                      >
-                        Learn More
-                      </Button>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          )}
-        </Container>
-      </section>
-      <section className="py-20 bg-gray-50">
-        <Container>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Why Choose Our Services?
-              </h2>
-              <div className="space-y-6">
-                {chooseUs.map((item, index) => (
-                  <motion.div
-                    key={item.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex gap-4"
-                  >
-                    <div className="text-primary-600 mt-1">{item.icon}</div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">
-                        {item.title}
-                      </h3>
-                      <p className="text-gray-600">{item.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary-500 to-primary-700 p-8 text-white">
-                <h3 className="text-2xl font-bold mb-6">Industries We Serve</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {industries.map((industry, index) => (
-                    <motion.div
-                      key={industry}
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="flex items-center gap-2"
-                    >
-                      <FaCheck className="text-primary-200" />
-                      <span>{industry}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </Container>
-      </section>
-      <section className="py-20">
-        <Container>
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Our Development Process
-            </h2>
-            <p className="text-gray-600">
-              We follow a systematic approach to ensure the success of every
-              project
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {developmentProcess.map((phase, index) => (
-              <motion.div
-                key={phase.step}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="relative"
-              >
-                <Card className="text-center p-6 hover:shadow-lg transition-all duration-300">
-                  <div className="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">
-                    {phase.step}
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {phase.title}
-                  </h3>
-                  <p className="text-gray-600">{phase.desc}</p>
-                </Card>
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gray-300" />
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </Container>
-      </section>
-      <section className="py-20 bg-gray-50">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Technologies We Use
-            </h2>
-            <p className="text-gray-600">
-              We leverage the latest technologies to build robust and scalable
-              solutions
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {technologies.map((tech, index) => (
-              <motion.div
-                key={tech}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="p-6 text-center hover:shadow-lg transition-all duration-300">
-                  <div className="text-primary-600 font-semibold">{tech}</div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <ServiceBanner
+        handleconsulting={handleconsulting}
+        handlePortfolio={handlePortfolio}
+      />
+      <Stats stats={stats} />
+      <OurService
+        servicess={servicess}
+        isLoading={isLoading}
+        setSelectedService={setSelectedService}
+        transformServiceData={transformServiceData}
+        servicesIcons={servicesIcons}
+      />
+      <WhyChoose chooseUs={chooseUs} industries={industries} />
+      <OurDevelopment developmentProcess={developmentProcess} />
+      <Technologies technologies={technologies} />
       <Testimonials />
-      <section className="py-20 bg-gray-50">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-gray-600">
-              Get answers to common questions about our services
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="p-6 h-full hover:shadow-lg transition-all duration-300">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                    {faq.q}
-                  </h3>
-                  <p className="text-gray-600">{faq.a}</p>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </Container>
-      </section>
-      <section className="py-20 bg-gradient-to-b from-primary-50 to-white">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Ready to Get Started?
-            </h2>
-            <p className="text-gray-600 mb-8">
-              Contact us today to discuss your project and see how we can help
-              transform your business
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Button size="lg" variant="primary">
-                Schedule Consultation
-              </Button>
-              <Button size="lg" variant="outline">
-                Contact Sales
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </section>
+      <Faq faqs={faqs} />
+      <CTA />
       {selectedService && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
           <motion.div
@@ -642,7 +342,6 @@ const Services = () => {
           </motion.div>
         </div>
       )}
-      <CTA />
     </div>
   );
 };

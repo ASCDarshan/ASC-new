@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { FaTimes, FaGlobe, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
-import { Container, Card, Badge, Button } from "../../components/common";
+import { Container, Card, Badge, Button } from "../common";
 
 const ProjectDetailsModal = ({ project, onClose }) => {
   if (!project) return null;
@@ -36,7 +36,7 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <Badge
-                      key={tech.id}
+                      key={tech?.id}
                       variant="primary"
                       className={`bg-gradient-to-r ${project.gradient} text-white`}
                     >

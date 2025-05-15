@@ -5,3 +5,5 @@ export { default as Loader } from "./Loader";
 export { default as Button } from "./Button";
 export { default as Container } from "./Container";
 export { default as ScrollToTop } from "./ScrollToTop";
+export { default as Stats } from "./Stats";
+export { default as CTA } from "./CTA";

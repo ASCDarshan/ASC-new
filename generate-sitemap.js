@@ -4,7 +4,6 @@ const { resolve } = require("path");
 const { default: ajaxCall } = require("./src/helpers/ajaxCall");
 
 const BASE_URL = "https://anantsoftcomputing.com/";
-const API_BASE_URL = "";
 
 async function generateSitemap() {
   try {

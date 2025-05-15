@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Container, Loader } from "../common";
+import { Container, Loader } from ".";
 import ajaxCall from "../../helpers/ajaxCall";
 
 const Stats = () => {
